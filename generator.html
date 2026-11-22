@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0d0e11">
+<title>Generator mObywatel</title>
+<style>
+  :root {
+    --bg: #0d0e11;
+    --surface: #16191f;
+    --text: #f3f4f6;
+    --muted: #9ca3af;
+    --blue: #3b82f6;
+    --border: rgba(255, 255, 255, 0.1);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+  }
+
+  body {
+    background: radial-gradient(circle at 20% 0%, #161e2e 0%, #0d0e11 55%);
+    color: var(--text);
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 440px;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gen-header {
+    padding: calc(env(safe-area-inset-top, 14px) + 14px) 20px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .gen-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .app-icon-red {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(155deg, #d81e3a 0%, #a51128 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    box-shadow: 0 3px 10px rgba(216, 30, 58, 0.35);
+    flex-shrink: 0;
+  }
+
+  .app-icon-red img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .gen-body {
+    flex: 1;
+    padding: 16px 20px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .gen-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .field-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 5px;
+  }
+
+  .field-group input,
+  .field-group select {
+    width: 100%;
+    padding: 11px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    background: var(--surface);
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .field-group input:focus,
+  .field-group select:focus {
+    border-color: var(--blue);
+  }
+
+  .pesel-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .pesel-row input {
+    font-family: ui-monospace, "Consolas", monospace;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #60a5fa;
+  }
+
+  .btn-small {
+    background: #232833;
+    color: #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0 14px;
+    border-radius: 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .photo-upload-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px dashed rgba(255, 255, 255, 0.22);
+    border-radius: 14px;
+    padding: 10px 12px;
+    cursor: pointer;
+  }
+
+  .photo-thumb {
+    width: 46px;
+    height: 58px;
+    border-radius: 8px;
+    background: #0c0e12;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .photo-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+  }
+
+  .gen-footer {
+    padding: 14px 20px calc(env(safe-area-inset-bottom, 16px) + 16px);
+    border-top: 1px solid var(--border);
+    background: #0d0e11;
+    position: sticky;
+    bottom: 0;
+  }
+
+  .btn-launch {
+    width: 100%;
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    border-radius: 14px;
+    font-size: 15.5px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+  }
+
+  .btn-launch:active { transform: scale(0.98); }
+
+  .toast {
+    position: fixed;
+    bottom: 84px;
+    left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    background: #2563eb;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="gen-header">
+    <div class="gen-brand">
+      <div class="app-icon-red">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg" alt="RP">
+      </div>
+      <div>
+        <div style="font-size:17px;font-weight:700;">Generator mObywatel</div>
+        <div style="font-size:12px;color:#9ca3af;">Ustaw dane raz — potem odpala się sama apka</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gen-body">
+    <div class="photo-upload-bar" onclick="document.getElementById('photoInput').click()">
+      <div class="photo-thumb" id="genPhotoThumb">&#128247;</div>
+      <div>
+        <div style="font-size:14px;font-weight:600;">Zdjęcie do dokumentu</div>
+        <div style="font-size:12px;color:#9ca3af;">Kliknij, aby wybrać z galerii / dysku</div>
+      </div>
+    </div>
+    <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="handlePhoto(event)">
+
+    <div class="gen-grid-2">
+      <div class="field-group">
+        <label>Imię (imiona)</label>
+        <input id="g-imie" type="text" placeholder="JAN">
+      </div>
+      <div class="field-group">
+        <label>Nazwisko</label>
+        <input id="g-nazwisko" type="text" placeholder="KOWALSKI">
+      </div>
+    </div>
+
+    <div class="gen-grid-2">
+      <div class="field-group">
+        <label>Data urodzenia (DD.MM.RRRR)</label>
+        <input id="g-urodzenie" type="text" placeholder="12.05.2006" oninput="autoGeneratePesel()">
+      </div>
+      <div class="field-group">
+        <label>Płeć</label>
+        <select id="g-plec" onchange="autoGeneratePesel()">
+          <option value="Mężczyzna">Mężczyzna</option>
+          <option value="Kobieta">Kobieta</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Numer PESEL (generowany automatycznie)</label>
+      <div class="pesel-row">
+        <input id="g-pesel" type="text" readonly>
+        <button type="button" class="btn-small" onclick="autoGeneratePesel(true)">Losuj</button>
+      </div>
+    </div>
+
+    <div class="gen-grid-2">
+      <div class="field-group">
+        <label>Obywatelstwo</label>
+        <input id="g-obywatelstwo" type="text" placeholder="POLSKIE">
+      </div>
+      <div class="field-group">
+        <label>Seria i numer</label>
+        <input id="g-seria" type="text" placeholder="ZZC 108291">
+      </div>
+    </div>
+
+    <div class="gen-grid-2">
+      <div class="field-group">
+        <label>Imię ojca</label>
+        <input id="g-ojciec" type="text" placeholder="MAREK">
+      </div>
+      <div class="field-group">
+        <label>Imię matki</label>
+        <input id="g-matka" type="text" placeholder="ANNA">
+      </div>
+    </div>
+
+    <div class="gen-grid-2">
+      <div class="field-group">
+        <label>Nazwisko rodowe</label>
+        <input id="g-rodowe" type="text" placeholder="KOWALSKI">
+      </div>
+      <div class="field-group">
+        <label>Miejsce urodzenia</label>
+        <input id="g-miejsce" type="text" placeholder="BIAŁYSTOK">
+      </div>
+    </div>
+
+    <div class="gen-grid-2">
+      <div class="field-group">
+        <label>Data wydania</label>
+        <input id="g-wydanie" type="text" placeholder="14.08.2024">
+      </div>
+      <div class="field-group">
+        <label>Termin ważności</label>
+        <input id="g-waznosc" type="text" placeholder="14.08.2034">
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Adres zameldowania</label>
+      <input id="g-adres" type="text" placeholder="UL. LIPOWA 14/2, 15-427 BIAŁYSTOK">
+    </div>
+
+    <div class="field-group">
+      <label>Kolor tekstu na karcie mDowód</label>
+      <select id="g-whiteText">
+        <option value="true">Biały (jak na screenie)</option>
+        <option value="false">Ciemny / Czarny</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="gen-footer">
+    <button type="button" class="btn-launch" onclick="saveAndLaunch()">Wygeneruj i otwórz mObywatel</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const STORAGE_KEY = "mobywatel_pwa_data_v1";
+
+  const DEFAULTS = {
+    imie: "JAN",
+    nazwisko: "KOWALSKI",
+    obywatelstwo: "POLSKIE",
+    urodzenie: "12.05.2006",
+    pesel: "",
+    seria: "ZZC 108291",
+    waznosc: "14.08.2034",
+    wydanie: "14.08.2024",
+    ojciec: "MAREK",
+    matka: "ANNA",
+    rodowe: "KOWALSKI",
+    plec: "Mężczyzna",
+    miejsce: "BIAŁYSTOK",
+    adres: "UL. LIPOWA 14/2, 15-427 BIAŁYSTOK",
+    photo: "",
+    whiteText: true,
+    configured: false
+  };
+
+  const FIELDS = [
+    "imie", "nazwisko", "obywatelstwo", "urodzenie", "pesel",
+    "seria", "waznosc", "wydanie", "ojciec", "matka",
+    "rodowe", "plec", "miejsce", "adres"
+  ];
+
+  let photoDataUrl = "";
+
+  function loadExisting() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? { ...DEFAULTS, ...JSON.parse(raw) } : { ...DEFAULTS };
+    } catch {
+      return { ...DEFAULTS };
+    }
+  }
+
+  function computePesel(dateStr, plec) {
+    const m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec((dateStr || "").trim());
+    let day = 12, month = 5, year = 2006;
+    if (m) {
+      day = Math.max(1, Math.min(31, parseInt(m[1], 10)));
+      month = Math.max(1, Math.min(12, parseInt(m[2], 10)));
+      year = parseInt(m[3], 10);
+    }
+    const yy = String(year % 100).padStart(2, "0");
+    let mmNum = month;
+    if (year >= 2000 && year <= 2099) mmNum += 20;
+    else if (year >= 2100 && year <= 2199) mmNum += 40;
+    else if (year >= 1800 && year <= 1899) mmNum += 80;
+    const mm = String(mmNum).padStart(2, "0");
+    const dd = String(day).padStart(2, "0");
+
+    const rand3 = String(Math.floor(Math.random() * 1000)).padStart(3, "0");
+    const genderDigits = plec === "Kobieta" ? [0, 2, 4, 6, 8] : [1, 3, 5, 7, 9];
+    const gDigit = genderDigits[Math.floor(Math.random() * genderDigits.length)];
+
+    const base10 = `${yy}${mm}${dd}${rand3}${gDigit}`;
+    const weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
+    let sum = 0;
+    for (let i = 0; i < 10; i++) sum += parseInt(base10[i], 10) * weights[i];
+    const ctrl = (10 - (sum % 10)) % 10;
+    return base10 + String(ctrl);
+  }
+
+  function autoGeneratePesel(notify = false) {
+    const dob = document.getElementById("g-urodzenie").value;
+    const plec = document.getElementById("g-plec").value;
+    document.getElementById("g-pesel").value = computePesel(dob, plec);
+    if (notify) showToast("Wylosowano nowy PESEL");
+  }
+
+  // Compress photo so it always fits safely inside localStorage on mobile
+  function handlePhoto(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = new Image();
+      img.onload = () => {
+        const maxSide = 480;
+        let w = img.width, h = img.height;
+        if (w > maxSide || h > maxSide) {
+          if (w > h) { h = Math.round(h * maxSide / w); w = maxSide; }
+          else { w = Math.round(w * maxSide / h); h = maxSide; }
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+        photoDataUrl = canvas.toDataURL("image/jpeg", 0.82);
+        document.getElementById("genPhotoThumb").innerHTML = `<img src="${photoDataUrl}">`;
+        showToast("Zdjęcie gotowe");
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function saveAndLaunch() {
+    const payload = { configured: true, photo: photoDataUrl };
+    for (const k of FIELDS) {
+      const el = document.getElementById(`g-${k}`);
+      if (el) payload[k] = el.value.trim();
+    }
+    if (!payload.pesel) {
+      payload.pesel = computePesel(payload.urodzenie, payload.plec);
+    }
+    payload.whiteText = document.getElementById("g-whiteText").value === "true";
+
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    } catch (err) {
+      // Fallback if photo is too large: save without photo
+      payload.photo = "";
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    }
+    window.location.replace("./index.html");
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(window._t);
+    window._t = setTimeout(() => t.classList.remove("show"), 1600);
+  }
+
+  // Init form
+  const cur = loadExisting();
+  for (const k of FIELDS) {
+    const el = document.getElementById(`g-${k}`);
+    if (el) el.value = cur[k] || "";
+  }
+  document.getElementById("g-whiteText").value = cur.whiteText ? "true" : "false";
+  if (cur.photo) {
+    photoDataUrl = cur.photo;
+    document.getElementById("genPhotoThumb").innerHTML = `<img src="${cur.photo}">`;
+  }
+  if (!cur.pesel) autoGeneratePesel();
+</script>
+</body>
+</html>
