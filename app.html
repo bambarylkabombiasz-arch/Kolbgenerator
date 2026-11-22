@@ -7,19 +7,22 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="mObywatel">
-<meta name="theme-color" content="#0a0b0e">
+<meta name="theme-color" content="#0b0c0e">
 <link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="./icon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="./logo.png">
+<link rel="icon" type="image/png" href="./logo.png">
 <title>mObywatel</title>
 <style>
   :root {
-    --bg-app: #0f1012;
-    --surface: #1b1d20;
-    --text: #f3f4f6;
-    --muted: #9ca3af;
-    --blue: #5ea0ff;
-    --green: #4ade80;
-    --border: rgba(255, 255, 255, 0.08);
+    --bg: #0b0c0e;
+    --surface: #181a1e;
+    --surface-2: #121417;
+    --text: #f5f6f8;
+    --muted: #98a0ad;
+    --blue: #5899fb;
+    --blue-deep: #2b6ee6;
+    --green: #46c862;
+    --border: rgba(255, 255, 255, 0.075);
   }
 
   * {
@@ -30,11 +33,11 @@
     -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Inter, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
   }
 
   html, body {
-    background: #0a0b0e;
+    background: var(--bg);
     color: var(--text);
     width: 100%;
     height: 100%;
@@ -50,43 +53,7 @@
     max-width: 460px;
     margin: 0 auto;
     overflow: hidden;
-    background: var(--bg-app);
-  }
-
-  /* Install Hint Banner (visible ONLY in browser, disappears automatically when opened as installed app!) */
-  .install-banner {
-    position: fixed;
-    top: calc(env(safe-area-inset-top, 10px) + 8px);
-    left: 12px;
-    right: 12px;
-    max-width: 436px;
-    margin: 0 auto;
-    background: rgba(24, 30, 44, 0.96);
-    border: 1px solid rgba(94, 160, 255, 0.45);
-    border-radius: 14px;
-    padding: 11px 14px;
-    display: none;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    z-index: 500;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
-    font-size: 12px;
-    line-height: 1.35;
-  }
-
-  .install-banner.show { display: flex; }
-
-  .install-close {
-    background: rgba(255,255,255,0.1);
-    border: none;
-    color: #fff;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    font-size: 13px;
-    cursor: pointer;
-    flex-shrink: 0;
+    background: var(--bg);
   }
 
   .screen {
@@ -94,43 +61,37 @@
     inset: 0;
     display: none;
     flex-direction: column;
-    background: var(--bg-app);
+    background: var(--bg);
     overflow: hidden;
   }
 
   .screen.active { display: flex; }
 
-  .app-icon-red {
-    width: 36px;
-    height: 36px;
+  .logo-sq {
+    width: 34px;
+    height: 34px;
     border-radius: 9px;
-    background: linear-gradient(155deg, #d81e3a 0%, #a51128 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px;
-    box-shadow: 0 3px 10px rgba(216, 30, 58, 0.35);
+    object-fit: cover;
     flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   }
-
-  .app-icon-red img { width: 100%; height: 100%; object-fit: contain; }
 
   /* =========================================================
      SCREEN 1: FACE ID LOGIN (1:1)
      ========================================================= */
   #screen-login {
     background:
-      radial-gradient(ellipse at 50% 65%, rgba(28, 44, 78, 0.28) 0%, transparent 65%),
+      radial-gradient(ellipse at 50% 60%, rgba(25, 42, 76, 0.22) 0%, transparent 62%),
       #0a0b0e;
-    padding: calc(env(safe-area-inset-top, 18px) + 18px) 22px calc(env(safe-area-inset-bottom, 16px) + 16px);
+    padding: calc(env(safe-area-inset-top, 16px) + 18px) 22px calc(env(safe-area-inset-bottom, 16px) + 16px);
     justify-content: space-between;
   }
 
-  .login-top { display: flex; flex-direction: column; gap: 24px; }
-  .login-brand { display: flex; align-items: center; gap: 12px; }
-  .login-brand-name { font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: -0.2px; }
-  .login-greeting { font-size: 31px; font-weight: 700; color: #ffffff; letter-spacing: -0.4px; margin-bottom: 6px; }
-  .login-sub { font-size: 16px; color: #9ca3af; }
+  .login-top { display: flex; flex-direction: column; gap: 26px; }
+  .login-brand { display: flex; align-items: center; gap: 11px; }
+  .login-brand-name { font-size: 21px; font-weight: 700; color: #ffffff; letter-spacing: -0.3px; }
+  .login-greeting { font-size: 30px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .login-sub { font-size: 16px; color: #a1a7b3; font-weight: 400; }
 
   .faceid-center {
     display: flex;
@@ -143,16 +104,15 @@
   }
 
   .faceid-box {
-    width: 84px;
-    height: 84px;
+    width: 82px;
+    height: 82px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s ease;
+    transition: transform 0.18s ease;
   }
 
   .faceid-box.scanning svg { animation: facePulse 0.65s ease-in-out infinite; }
-
   @keyframes facePulse {
     0%, 100% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.09); opacity: 0.7; }
@@ -165,10 +125,10 @@
   .btn-outline-pass {
     width: 100%;
     padding: 15px;
-    border-radius: 14px;
+    border-radius: 13px;
     background: transparent;
-    border: 1.8px solid #3567d6;
-    color: #4f86f7;
+    border: 1.6px solid #3c73e6;
+    color: #5a94ff;
     font-size: 15.5px;
     font-weight: 600;
     cursor: pointer;
@@ -176,36 +136,36 @@
 
   .gov-banner {
     background: #ffffff;
-    border-radius: 12px;
-    padding: 9px 11px;
+    border-radius: 11px;
+    padding: 8px 10px;
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr 1.2fr 0.9fr;
+    grid-template-columns: 1.1fr 0.9fr 1.25fr 0.85fr;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     color: #111827;
   }
 
   .gov-item {
     display: flex;
     align-items: center;
-    gap: 5px;
-    font-size: 7px;
+    gap: 4px;
+    font-size: 6.8px;
     line-height: 1.15;
     font-weight: 700;
     color: #1f2937;
   }
 
   .mini-pl-flag {
-    width: 24px;
-    height: 15px;
+    width: 22px;
+    height: 14px;
     border: 0.5px solid #d1d5db;
     background: linear-gradient(to bottom, #ffffff 50%, #dc143c 50%);
     flex-shrink: 0;
   }
 
   .mini-eu-flag {
-    width: 24px;
-    height: 16px;
+    width: 22px;
+    height: 15px;
     background: #003399;
     display: flex;
     align-items: center;
@@ -215,12 +175,12 @@
     flex-shrink: 0;
   }
 
-  .login-version { text-align: center; font-size: 12px; color: #8b919d; margin-top: -4px; }
+  .login-version { text-align: center; font-size: 11.5px; color: #8c929e; margin-top: -4px; }
 
   /* =========================================================
-     SCREEN 2: DOKUMENTY (Tylko mDowód + przelot z dołu do góry)
+     SCREEN 2: DOKUMENTY (1:1 — tylko niebieski kafelek mDowód + przelot z dołu)
      ========================================================= */
-  #screen-docs { background: #0f1012; }
+  #screen-docs { background: #0d0e10; }
 
   .docs-topbar {
     padding: calc(env(safe-area-inset-top, 14px) + 12px) 20px 10px;
@@ -229,11 +189,11 @@
     justify-content: space-between;
   }
 
-  .docs-top-icons { display: flex; align-items: center; gap: 18px; color: #e5e7eb; }
+  .docs-top-icons { display: flex; align-items: center; gap: 20px; color: #e6e8ec; }
 
   .docs-body {
     flex: 1;
-    padding: 12px 20px 96px;
+    padding: 10px 18px 96px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -243,21 +203,22 @@
     font-size: 31px;
     font-weight: 700;
     color: #ffffff;
-    margin-bottom: 22px;
-    letter-spacing: -0.4px;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
   }
 
   .mdowod-tile {
     position: relative;
     width: 100%;
-    height: 222px;
-    border-radius: 20px;
-    padding: 20px;
+    height: 214px;
+    border-radius: 18px;
+    padding: 18px 20px;
     background:
-      radial-gradient(circle at 75% 15%, #519cf7 0%, transparent 55%),
-      linear-gradient(135deg, #1d63c6 0%, #2773d8 48%, #154ca1 100%);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      radial-gradient(ellipse at 82% 18%, #4da1ff 0%, rgba(45, 118, 224, 0) 58%),
+      radial-gradient(ellipse at 12% 95%, #0f3d8a 0%, rgba(15, 61, 138, 0) 60%),
+      linear-gradient(135deg, #1d64c9 0%, #2877e0 48%, #154ca1 100%);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.48);
     cursor: pointer;
     overflow: hidden;
     display: flex;
@@ -266,20 +227,19 @@
   }
 
   .mdowod-tile.fly-in {
-    animation: tileFlyUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: tileFlyUp 0.62s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   @keyframes tileFlyUp {
-    0% { opacity: 0; transform: translateY(290px) scale(0.93); }
+    0% { opacity: 0; transform: translateY(310px) scale(0.93); }
     72% { opacity: 1; transform: translateY(-6px) scale(1.01); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  .mdowod-tile::before {
-    content: "";
+  .tile-waves {
     position: absolute;
-    inset: -30%;
-    background: repeating-radial-gradient(circle at 20% 80%, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 10px);
+    inset: 0;
+    opacity: 0.22;
     pointer-events: none;
   }
 
@@ -291,13 +251,14 @@
     z-index: 2;
   }
 
-  .tile-title { font-size: 21px; font-weight: 700; color: #ffffff; }
+  .tile-title { font-size: 20.5px; font-weight: 700; color: #ffffff; letter-spacing: -0.2px; }
 
   .tile-emblem-badge {
     width: 38px;
     height: 38px;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -333,12 +294,12 @@
 
   .fab-add {
     position: absolute;
-    right: 20px;
+    right: 18px;
     bottom: calc(env(safe-area-inset-bottom, 10px) + 78px);
-    background: #6da4fa;
+    background: #6ea5fb;
     color: #0b1220;
     border: none;
-    border-radius: 16px;
+    border-radius: 15px;
     padding: 13px 18px;
     font-size: 14.5px;
     font-weight: 700;
@@ -346,14 +307,14 @@
     align-items: center;
     gap: 8px;
     cursor: pointer;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
   }
 
   /* =========================================================
      SCREEN 3: mDOWÓD DETAIL (1:1 + HOLOGRAM GODŁA)
      ========================================================= */
   .topbar {
-    background: var(--bg-app);
+    background: var(--bg);
     padding: calc(env(safe-area-inset-top, 12px) + 10px) 16px 8px;
     display: flex;
     align-items: center;
@@ -364,21 +325,21 @@
   .back-btn {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
     color: #5ea0ff;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
   }
 
-  .back-chevron { font-size: 25px; line-height: 1; margin-top: -2px; }
+  .back-chevron { font-size: 26px; line-height: 1; margin-top: -2px; }
   .topbar-title { font-size: 17px; font-weight: 700; color: #f9fafb; }
 
   .help-btn {
     width: 26px;
     height: 26px;
     border-radius: 50%;
-    border: 1.7px solid #e5e7eb;
+    border: 1.6px solid #e5e7eb;
     background: transparent;
     color: #f9fafb;
     font-size: 14px;
@@ -431,8 +392,8 @@
     background: linear-gradient(
       118deg,
       transparent 40%,
-      rgba(255, 255, 255, 0.25) 48%,
-      rgba(165, 216, 255, 0.14) 52%,
+      rgba(255, 255, 255, 0.24) 48%,
+      rgba(165, 216, 255, 0.13) 52%,
       rgba(244, 162, 220, 0.08) 56%,
       transparent 63%
     );
@@ -451,7 +412,7 @@
     position: relative;
     z-index: 3;
     display: grid;
-    grid-template-columns: 128px 1fr;
+    grid-template-columns: 126px 1fr;
     gap: 15px;
   }
 
@@ -463,8 +424,8 @@
   }
 
   .photo-frame {
-    width: 124px;
-    height: 158px;
+    width: 122px;
+    height: 156px;
     border-radius: 15px;
     background: #08090b;
     padding: 3px;
@@ -506,7 +467,7 @@
 
   #flagCanvas { width: 78px; height: 50px; display: block; }
 
-  /* HOLOGRAM GODŁA (1:1 iridescent metallic shimmer + tilt reactive) */
+  /* HOLOGRAM GODŁA (1:1) */
   .rp-row {
     display: flex;
     align-items: center;
@@ -521,7 +482,6 @@
     flex-shrink: 0;
     border-radius: 4px;
     overflow: hidden;
-    /* Mask exact heraldic shield silhouette so rainbow stays strictly on the emblem */
     -webkit-mask-image: url("https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg");
     mask-image: url("https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg");
     -webkit-mask-size: contain;
@@ -564,12 +524,7 @@
   .emblem-holo-glint {
     position: absolute;
     inset: -40%;
-    background: linear-gradient(
-      110deg,
-      transparent 40%,
-      rgba(255, 255, 255, 0.85) 50%,
-      transparent 60%
-    );
+    background: linear-gradient(110deg, transparent 40%, rgba(255, 255, 255, 0.85) 50%, transparent 60%);
     mix-blend-mode: overlay;
     animation: emblemGlint 2.8s ease-in-out infinite;
     pointer-events: none;
@@ -817,23 +772,13 @@
 </style>
 </head>
 <body>
-
-<!-- Shown ONLY in Safari/Chrome before adding to home screen; hidden inside installed app -->
-<div class="install-banner" id="installBanner">
-  <div>
-    <b>Zapisz jako aplikację:</b> kliknij <b>Udostępnij &#8593;</b> (lub &#8942;) &rarr; <b>Do ekranu początkowego</b>. Po dodaniu otworzy się bez paska adresu!
-  </div>
-  <button class="install-close" onclick="document.getElementById('installBanner').classList.remove('show')">&#10005;</button>
-</div>
-
 <div class="app-shell">
+
   <!-- SCREEN 1: FACE ID LOGIN -->
   <div class="screen active" id="screen-login">
     <div class="login-top">
       <div class="login-brand">
-        <div class="app-icon-red">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg" alt="RP">
-        </div>
+        <img class="logo-sq" src="./logo.png" alt="Logo">
         <div class="login-brand-name">mObywatel</div>
       </div>
       <div>
@@ -844,7 +789,7 @@
 
     <div class="faceid-center" onclick="triggerRealFaceId()">
       <div class="faceid-box" id="faceIdBox">
-        <svg id="faceIdSvg" width="76" height="76" viewBox="0 0 64 64" fill="none" stroke="#4f86f7" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+        <svg id="faceIdSvg" width="74" height="74" viewBox="0 0 64 64" fill="none" stroke="#4f86f7" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 8H12C9.8 8 8 9.8 8 12V18"/>
           <path d="M46 8H52C54.2 8 56 9.8 56 12V18"/>
           <path d="M18 56H12C9.8 56 8 54.2 8 52V46"/>
@@ -889,9 +834,7 @@
   <!-- SCREEN 2: DOKUMENTY -->
   <div class="screen" id="screen-docs">
     <div class="docs-topbar">
-      <div class="app-icon-red">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg" alt="RP">
-      </div>
+      <img class="logo-sq" src="./logo.png" alt="Logo">
       <div class="docs-top-icons">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <rect x="4" y="7" width="16" height="11" rx="3"/>
@@ -912,6 +855,13 @@
       <div class="docs-h1">Dokumenty</div>
 
       <div class="mdowod-tile" id="mdowodTile" onclick="goToScreen('mdowod')">
+        <svg class="tile-waves" viewBox="0 0 400 220" preserveAspectRatio="none">
+          <path d="M-20 170 Q 90 110, 210 155 T 430 120" stroke="white" stroke-width="1.2" fill="none"/>
+          <path d="M-20 185 Q 90 125, 210 170 T 430 135" stroke="white" stroke-width="1.2" fill="none"/>
+          <path d="M-20 200 Q 90 140, 210 185 T 430 150" stroke="white" stroke-width="1.2" fill="none"/>
+          <path d="M-20 215 Q 90 155, 210 200 T 430 165" stroke="white" stroke-width="1.2" fill="none"/>
+        </svg>
+
         <div class="tile-top">
           <div class="tile-title">mDowód</div>
           <div class="tile-emblem-badge">
@@ -920,7 +870,7 @@
         </div>
         <div class="tile-bottom">
           <span id="tileNamePreview">JAN KOWALSKI</span>
-          <span style="opacity:0.75;font-size:12px;">Ważny</span>
+          <span style="opacity:0.78;font-size:12px;">Ważny</span>
         </div>
       </div>
 
@@ -1138,8 +1088,8 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  const STORAGE_KEY = "mobywatel_app_data";
-  const CRED_KEY = "mobywatel_bio_cred_id";
+  const STORAGE_KEY = "card_app_v4";
+  const CRED_KEY = "card_app_bio_v4";
 
   function decodePayload(str) {
     try {
@@ -1149,13 +1099,10 @@
       const bytes = new Uint8Array(bin.length);
       for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
       return JSON.parse(new TextDecoder().decode(bytes));
-    } catch {
-      return null;
-    }
+    } catch { return null; }
   }
 
   function loadAppData() {
-    // 1. Check URL hash first (this carries data into installed iOS/Android PWA!)
     if (window.location.hash && window.location.hash.startsWith("#d=")) {
       const parsed = decodePayload(window.location.hash.slice(3));
       if (parsed) {
@@ -1163,7 +1110,6 @@
         return parsed;
       }
     }
-    // 2. Fallback to saved localStorage
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) return JSON.parse(saved);
@@ -1172,15 +1118,7 @@
   }
 
   const data = loadAppData();
-  if (!data) {
-    window.location.replace("./index.html");
-  }
-
-  // Show install hint ONLY when opened inside regular mobile browser (not standalone installed app)
-  const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
-  if (!isStandalone) {
-    document.getElementById("installBanner").classList.add("show");
-  }
+  if (!data) window.location.replace("./index.html");
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
@@ -1200,7 +1138,6 @@
       if (el && data[k] !== undefined) el.textContent = data[k];
     }
     document.getElementById("tileNamePreview").textContent = `${data.imie || ""} ${data.nazwisko || ""}`.trim();
-
     const img = document.getElementById("userPhoto");
     const ph = document.getElementById("photoPlaceholder");
     if (data.photo) {
@@ -1223,7 +1160,6 @@
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
     const target = document.getElementById(`screen-${name}`);
     if (target) target.classList.add("active");
-
     if (name === "docs") {
       const tile = document.getElementById("mdowodTile");
       tile.classList.remove("fly-in");
@@ -1234,11 +1170,8 @@
     }
   }
 
-  // REAL NATIVE FACE ID / BIOMETRICS via WebAuthn (triggers real iOS Face ID / Android Fingerprint sheet)
   let bioBusy = false;
-  function bufToB64(buf) {
-    return btoa(String.fromCharCode(...new Uint8Array(buf)));
-  }
+  function bufToB64(buf) { return btoa(String.fromCharCode(...new Uint8Array(buf))); }
   function b64ToBuf(str) {
     const bin = atob(str);
     const arr = new Uint8Array(bin.length);
@@ -1253,36 +1186,27 @@
     const lbl = document.getElementById("faceIdLabel");
     const svg = document.getElementById("faceIdSvg");
 
-    // Request iOS gyroscope permission on user gesture for hologram tilt
     if (typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function") {
       DeviceOrientationEvent.requestPermission().catch(() => {});
     }
 
-    const canWebAuthn = window.PublicKeyCredential && navigator.credentials && window.isSecureContext;
-    if (canWebAuthn) {
+    if (window.PublicKeyCredential && navigator.credentials && window.isSecureContext) {
       try {
         const challenge = crypto.getRandomValues(new Uint8Array(32));
         const savedCred = localStorage.getItem(CRED_KEY);
 
         if (!savedCred) {
-          // First time: bind device Face ID / Touch ID to this app
           const cred = await navigator.credentials.create({
             publicKey: {
               challenge,
               rp: { name: "mObywatel", id: window.location.hostname },
               user: {
                 id: crypto.getRandomValues(new Uint8Array(16)),
-                name: "mobywatel-user",
+                name: "user-bio",
                 displayName: (data && data.imie) ? data.imie : "mObywatel"
               },
-              pubKeyCredParams: [
-                { type: "public-key", alg: -7 },
-                { type: "public-key", alg: -257 }
-              ],
-              authenticatorSelection: {
-                authenticatorAttachment: "platform",
-                userVerification: "required"
-              },
+              pubKeyCredParams: [{ type: "public-key", alg: -7 }, { type: "public-key", alg: -257 }],
+              authenticatorSelection: { authenticatorAttachment: "platform", userVerification: "required" },
               timeout: 30000
             }
           });
@@ -1293,15 +1217,10 @@
             return;
           }
         } else {
-          // Subsequent launches: trigger real native Face ID prompt
           const assertion = await navigator.credentials.get({
             publicKey: {
               challenge,
-              allowCredentials: [{
-                type: "public-key",
-                id: b64ToBuf(savedCred),
-                transports: ["internal"]
-              }],
+              allowCredentials: [{ type: "public-key", id: b64ToBuf(savedCred), transports: ["internal"] }],
               userVerification: "required",
               timeout: 30000
             }
@@ -1313,34 +1232,31 @@
           }
         }
       } catch (err) {
-        // User cancelled or device has no platform authenticator — if user cancelled, stay on login
         if (err && err.name === "NotAllowedError") {
           bioBusy = false;
-          lbl.textContent = "Spróbuj ponownie lub wpisz hasło";
+          lbl.textContent = "Dotknij, aby zalogować się Face ID";
           return;
         }
       }
     }
 
-    // Smooth fallback if opened on a device without biometrics
     box.classList.add("scanning");
     lbl.textContent = "Weryfikacja Face ID...";
     setTimeout(() => {
       box.classList.remove("scanning");
-      svg.setAttribute("stroke", "#4ade80");
+      svg.setAttribute("stroke", "#46c862");
       lbl.textContent = "Zalogowano";
-      lbl.style.color = "#4ade80";
+      lbl.style.color = "#46c862";
       setTimeout(() => {
         svg.setAttribute("stroke", "#4f86f7");
         lbl.textContent = "Dotknij, aby zalogować się Face ID";
         lbl.style.color = "#c7ccd6";
         bioBusy = false;
         goToScreen("docs");
-      }, 380);
-    }, 550);
+      }, 360);
+    }, 500);
   }
 
-  // Hologram tilt response on phone gyroscope
   window.addEventListener("deviceorientation", e => {
     const foil = document.getElementById("holoFoil");
     if (!foil || e.gamma === null || e.beta === null) return;
@@ -1355,7 +1271,6 @@
     document.getElementById("passModal").classList.add("open");
     setTimeout(() => document.getElementById("passInput").focus(), 60);
   }
-
   function closePassModal() { document.getElementById("passModal").classList.remove("open"); }
   function submitPass() { closePassModal(); goToScreen("docs"); }
 
@@ -1375,10 +1290,8 @@
   function generateQR() {
     const c = document.getElementById("qrCanvas");
     const ctx = c.getContext("2d");
-    const n = 21;
-    const cell = c.width / n;
-    ctx.fillStyle = "#fff";
-    ctx.fillRect(0, 0, c.width, c.height);
+    const n = 21, cell = c.width / n;
+    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, c.width, c.height);
     ctx.fillStyle = "#111";
     const finder = (ox, oy) => {
       for (let y = 0; y < 7; y++)
@@ -1403,19 +1316,12 @@
       `Czas: ${p(now.getHours())}:${p(now.getMinutes())}:${p(now.getSeconds())} ${p(now.getDate())}.${p(now.getMonth()+1)}.${now.getFullYear()}`;
   }
 
-  // Rounded Waving Polish Flag
   (function initRoundedWavingFlag() {
     const canvas = document.getElementById("flagCanvas");
     const ctx = canvas.getContext("2d");
-    const W = canvas.width;
-    const H = canvas.height;
-    const flagW = 136;
-    const flagH = 82;
-    const offsetX = 10;
-    const offsetY = 9;
-    const cornerR = 13;
+    const W = canvas.width, H = canvas.height;
+    const flagW = 136, flagH = 82, offsetX = 10, offsetY = 9, cornerR = 13;
     let t = 0;
-
     function getCornerInset(x) {
       if (x < cornerR) {
         const dx = cornerR - x;
@@ -1427,37 +1333,30 @@
       }
       return 0;
     }
-
     function drawFlag() {
       ctx.clearRect(0, 0, W, H);
       for (let x = 0; x < flagW; x++) {
         const u = x / flagW;
         const wave = Math.sin(u * 4.4 - t) * (2.5 + u * 1.9);
         const shade = Math.cos(u * 4.4 - t) * 19;
-
         const inset = getCornerInset(x);
         const topY = offsetY + wave + inset;
         const midY = offsetY + wave + flagH / 2;
         const botY = offsetY + wave + flagH - inset;
-
         if (botY <= topY) continue;
-
-        const whiteTop = topY;
         const whiteBot = Math.min(midY, botY);
-        if (whiteBot > whiteTop) {
+        if (whiteBot > topY) {
           const wv = Math.max(224, Math.min(255, Math.round(248 + shade * 0.5)));
           ctx.fillStyle = `rgb(${wv}, ${wv}, ${wv})`;
-          ctx.fillRect(offsetX + x, whiteTop, 1.5, whiteBot - whiteTop + 0.5);
+          ctx.fillRect(offsetX + x, topY, 1.5, whiteBot - topY + 0.5);
         }
-
         const redTop = Math.max(midY, topY);
-        const redBot = botY;
-        if (redBot > redTop) {
+        if (botY > redTop) {
           const r = Math.max(178, Math.min(242, Math.round(220 + shade * 0.85)));
           const g = Math.max(12, Math.min(44, Math.round(20 + shade * 0.4)));
           const b = Math.max(32, Math.min(72, Math.round(48 + shade * 0.45)));
           ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
-          ctx.fillRect(offsetX + x, redTop, 1.5, redBot - redTop);
+          ctx.fillRect(offsetX + x, redTop, 1.5, botY - redTop);
         }
       }
       t += 0.065;
