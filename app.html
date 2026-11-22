@@ -214,7 +214,7 @@
 
   .docs-top-link { color: #5b9bff; font-size: 16px; font-weight: 500; cursor: pointer; }
 
-.mdowod-tile {
+  .mdowod-tile {
     position: relative;
     width: 100%;
     height: 215px;
@@ -238,8 +238,6 @@
     display: none;
   }
 
-  .mdowod-tile::before { display: none; }
-
   .mdowod-tile::after {
     content: "";
     position: absolute;
@@ -250,6 +248,13 @@
     pointer-events: none;
   }
 
+  .mdowod-tile.fly-in { animation: tileFlyUp 0.62s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  @keyframes tileFlyUp {
+    0% { opacity: 0; transform: translateY(310px) scale(0.93); }
+    72% { opacity: 1; transform: translateY(-6px) scale(1.01); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
   .tile-top {
     display: flex;
     justify-content: space-between;
@@ -257,6 +262,8 @@
     position: relative;
     z-index: 4;
   }
+
+  .tile-title { font-size: 21px; font-weight: 500; color: #ffffff; letter-spacing: -0.2px; }
 
   .tile-emblem-badge {
     width: 38px;
@@ -274,14 +281,10 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* bez brightness(0) invert(1) zeby nie robilo bialej plamy z tarczy */
-    filter: none;
   }
 
-  .tile-emblem-badge img { width: 100%; height: 100%; object-fit: contain; filter: brightness(0) invert(1); }
-
   /* =========================================================
-     SCREEN 3: mDOWÓD DETAIL (Lżejsze czarne napisy!)
+     SCREEN 3: mDOWÓD DETAIL
      ========================================================= */
   .topbar {
     background: var(--bg);
@@ -461,7 +464,6 @@
 
   .right-col { display: flex; flex-direction: column; gap: 14px; padding-top: 4px; }
 
-  /* Lighter, natural black typography on the mDowód card (not overly bold) */
   .field-val {
     font-size: 16px;
     font-weight: 500;
@@ -529,96 +531,37 @@
   .accordion-body.open { display: block; }
 
   /* =========================================================
-     1:1 LIST SECTIONS (USŁUGI, KOD QR, WIĘCEJ)
+     LIST SECTIONS (USŁUGI, KOD QR, WIĘCEJ)
      ========================================================= */
-  .sec-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 2px 2px 10px;
-  }
-
-  .sec-head {
-    font-size: 14.5px;
-    font-weight: 600;
-    color: #e5e7eb;
-    margin: 6px 2px 10px;
-  }
-
+  .sec-row { display: flex; justify-content: space-between; align-items: center; margin: 2px 2px 10px; }
+  .sec-head { font-size: 14.5px; font-weight: 600; color: #e5e7eb; margin: 6px 2px 10px; }
   .sec-row .sec-head { margin: 0; }
 
-  .m-card {
-    background: var(--surface);
-    border-radius: 16px;
-    overflow: hidden;
-    margin-bottom: 22px;
-  }
-
-  .m-row {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px 16px;
-    cursor: pointer;
-    position: relative;
-  }
-
+  .m-card { background: var(--surface); border-radius: 16px; overflow: hidden; margin-bottom: 22px; }
+  .m-row { display: flex; align-items: center; gap: 15px; padding: 15px 16px; cursor: pointer; position: relative; }
   .m-row:active { background: var(--surface-active); }
+  .m-row-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .m-row-label { flex: 1; font-size: 16px; font-weight: 400; color: #f3f4f6; line-height: 1.3; }
+  .m-chev { color: #7c828f; flex-shrink: 0; }
 
-  .m-row-icon {
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+  .custom-icon-mask {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
   }
 
-  .m-row-label {
-    flex: 1;
-    font-size: 16px;
-    font-weight: 400;
-    color: #f3f4f6;
-    line-height: 1.3;
-  }
-
-  .m-chev {
-    color: #7c828f;
-    flex-shrink: 0;
-  }
-
-  /* Kod QR 1:1 Menu Screen */
-  .qr-intro {
-    font-size: 14.5px;
-    line-height: 1.48;
-    color: #d1d5db;
-    margin-bottom: 20px;
-  }
-
-  .qr-menu-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 18px 16px;
-    cursor: pointer;
-  }
-
+  .qr-intro { font-size: 14.5px; line-height: 1.48; color: #d1d5db; margin-bottom: 20px; }
+  .qr-menu-row { display: flex; align-items: center; gap: 16px; padding: 18px 16px; cursor: pointer; }
   .qr-menu-row:active { background: var(--surface-active); }
+  .qr-menu-title { font-size: 16.5px; font-weight: 600; color: #ffffff; margin-bottom: 4px; }
+  .qr-menu-sub { font-size: 13.5px; line-height: 1.38; color: #c5cad3; }
 
-  .qr-menu-title {
-    font-size: 16.5px;
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 4px;
-  }
-
-  .qr-menu-sub {
-    font-size: 13.5px;
-    line-height: 1.38;
-    color: #c5cad3;
-  }
-
-  /* QR Unavailable Sub-Screen */
   .qr-error-wrap {
     flex: 1;
     display: flex;
@@ -833,7 +776,7 @@
         <span class="docs-top-link" onclick="showToast('Wszystkie dostępne dokumenty są dodane')">Dodaj</span>
       </div>
 
-<div class="mdowod-tile" id="mdowodTile" onclick="goToScreen('mdowod')">
+      <div class="mdowod-tile" id="mdowodTile" onclick="goToScreen('mdowod')">
         <img class="mdowod-tile-bg" id="mdowodTileBg" alt="">
         <div class="tile-top">
           <div class="tile-title">mDowód</div>
@@ -842,6 +785,8 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
   <!-- SCREEN 3: mDOWÓD DETAIL -->
   <div class="screen" id="screen-mdowod">
@@ -914,7 +859,7 @@
           <span class="circle-lbl">Dane dowodu<br>osobistego</span>
         </div>
 
-        <div class="circle-action-item" onclick="openSheet('Zastrzeż PESEL', 'Twój numer PESEL jest obecnie niezastrzeżony.', '<b>Numer PESEL:</b> ' + (data.pesel || '') + '<br><b>Status w rejestrze:</b> Niezastrzeżony')">
+        <div class="circle-action-item" onclick="openSheet('Zastrzeż PESEL', 'Twój numer PESEL jest obecnie niezastrzeżony.', '<b>Numer PESEL:</b> ' + ((data && data.pesel) || '') + '<br><b>Status w rejestrze:</b> Niezastrzeżony')">
           <div class="circle-btn">
             <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8">
               <path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/>
@@ -942,7 +887,7 @@
             <div class="d-val-lg" id="d-seria">VGB810570</div>
             <div class="d-note">Dane mDowodu i dowodu osobistego są inne - to dwa różne dokumenty.</div>
           </div>
-          <button class="action-pill" onclick="copyText(data.seria, 'Skopiowano serię i numer')">Kopiuj</button>
+          <button class="action-pill" onclick="copyText((data && data.seria) || '', 'Skopiowano serię i numer')">Kopiuj</button>
         </div>
         <div class="dark-row"><div><div class="d-lbl">Termin ważności mDowodu</div><div class="d-val" id="d-waznosc">14.08.2034</div></div></div>
         <div class="dark-row"><div><div class="d-lbl">Data wydania mDowodu</div><div class="d-val" id="d-wydanie">14.08.2024</div></div></div>
@@ -980,7 +925,7 @@
     </div>
   </div>
 
-  <!-- SCREEN 4: USŁUGI (1:1 dokładnie z 4 zrzutów użytkownika) -->
+  <!-- SCREEN 4: USŁUGI -->
   <div class="screen" id="screen-services">
     <div class="main-topbar">
       <img class="logo-sq" src="./logo.png" alt="Logo">
@@ -990,7 +935,6 @@
     <div class="scroll-body">
       <div class="page-h1">Usługi</div>
 
-      <!-- ULUBIONE -->
       <div class="sec-row">
         <div class="sec-head">Ulubione</div>
         <span class="top-link-blue" style="font-size:15px;" onclick="showToast('Lista ulubionych usług')">Dostosuj</span>
@@ -1032,7 +976,7 @@
           <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="m-row" onclick="openSheet('Zastrzeż PESEL', 'Chroń swój numer PESEL przed nieuprawnionym wykorzystaniem.', '<b>PESEL:</b> ' + (data.pesel || '') + '<br><b>Status:</b> Niezastrzeżony')">
+        <div class="m-row" onclick="openSheet('Zastrzeż PESEL', 'Chroń swój numer PESEL przed nieuprawnionym wykorzystaniem.', '<b>PESEL:</b> ' + ((data && data.pesel) || '') + '<br><b>Status:</b> Niezastrzeżony')">
           <div class="m-row-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M12 2.5l7.5 3v6c0 4.8-3.2 8.8-7.5 10.5C7.7 20.3 4.5 16.3 4.5 11.5v-6L12 2.5z" fill="#a855f7"/>
@@ -1081,7 +1025,6 @@
         </div>
       </div>
 
-      <!-- OCHRONA DANYCH -->
       <div class="sec-head">Ochrona danych</div>
       <div class="m-card">
         <div class="m-row" onclick="openSheet('Sprawdź dowód', 'Sprawdź, czy dany dowód osobisty jest ważny lub unieważniony w Rejestrze Dowodów Osobistych.', '<b>Rejestr RDO:</b> Dostępny')">
@@ -1111,7 +1054,6 @@
         </div>
       </div>
 
-      <!-- ZDROWIE -->
       <div class="sec-head">Zdrowie</div>
       <div class="m-card">
         <div class="m-row" onclick="openSheet('Recepty', 'Twoje e-Recepty z Internetowego Konta Pacjenta.', '<b>Aktywne recepty:</b> 0')">
@@ -1137,7 +1079,6 @@
         </div>
       </div>
 
-      <!-- SPRAWY URZĘDOWE -->
       <div class="sec-head">Sprawy urzędowe</div>
       <div class="m-card">
         <div class="m-row" onclick="openSheet('Załatw sprawę', 'Składaj wnioski urzędowe online bez wizyty w urzędzie.', '<b>Usługa:</b> ePUAP / e-Doręczenia')">
@@ -1199,7 +1140,6 @@
         </div>
       </div>
 
-      <!-- KIEROWCA I POJAZDY -->
       <div class="sec-head">Kierowca i pojazdy</div>
       <div class="m-card">
         <div class="m-row" onclick="openSheet('Uprawnienia kierowcy', 'Sprawdź status swoich uprawnień do kierowania pojazdami w CEPiK.', '<b>Rejestr CEK:</b> Połączono')">
@@ -1229,7 +1169,6 @@
         </div>
       </div>
 
-      <!-- OPŁATY I PODATKI -->
       <div class="sec-head">Opłaty i podatki</div>
       <div class="m-card">
         <div class="m-row" onclick="openSheet('ePłatności', 'Opłacaj podatki lokalne i opłaty urzędowe bez prowizji.', '<b>Do zapłaty:</b> 0,00 zł')">
@@ -1245,7 +1184,6 @@
         </div>
       </div>
 
-      <!-- ŚRODOWISKO -->
       <div class="sec-head">Środowisko</div>
       <div class="m-card">
         <div class="m-row" onclick="openSheet('Naruszenie środowiskowe', 'Zgłoś nielegalne wysypisko śmieci lub zanieczyszczenie do GIOŚ.', '<b>Twoje zgłoszenia:</b> 0')">
@@ -1270,7 +1208,6 @@
         </div>
       </div>
 
-      <!-- PODRÓŻ -->
       <div class="sec-head">Podróż</div>
       <div class="m-card">
         <div class="m-row" onclick="openSheet('Bezpieczny autobus', 'Sprawdź badania techniczne i OC autobusu przed wyjazdem.', '<b>Baza CEP:</b> Aktywna')">
@@ -1324,7 +1261,7 @@
     </div>
   </div>
 
-  <!-- SCREEN 5: KOD QR (1:1 ze zrzutu z dwoma opcjami) -->
+  <!-- SCREEN 5: KOD QR -->
   <div class="screen" id="screen-qr">
     <div class="main-topbar">
       <img class="logo-sq" src="./logo.png" alt="Logo">
@@ -1371,7 +1308,7 @@
     </div>
   </div>
 
-  <!-- SCREEN 5B: KOD QR ERROR (po kliknięciu Zeskanuj / Pokaż kod QR) -->
+  <!-- SCREEN 5B: KOD QR ERROR -->
   <div class="screen" id="screen-qr-error">
     <div class="topbar">
       <div class="back-btn" onclick="goToScreen('qr')">
@@ -1405,7 +1342,7 @@
     </div>
   </div>
 
-  <!-- SCREEN 6: WIĘCEJ (1:1 ze zrzutów użytkownika) -->
+  <!-- SCREEN 6: WIĘCEJ -->
   <div class="screen" id="screen-more">
     <div class="main-topbar">
       <img class="logo-sq" src="./logo.png" alt="Logo">
@@ -1415,10 +1352,9 @@
     <div class="scroll-body">
       <div class="page-h1">Więcej</div>
 
-      <!-- TWOJE DANE -->
       <div class="sec-head">Twoje dane</div>
       <div class="m-card">
-        <div class="m-row" onclick="openSheet('Dane zameldowania', 'Aktualny adres zameldowania pobrany z rejestru PESEL.', '<b>Adres:</b> ' + (data.adres || '') + '<br><b>Data zameldowania:</b> ' + (data.dataZam || ''))">
+        <div class="m-row" onclick="openSheet('Dane zameldowania', 'Aktualny adres zameldowania pobrany z rejestru PESEL.', '<b>Adres:</b> ' + ((data && data.adres) || '') + '<br><b>Data zameldowania:</b> ' + ((data && data.dataZam) || ''))">
           <div class="m-row-icon">
             <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 10.5L12 3l9 7.5M5 9.5V20h14V9.5"/>
@@ -1442,7 +1378,6 @@
         </div>
       </div>
 
-      <!-- USTAWIENIA -->
       <div class="sec-head">Ustawienia</div>
       <div class="m-card">
         <div class="m-row" onclick="showToast('Hasło do aplikacji jest aktualne')">
@@ -1510,7 +1445,6 @@
         </div>
       </div>
 
-      <!-- POZOSTAŁE -->
       <div class="sec-head">Pozostałe</div>
       <div class="m-card">
         <div class="m-row" onclick="openSheet('Historia aktywności', 'Ostatnie zdarzenia zarejestrowane w aplikacji.', '<b>Dzisiaj:</b> Zalogowano biometrią (Face ID)<br><b>16.11.2026:</b> Aktualizacja do wersji 4.93.1')">
@@ -1580,7 +1514,7 @@
   <!-- SHARED 4-TAB BOTTOM BAR -->
   <div class="bottom-nav-4" id="globalNav">
     <div class="nav4-btn active" id="nav-docs" onclick="goToScreen('docs')">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" id="ico-nav-docs">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" id="ico-nav-docs">
         <rect x="4" y="8" width="16" height="12" rx="2.5"/>
         <path d="M6.5 5.5h11" stroke-linecap="round"/>
       </svg>
@@ -1710,9 +1644,11 @@
     const btn = document.getElementById("btnUpdateDoc");
     btn.textContent = "Sprawdzanie...";
     setTimeout(() => {
-      data.lastUpdate = formatDateToday();
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
-      document.getElementById("d-update").textContent = data.lastUpdate;
+      if (data) {
+        data.lastUpdate = formatDateToday();
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
+        document.getElementById("d-update").textContent = data.lastUpdate;
+      }
       btn.textContent = "Aktualizuj";
       showToast("Dane mDowodu są aktualne");
     }, 520);
@@ -1738,7 +1674,6 @@
       if (btn) btn.classList.toggle("active", k === activeNav);
     });
 
-    // Filled blue active icon on docs/services/more matching screenshots
     const icoDocs = document.getElementById("ico-nav-docs");
     const icoSrv = document.getElementById("ico-nav-services");
     const icoMore = document.getElementById("ico-nav-more");
@@ -1969,131 +1904,97 @@
     window._t = setTimeout(() => t.classList.remove("show"), 1600);
   }
 
+  // AUTO-LOADER: tlo karty mDowód + godło + pokolorowane ikony ic001..ic035
+  (function autoLoadExactAssets() {
+    const SEARCH_DIRS = ["./", "./icons/"];
+
+    async function findFile(fileList) {
+      for (const dir of SEARCH_DIRS) {
+        for (const fname of fileList) {
+          const url = dir + fname;
+          try {
+            const res = await fetch(url, { method: "HEAD" });
+            if (res.ok) return url;
+          } catch {}
+        }
+      }
+      return null;
+    }
+
+    (async () => {
+      const bgUrl = await findFile([
+        "mdowod_bg_big.webp",
+        "mdowod_bg_big.jpg",
+        "mdowod_bg_big.jpeg",
+        "mdowod_bg_big.png"
+      ]);
+      const bgImg = document.getElementById("mdowodTileBg");
+      if (bgUrl && bgImg) {
+        bgImg.src = bgUrl;
+        bgImg.style.display = "block";
+      }
+
+      const godloUrl = await findFile(["godlo.svg", "godlo.png"]);
+      const eagleImg = document.getElementById("tileEagleImg");
+      if (godloUrl && eagleImg) {
+        eagleImg.src = godloUrl;
+      }
+    })();
+
+    const ICON_MAP = {
+      "Podpisz dokument":        { files: ["ic003_podpisz_wniosek.svg"],           color: "#c7d2e0" },
+      "Bezpiecznie w sieci":     { files: ["ic010_bezpieczenstwo_w_sieci.svg"],    color: "#a855f7" },
+      "Alert powodziowy":        { files: ["ic009_alert_powodziowy.svg"],          color: "#22c55e" },
+      "Zastrzeż PESEL":          { files: ["ic013_zastrzez_pesel.svg"],            color: "#a855f7" },
+      "Firma":                   { files: ["ic002_firma.svg", "g005_mbiznes.svg"], color: "#b0895a" },
+      "Punkty karne":            { files: ["ic004_punkty_karne.svg"],              color: "#3b82f6" },
+      "Mandaty":                 { files: ["ic005_mandaty.svg"],                   color: "#38bdf8" },
+
+      "Sprawdź dowód":           { files: ["ic034_sprawdz_dowod.svg"],             color: "#a855f7" },
+      "Sprawdź PESEL":           { files: ["ic012_sprawdz_pesel.svg"],             color: "#a855f7" },
+
+      "Recepty":                 { files: ["ic001_recepty.svg"],                   color: "#ef4444" },
+      "mojeIKP":                 { files: ["ic035_mojeikp.svg"],                   color: "#3b82f6" },
+
+      "Załatw sprawę":           { files: ["ic020_zloz_dokument.svg", "g012_zloz_wniosek.svg"], color: "#b8c4d4" },
+      "Twoje sprawy":            { files: ["ic028_inne_uslugi.svg", "ic026_pozostale.svg"],     color: "#b8c4d4" },
+      "Odbiór dowodu":           { files: ["ic031_odbierz_dowod.svg"],             color: "#b8c4d4" },
+      "E-wizyta w ZUS":          { files: ["ic015_e_wizytwa_w_zus.svg"],           color: "#b8c4d4" },
+      "Wybory":                  { files: ["ic011_wybory.svg"],                    color: "#b8c4d4" },
+
+      "Uprawnienia kierowcy":    { files: ["ic024_uprawnienia_kierowcy.svg"],      color: "#3b82f6" },
+      "Historia pojazdu":        { files: ["ic006_historia_pojazdu.svg"],          color: "#3b82f6" },
+
+      "ePłatności":              { files: ["ic014_eplatnosci.svg", "g009_eplatnosci.svg"], color: "#38bdf8" },
+
+      "Naruszenie środowiskowe": { files: ["ic007_naruszenie_srodowiskowe.svg"],   color: "#22c55e" },
+      "Jakość powietrza":        { files: ["ic008_jakosc_powietrza.svg"],          color: "#22c55e" },
+
+      "Bezpieczny autobus":      { files: ["ic016_bezpieczny_autobus.svg"],        color: "#eab308" },
+      "Bilkom":                  { files: ["ic017_bilkom.svg"],                    color: "#eab308" },
+      "Karta MKA":               { files: ["ic018_karta_mka.svg"],                 color: "#eab308" },
+      "Polak za granicą":        { files: ["ic019_polak_za_granica.svg"],          color: "#eab308" }
+    };
+
+    document.querySelectorAll(".m-row").forEach(async row => {
+      const lbl = row.querySelector(".m-row-label");
+      const box = row.querySelector(".m-row-icon");
+      if (!lbl || !box) return;
+
+      const cfg = ICON_MAP[lbl.textContent.trim()];
+      if (!cfg) return;
+
+      const url = await findFile(cfg.files);
+      if (!url) return;
+
+      box.innerHTML = `<span class="custom-icon-mask" style="background-color:${cfg.color};-webkit-mask-image:url('${url}');mask-image:url('${url}');"></span>`;
+    });
+  })();
+
   updateGreeting();
   renderDoc();
   updateClock();
   setInterval(updateClock, 1000);
-</script>
-  <style>
-  .custom-icon-mask {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
-  }
-  .custom-icon-raw {
-    width: 25px;
-    height: 25px;
-    object-fit: contain;
-    display: block;
-  }
-<style>
-  .custom-icon-mask {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
-  }
-</style>
-<script>
-(function autoLoadExactAssets() {
-  const SEARCH_DIRS = ["./", "./icons/"];
-
-  async function findFile(fileList) {
-    for (const dir of SEARCH_DIRS) {
-      for (const fname of fileList) {
-        const url = dir + fname;
-        try {
-          const res = await fetch(url, { method: "HEAD" });
-          if (res.ok) return url;
-        } catch {}
-      }
-    }
-    return null;
-  }
-
-  // 1. Automatyczne wykrycie tla karty mDowód (webp / jpg / png)
-  (async () => {
-    const bgUrl = await findFile([
-      "mdowod_bg_big.webp",
-      "mdowod_bg_big.jpg",
-      "mdowod_bg_big.jpeg",
-      "mdowod_bg_big.png"
-    ]);
-    const bgImg = document.getElementById("mdowodTileBg");
-    if (bgUrl && bgImg) {
-      bgImg.src = bgUrl;
-      bgImg.style.display = "block";
-    }
-
-    // Jesli wrzuciles godlo.svg do repo, uzyj go jako bialego orla w prawym gornym rogu karty
-    const godloUrl = await findFile(["godlo.svg", "godlo.png"]);
-    const eagleImg = document.getElementById("tileEagleImg");
-    if (godloUrl && eagleImg) {
-      eagleImg.src = godloUrl;
-    }
-  })();
-
-  // 2. Kolorowanie wszystkich Twoich oryginalnych ikon ic001..ic035 dokladnie pod kolory z mObywatela
-  const ICON_MAP = {
-    "Podpisz dokument":        { files: ["ic003_podpisz_wniosek.svg"],           color: "#c7d2e0" },
-    "Bezpiecznie w sieci":     { files: ["ic010_bezpieczenstwo_w_sieci.svg"],    color: "#a855f7" },
-    "Alert powodziowy":        { files: ["ic009_alert_powodziowy.svg"],          color: "#22c55e" },
-    "Zastrzeż PESEL":          { files: ["ic013_zastrzez_pesel.svg"],            color: "#a855f7" },
-    "Firma":                   { files: ["ic002_firma.svg", "g005_mbiznes.svg"], color: "#b0895a" },
-    "Punkty karne":            { files: ["ic004_punkty_karne.svg"],              color: "#3b82f6" },
-    "Mandaty":                 { files: ["ic005_mandaty.svg"],                   color: "#38bdf8" },
-
-    "Sprawdź dowód":           { files: ["ic034_sprawdz_dowod.svg"],             color: "#a855f7" },
-    "Sprawdź PESEL":           { files: ["ic012_sprawdz_pesel.svg"],             color: "#a855f7" },
-
-    "Recepty":                 { files: ["ic001_recepty.svg"],                   color: "#ef4444" },
-    "mojeIKP":                 { files: ["ic035_mojeikp.svg"],                   color: "#3b82f6" },
-
-    "Załatw sprawę":           { files: ["ic020_zloz_dokument.svg", "g012_zloz_wniosek.svg"], color: "#b8c4d4" },
-    "Twoje sprawy":            { files: ["ic028_inne_uslugi.svg", "ic026_pozostale.svg"],     color: "#b8c4d4" },
-    "Odbiór dowodu":           { files: ["ic031_odbierz_dowod.svg"],             color: "#b8c4d4" },
-    "E-wizyta w ZUS":          { files: ["ic015_e_wizytwa_w_zus.svg"],           color: "#b8c4d4" },
-    "Wybory":                  { files: ["ic011_wybory.svg"],                    color: "#b8c4d4" },
-
-    "Uprawnienia kierowcy":    { files: ["ic024_uprawnienia_kierowcy.svg"],      color: "#3b82f6" },
-    "Historia pojazdu":        { files: ["ic006_historia_pojazdu.svg"],          color: "#3b82f6" },
-
-    "ePłatności":              { files: ["ic014_eplatnosci.svg", "g009_eplatnosci.svg"], color: "#38bdf8" },
-
-    "Naruszenie środowiskowe": { files: ["ic007_naruszenie_srodowiskowe.svg"],   color: "#22c55e" },
-    "Jakość powietrza":        { files: ["ic008_jakosc_powietrza.svg"],          color: "#22c55e" },
-
-    "Bezpieczny autobus":      { files: ["ic016_bezpieczny_autobus.svg"],        color: "#eab308" },
-    "Bilkom":                  { files: ["ic017_bilkom.svg"],                    color: "#eab308" },
-    "Karta MKA":               { files: ["ic018_karta_mka.svg"],                 color: "#eab308" },
-    "Polak za granicą":        { files: ["ic019_polak_za_granica.svg"],          color: "#eab308" }
-  };
-
-  document.querySelectorAll(".m-row").forEach(async row => {
-    const lbl = row.querySelector(".m-row-label");
-    const box = row.querySelector(".m-row-icon");
-    if (!lbl || !box) return;
-
-    const cfg = ICON_MAP[lbl.textContent.trim()];
-    if (!cfg) return;
-
-    const url = await findFile(cfg.files);
-    if (!url) return;
-
-    box.innerHTML = `<span class="custom-icon-mask" style="background-color:${cfg.color};-webkit-mask-image:url('${url}');mask-image:url('${url}');"></span>`;
-  });
-})();
 </script>
 </body>
 </html>
