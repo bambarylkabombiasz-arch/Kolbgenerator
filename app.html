@@ -7,24 +7,23 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="mObywatel">
-<meta name="theme-color" content="#0a0b0e">
+<meta name="theme-color" content="#0d0e11">
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" sizes="180x180" href="./logo.png">
 <link rel="icon" type="image/png" href="./logo.png">
 <title>mObywatel</title>
 <style>
   :root {
-    --bg: #0e0f11;
+    --bg: #0f1014;
     --bg-login: #0a0b0e;
-    --surface: #191a1c;
-    --surface-2: #222428;
-    --text: #f5f6f8;
+    --surface: #181a1f;
+    --surface-active: #22252c;
+    --text: #f3f4f6;
     --muted: #9ca3af;
     --blue: #5899fb;
     --blue-pill: #122742;
     --green: #46c862;
-    --red: #ef4444;
-    --border: rgba(255, 255, 255, 0.075);
+    --border: rgba(255, 255, 255, 0.065);
   }
 
   * {
@@ -105,15 +104,7 @@
     margin: auto 0;
   }
 
-  .faceid-box {
-    width: 84px;
-    height: 84px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.18s ease;
-  }
-
+  .faceid-box { width: 84px; height: 84px; display: flex; align-items: center; justify-content: center; }
   .faceid-box.scanning svg { animation: facePulse 0.65s ease-in-out infinite; }
   @keyframes facePulse {
     0%, 100% { transform: scale(1); opacity: 1; }
@@ -134,8 +125,6 @@
     font-weight: 600;
     cursor: pointer;
   }
-
-  .btn-outline-pass:active { background: rgba(60, 115, 230, 0.12); }
 
   .gov-banner {
     background: #ffffff;
@@ -158,34 +147,9 @@
     color: #1f2937;
   }
 
-  .mini-pl-flag {
-    width: 22px;
-    height: 14px;
-    border: 0.5px solid #d1d5db;
-    background: linear-gradient(to bottom, #ffffff 50%, #dc143c 50%);
-    flex-shrink: 0;
-  }
-
-  .mini-eu-flag {
-    width: 22px;
-    height: 15px;
-    background: #003399;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffcc00;
-    font-size: 8px;
-    flex-shrink: 0;
-  }
-
-  .login-version-row {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    font-size: 11.5px;
-    color: #8c929e;
-    margin-top: -2px;
-  }
+  .mini-pl-flag { width: 22px; height: 14px; border: 0.5px solid #d1d5db; background: linear-gradient(to bottom, #ffffff 50%, #dc143c 50%); flex-shrink: 0; }
+  .mini-eu-flag { width: 22px; height: 15px; background: #003399; display: flex; align-items: center; justify-content: center; color: #ffcc00; font-size: 8px; flex-shrink: 0; }
+  .login-version-row { display: flex; justify-content: flex-end; font-size: 11.5px; color: #8c929e; margin-top: -2px; }
 
   /* =========================================================
      SHARED HEADER & SCROLL
@@ -198,6 +162,15 @@
     flex-shrink: 0;
   }
 
+  .top-link-blue {
+    color: #5ea0ff;
+    font-size: 15.5px;
+    font-weight: 500;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+  }
+
   .bell-btn {
     background: transparent;
     border: none;
@@ -208,24 +181,23 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    position: relative;
   }
 
   .scroll-body {
     flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 10px 16px 104px;
+    padding: 8px 16px 104px;
   }
 
   .scroll-body::-webkit-scrollbar { width: 0; }
 
   .page-h1 {
-    font-size: 32px;
+    font-size: 31px;
     font-weight: 700;
     color: #ffffff;
-    letter-spacing: -0.5px;
-    margin-bottom: 16px;
+    letter-spacing: -0.45px;
+    margin-bottom: 18px;
   }
 
   /* =========================================================
@@ -279,24 +251,14 @@
     pointer-events: none;
   }
 
-  .mdowod-tile.fly-in {
-    animation: tileFlyUp 0.62s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
+  .mdowod-tile.fly-in { animation: tileFlyUp 0.62s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
   @keyframes tileFlyUp {
     0% { opacity: 0; transform: translateY(310px) scale(0.93); }
     72% { opacity: 1; transform: translateY(-6px) scale(1.01); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  .tile-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    position: relative;
-    z-index: 2;
-  }
-
+  .tile-top { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 2; }
   .tile-title { font-size: 21px; font-weight: 500; color: #ffffff; letter-spacing: -0.2px; }
 
   .tile-emblem-badge {
@@ -311,15 +273,10 @@
     box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35);
   }
 
-  .tile-emblem-badge img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-  }
+  .tile-emblem-badge img { width: 100%; height: 100%; object-fit: contain; filter: brightness(0) invert(1); }
 
   /* =========================================================
-     SCREEN 3: mDOWÓD DETAIL
+     SCREEN 3: mDOWÓD DETAIL (Lżejsze czarne napisy!)
      ========================================================= */
   .topbar {
     background: var(--bg);
@@ -342,7 +299,7 @@
   }
 
   .back-chevron { font-size: 26px; line-height: 1; margin-top: -2px; }
-  .topbar-title { font-size: 17px; font-weight: 700; color: #f9fafb; text-align: center; }
+  .topbar-title { font-size: 17px; font-weight: 600; color: #f9fafb; text-align: center; }
 
   .help-btn {
     justify-self: end;
@@ -368,13 +325,7 @@
   }
 
   .content::-webkit-scrollbar { width: 0; }
-
-  .time-strip {
-    text-align: center;
-    font-size: 13px;
-    color: #9ca3af;
-    margin: 4px 0 14px;
-  }
+  .time-strip { text-align: center; font-size: 13px; color: #9ca3af; margin: 4px 0 14px; }
 
   .doc-wrapper {
     border-radius: 18px;
@@ -418,20 +369,8 @@
     100% { transform: translateX(-58%) rotate(10deg); }
   }
 
-  .card-grid {
-    position: relative;
-    z-index: 3;
-    display: grid;
-    grid-template-columns: 126px 1fr;
-    gap: 15px;
-  }
-
-  .left-col {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-  }
+  .card-grid { position: relative; z-index: 3; display: grid; grid-template-columns: 126px 1fr; gap: 15px; }
+  .left-col { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
 
   .photo-frame {
     width: 122px;
@@ -443,46 +382,14 @@
     overflow: hidden;
   }
 
-  .photo-inner {
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #1a1d22;
-  }
+  .photo-inner { width: 100%; height: 100%; border-radius: 12px; overflow: hidden; background: #1a1d22; }
+  .photo-inner img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.06); }
+  .photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #9ca3af; font-size: 24px; }
 
-  .photo-inner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%) contrast(1.06);
-  }
-
-  .photo-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #9ca3af;
-    font-size: 24px;
-  }
-
-  .flag-container {
-    width: 78px;
-    height: 50px;
-    margin-left: 2px;
-    filter: drop-shadow(0 2px 5px rgba(0, 35, 80, 0.14));
-  }
-
+  .flag-container { width: 78px; height: 50px; margin-left: 2px; filter: drop-shadow(0 2px 5px rgba(0, 35, 80, 0.14)); }
   #flagCanvas { width: 78px; height: 50px; display: block; }
 
-  .rp-row {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    margin-left: 3px;
-  }
+  .rp-row { display: flex; align-items: center; gap: 9px; margin-left: 3px; }
 
   .holo-emblem-wrap {
     position: relative;
@@ -502,13 +409,7 @@
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.16));
   }
 
-  .emblem-hd {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    filter: grayscale(100%) brightness(1.32) contrast(0.84);
-  }
+  .emblem-hd { width: 100%; height: 100%; object-fit: contain; display: block; filter: grayscale(100%) brightness(1.32) contrast(0.84); }
 
   .emblem-holo-foil {
     position: absolute;
@@ -551,25 +452,21 @@
     100% { transform: translateX(-90%); opacity: 0.2; }
   }
 
-  .rp-text { font-size: 11.5px; line-height: 1.24; color: #3f444d; font-weight: 500; }
+  .rp-text { font-size: 11.5px; line-height: 1.24; color: #4a505a; font-weight: 400; }
 
-  .right-col {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding-top: 4px;
-  }
+  .right-col { display: flex; flex-direction: column; gap: 14px; padding-top: 4px; }
 
+  /* Lighter, natural black typography on the mDowód card (not overly bold) */
   .field-val {
-    font-size: 16.5px;
-    font-weight: 700;
-    color: #0e1013;
-    letter-spacing: 0.25px;
-    line-height: 1.15;
+    font-size: 16px;
+    font-weight: 500;
+    color: #14161a;
+    letter-spacing: 0.15px;
+    line-height: 1.18;
     word-break: break-word;
   }
 
-  .field-lbl { font-size: 12px; color: #464d57; margin-top: 2px; font-weight: 400; }
+  .field-lbl { font-size: 12px; color: #525965; margin-top: 2px; font-weight: 400; }
 
   .card-valid-bar {
     background: #141517;
@@ -595,57 +492,13 @@
 
   .valid-text { color: var(--green); font-size: 15.5px; font-weight: 500; }
 
-  .circle-actions {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-    margin-bottom: 18px;
-  }
+  .circle-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 18px; }
+  .circle-action-item { display: flex; flex-direction: column; align-items: center; gap: 7px; cursor: pointer; }
+  .circle-btn { width: 54px; height: 54px; border-radius: 50%; background: #181a1d; border: 1px solid rgba(255, 255, 255, 0.06); display: flex; align-items: center; justify-content: center; }
+  .circle-lbl { font-size: 11px; color: #c7ccd6; text-align: center; line-height: 1.2; }
 
-  .circle-action-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 7px;
-    cursor: pointer;
-  }
-
-  .circle-btn {
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    background: #181a1d;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .circle-action-item:active .circle-btn { background: #23262b; }
-
-  .circle-lbl {
-    font-size: 11px;
-    color: #c7ccd6;
-    text-align: center;
-    line-height: 1.2;
-  }
-
-  .dark-card {
-    background: #191a1c;
-    border-radius: 16px;
-    padding: 18px;
-    margin-bottom: 14px;
-  }
-
-  .dark-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    gap: 12px;
-  }
-
+  .dark-card { background: #191a1c; border-radius: 16px; padding: 18px; margin-bottom: 14px; }
+  .dark-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.07); gap: 12px; }
   .dark-row:first-child { padding-top: 0; }
   .dark-row:last-child { border-bottom: none; padding-bottom: 0; }
 
@@ -666,141 +519,101 @@
     flex-shrink: 0;
   }
 
-  .action-pill:active { background: #19355a; }
-
-  .accordion-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 17px;
-    color: #f3f4f6;
-    padding: 4px 0;
-  }
-
-  .accordion-body {
-    display: none;
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
-  }
-
+  .accordion-head { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 500; font-size: 17px; color: #f3f4f6; padding: 4px 0; }
+  .accordion-body { display: none; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.07); }
   .accordion-body.open { display: block; }
 
   /* =========================================================
-     USŁUGI & WIĘCEJ LISTS
+     1:1 LIST SECTIONS (USŁUGI, KOD QR, WIĘCEJ)
      ========================================================= */
-  .search-bar {
+  .sec-row {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    background: #1a1c20;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    padding: 11px 14px;
-    margin-bottom: 18px;
+    margin: 2px 2px 10px;
   }
 
-  .search-bar input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: #ffffff;
-    font-size: 15px;
-    outline: none;
-    user-select: text;
-    -webkit-user-select: text;
+  .sec-head {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #e5e7eb;
+    margin: 6px 2px 10px;
   }
 
-  .search-bar input::placeholder { color: #7e8591; }
-  .sec-label { font-size: 13px; font-weight: 600; color: #9ca3af; margin: 6px 2px 10px; }
+  .sec-row .sec-head { margin: 0; }
 
-  .list-card {
+  .m-card {
     background: var(--surface);
     border-radius: 16px;
     overflow: hidden;
-    margin-bottom: 16px;
+    margin-bottom: 22px;
   }
 
-  .list-row {
+  .m-row {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 14px 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    gap: 15px;
+    padding: 15px 16px;
     cursor: pointer;
+    position: relative;
   }
 
-  .list-row:last-child { border-bottom: none; }
-  .list-row:active { background: var(--surface-2); }
+  .m-row:active { background: var(--surface-active); }
 
-  .srv-ico {
-    width: 38px;
-    height: 38px;
-    border-radius: 11px;
+  .m-row-icon {
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
 
-  .ico-blue { background: rgba(59, 130, 246, 0.16); color: #60a5fa; }
-  .ico-green { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
-  .ico-red { background: rgba(239, 68, 68, 0.15); color: #f87171; }
-  .ico-amber { background: rgba(245, 158, 11, 0.16); color: #fbbf24; }
-  .ico-purple { background: rgba(168, 85, 247, 0.16); color: #c084fc; }
-  .ico-cyan { background: rgba(6, 182, 212, 0.16); color: #22d3ee; }
-  .ico-gray { background: rgba(156, 163, 175, 0.14); color: #d1d5db; }
+  .m-row-label {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 400;
+    color: #f3f4f6;
+    line-height: 1.3;
+  }
 
-  .row-text { flex: 1; min-width: 0; }
-  .row-title { font-size: 15.5px; font-weight: 500; color: #f3f4f6; line-height: 1.25; }
-  .row-sub { font-size: 12.5px; color: #8c93a0; margin-top: 2px; }
-  .chev { color: #6b7280; flex-shrink: 0; }
-
-  .toggle-switch {
-    width: 46px;
-    height: 27px;
-    border-radius: 999px;
-    background: #34c759;
-    position: relative;
-    transition: background 0.2s ease;
+  .m-chev {
+    color: #7c828f;
     flex-shrink: 0;
   }
 
-  .toggle-switch.off { background: #374151; }
-  .toggle-knob {
-    width: 23px;
-    height: 23px;
-    border-radius: 50%;
-    background: #ffffff;
-    position: absolute;
-    top: 2px;
-    left: 21px;
-    transition: left 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  /* Kod QR 1:1 Menu Screen */
+  .qr-intro {
+    font-size: 14.5px;
+    line-height: 1.48;
+    color: #d1d5db;
+    margin-bottom: 20px;
   }
-  .toggle-switch.off .toggle-knob { left: 2px; }
 
-  .btn-logout {
-    width: 100%;
-    background: rgba(239, 68, 68, 0.13);
-    color: #f87171;
-    border: 1px solid rgba(239, 68, 68, 0.25);
-    border-radius: 14px;
-    padding: 15px;
-    font-size: 15.5px;
-    font-weight: 600;
+  .qr-menu-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 16px;
     cursor: pointer;
-    margin-top: 4px;
-    margin-bottom: 14px;
   }
 
-  .more-version { text-align: center; font-size: 12px; color: #6b7280; padding-bottom: 12px; }
+  .qr-menu-row:active { background: var(--surface-active); }
 
-  /* =========================================================
-     QR UNAVAILABLE SCREEN
-     ========================================================= */
+  .qr-menu-title {
+    font-size: 16.5px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+  }
+
+  .qr-menu-sub {
+    font-size: 13.5px;
+    line-height: 1.38;
+    color: #c5cad3;
+  }
+
+  /* QR Unavailable Sub-Screen */
   .qr-error-wrap {
     flex: 1;
     display: flex;
@@ -826,21 +639,7 @@
 
   .qr-error-title { font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 10px; line-height: 1.3; }
   .qr-error-desc { font-size: 14px; color: #a1a7b3; line-height: 1.52; max-width: 320px; margin-bottom: 18px; }
-
-  .qr-error-meta {
-    background: #181a1e;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 14px;
-    padding: 12px 16px;
-    width: 100%;
-    max-width: 330px;
-    text-align: left;
-    font-size: 12px;
-    color: #9ca3af;
-    line-height: 1.6;
-    margin-bottom: 22px;
-  }
-
+  .qr-error-meta { background: #181a1e; border: 1px solid rgba(255, 255, 255, 0.07); border-radius: 14px; padding: 12px 16px; width: 100%; max-width: 330px; text-align: left; font-size: 12px; color: #9ca3af; line-height: 1.6; margin-bottom: 22px; }
   .qr-error-meta b { color: #e5e7eb; font-weight: 600; }
 
   .btn-retry {
@@ -860,16 +659,7 @@
     gap: 8px;
   }
 
-  .spinner {
-    width: 16px;
-    height: 16px;
-    border: 2px solid rgba(255,255,255,0.35);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    display: none;
-  }
-
+  .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
   /* =========================================================
@@ -882,7 +672,7 @@
     right: 0;
     max-width: 460px;
     margin: 0 auto;
-    background: #141517;
+    background: #141518;
     border-top: 1px solid rgba(255, 255, 255, 0.07);
     display: none;
     grid-template-columns: repeat(4, 1fr);
@@ -907,7 +697,7 @@
   .nav4-btn.active { color: #5ea0ff; }
 
   /* =========================================================
-     BOTTOM SHEET (Service details / About app 4.93.1)
+     BOTTOM SHEET & MODALS
      ========================================================= */
   .sheet-bg {
     position: fixed;
@@ -932,69 +722,16 @@
     animation: sheetUp 0.24s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  @keyframes sheetUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
-  }
-
-  .sheet-handle {
-    width: 38px;
-    height: 4px;
-    border-radius: 99px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 0 auto 16px;
-  }
-
+  @keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .sheet-handle { width: 38px; height: 4px; border-radius: 99px; background: rgba(255, 255, 255, 0.2); margin: 0 auto 16px; }
   .sheet-title { font-size: 19px; font-weight: 700; margin-bottom: 8px; }
   .sheet-desc { font-size: 14px; color: #a1a7b3; line-height: 1.5; margin-bottom: 16px; }
-  .sheet-box {
-    background: #111317;
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 14px;
-    padding: 13px 15px;
-    font-size: 13px;
-    color: #d1d5db;
-    line-height: 1.65;
-    margin-bottom: 18px;
-  }
+  .sheet-box { background: #111317; border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 13px 15px; font-size: 13px; color: #d1d5db; line-height: 1.65; margin-bottom: 18px; }
 
-  .modal-bg {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.72);
-    backdrop-filter: blur(5px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 250;
-  }
-
+  .modal-bg { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.72); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 250; }
   .modal-bg.open { display: flex; }
-
-  .pass-modal {
-    background: #181a1f;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 20px;
-    padding: 20px;
-    width: 100%;
-    max-width: 360px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .pass-modal input {
-    width: 100%;
-    padding: 12px 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: #0f1014;
-    color: #fff;
-    font-size: 16px;
-    outline: none;
-    user-select: text;
-  }
+  .pass-modal { background: #181a1f; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 20px; width: 100%; max-width: 360px; display: flex; flex-direction: column; gap: 14px; }
+  .pass-modal input { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); background: #0f1014; color: #fff; font-size: 16px; outline: none; user-select: text; }
 
   .btn-primary { width: 100%; background: #2563eb; color: #fff; border: none; padding: 13px; border-radius: 13px; font-size: 15px; font-weight: 600; cursor: pointer; }
   .btn-sec { background: #282c34; color: #e5e7eb; border: none; padding: 12px; border-radius: 12px; font-weight: 600; cursor: pointer; }
@@ -1024,7 +761,7 @@
 <body>
 <div class="app-shell">
 
-  <!-- SCREEN 1: FACE ID LOGIN (4.93.1) -->
+  <!-- SCREEN 1: FACE ID LOGIN -->
   <div class="screen active" id="screen-login">
     <div class="login-top">
       <div class="login-brand">
@@ -1076,7 +813,7 @@
   <div class="screen" id="screen-docs">
     <div class="main-topbar">
       <img class="logo-sq" src="./logo.png" alt="Logo">
-      <button class="bell-btn" onclick="openSheet('Powiadomienia', 'Wszystkie Twoje dokumenty i certyfikaty są aktualne.', '<b>16.11.2026:</b> Zaktualizowano certyfikat domenowy aplikacji do wersji 4.93.1.<br><b>Status:</b> Brak zaległych spraw urzędowych.')">
+      <button class="bell-btn" onclick="openSheet('Powiadomienia', 'Wszystkie Twoje dokumenty i certyfikaty są aktualne.', '<b>16.11.2026:</b> Zaktualizowano certyfikat domenowy aplikacji do wersji 4.93.1.')">
         <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
           <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
@@ -1110,7 +847,7 @@
         <span>Dokumenty</span>
       </div>
       <div class="topbar-title">mDowód</div>
-      <button class="help-btn" onclick="openSheet('Informacje o mDowodzie', 'mDowód jest dokumentem elektronicznym równorzędnym z dowodem osobistym na terenie Rzeczypospolitej Polskiej.', '<b>Podstawa prawna:</b> Ustawa z dnia 26 maja 2023 r. o aplikacji mObywatel (Dz. U. z 2026 r. poz. 1232).<br><b>Certyfikat dokumentu:</b> Ważny (RDO-2026).')">?</button>
+      <button class="help-btn" onclick="openSheet('Informacje o mDowodzie', 'mDowód jest dokumentem elektronicznym równorzędnym z dowodem osobistym na terenie Rzeczypospolitej Polskiej.', '<b>Certyfikat dokumentu:</b> Ważny (RDO-2026).')">?</button>
     </div>
 
     <div class="content">
@@ -1153,7 +890,7 @@
       </div>
 
       <div class="circle-actions">
-        <div class="circle-action-item" onclick="goToScreen('qr')">
+        <div class="circle-action-item" onclick="goToScreen('qr-error')">
           <div class="circle-btn">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round">
               <path d="M4 8V5a1 1 0 0 1 1-1h3M20 8V5a1 1 0 0 0-1-1h-3M4 16v3a1 1 0 0 0 1 1h3M20 16v3a1 1 0 0 1-1 1h-3"/>
@@ -1173,7 +910,7 @@
           <span class="circle-lbl">Dane dowodu<br>osobistego</span>
         </div>
 
-        <div class="circle-action-item" onclick="openSheet('Zastrzeż PESEL', 'Twój numer PESEL jest obecnie niezastrzeżony.', '<b>Numer PESEL:</b> ' + (data.pesel || '') + '<br><b>Status w rejestrze:</b> Niezastrzeżony<br><b>Ostatnie sprawdzenie:</b> Dzisiaj')">
+        <div class="circle-action-item" onclick="openSheet('Zastrzeż PESEL', 'Twój numer PESEL jest obecnie niezastrzeżony.', '<b>Numer PESEL:</b> ' + (data.pesel || '') + '<br><b>Status w rejestrze:</b> Niezastrzeżony')">
           <div class="circle-btn">
             <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8">
               <path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/>
@@ -1184,7 +921,7 @@
           <span class="circle-lbl">Zastrzeż<br>PESEL</span>
         </div>
 
-        <div class="circle-action-item" onclick="openSheet('Więcej skrótów', 'Dostępne operacje dla dokumentu mDowód.', '• Pobierz potwierdzenie danych (PDF)<br>• Sprawdź historię udostępnień<br>• Zgłoś unieważnienie certyfikatu')">
+        <div class="circle-action-item" onclick="openSheet('Więcej skrótów', 'Dostępne operacje dla dokumentu mDowód.', '• Pobierz potwierdzenie danych (PDF)<br>• Sprawdź historię udostępnień')">
           <div class="circle-btn">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="#3b82f6">
               <circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/>
@@ -1239,158 +976,405 @@
     </div>
   </div>
 
-  <!-- SCREEN 4: USŁUGI (Aktualne usługi 2026: Zastrzeż PESEL, Odyseusz, Recepty PDF, KSeF...) -->
+  <!-- SCREEN 4: USŁUGI (1:1 dokładnie z 4 zrzutów użytkownika) -->
   <div class="screen" id="screen-services">
     <div class="main-topbar">
       <img class="logo-sq" src="./logo.png" alt="Logo">
-      <button class="bell-btn" onclick="showToast('Brak nowych powiadomień')">
-        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
-          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-        </svg>
-      </button>
+      <div></div>
     </div>
 
     <div class="scroll-body">
       <div class="page-h1">Usługi</div>
 
-      <div class="search-bar">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8c93a0" stroke-width="2" stroke-linecap="round">
-          <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
-        </svg>
-        <input type="text" placeholder="Szukaj usługi" oninput="filterServices(this.value)">
+      <!-- ULUBIONE -->
+      <div class="sec-row">
+        <div class="sec-head">Ulubione</div>
+        <span class="top-link-blue" style="font-size:15px;" onclick="showToast('Lista ulubionych usług')">Dostosuj</span>
+      </div>
+      <div class="m-card">
+        <div class="m-row" onclick="openSheet('Podpisz dokument', 'Podpisuj dokumenty PDF podpisem zaufanym lub osobistym.', '<b>Status:</b> Brak oczekujących plików do podpisu')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M5 3h9l5 5v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="#c7d2e0"/>
+              <path d="M14 3v5h5" fill="#8f9fb3"/>
+              <path d="M7.5 16.5c1.5-2.5 2.5-2.5 2.5 0s1.5 1.5 2.5-1 1.5 1.5 3.5 1" stroke="#181a1f" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Podpisz dokument</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="openSheet('Bezpiecznie w sieci', 'Zgłaszaj podejrzane strony internetowe, SMS-y i incydenty do CERT Polska.', '<b>Połączenie z CERT Polska:</b> Aktywne')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L3.5 8.2L6.8 19.5H17.2L20.5 8.2L12 2Z" fill="#a855f7"/>
+              <circle cx="12" cy="11.5" r="4.5" stroke="#181a1f" stroke-width="1.6"/>
+              <path d="M7.8 11.5h8.4M12 7a7 7 0 0 1 0 9M12 7a7 7 0 0 0 0 9" stroke="#181a1f" stroke-width="1.3"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Bezpiecznie w sieci</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="openSheet('Alert powodziowy', 'Bieżące ostrzeżenia hydrologiczne IMGW dla Twojego regionu.', '<b>Status:</b> Brak zagrożeń powodziowych w okolicy')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3L3 18h18L12 3z" fill="#22c55e"/>
+              <path d="M12 9v4M12 15.5h.01" stroke="#181a1f" stroke-width="2" stroke-linecap="round"/>
+              <path d="M3 20.5c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0" stroke="#22c55e" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Alert powodziowy</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="openSheet('Zastrzeż PESEL', 'Chroń swój numer PESEL przed nieuprawnionym wykorzystaniem.', '<b>PESEL:</b> ' + (data.pesel || '') + '<br><b>Status:</b> Niezastrzeżony')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2.5l7.5 3v6c0 4.8-3.2 8.8-7.5 10.5C7.7 20.3 4.5 16.3 4.5 11.5v-6L12 2.5z" fill="#a855f7"/>
+              <rect x="8.8" y="11" width="6.4" height="5" rx="1.2" fill="#181a1f"/>
+              <path d="M10 11V9.5a2 2 0 1 1 4 0V11" stroke="#181a1f" stroke-width="1.7"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Zastrzeż PESEL</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="openSheet('Firma', 'Dane Twojej działalności gospodarczej z rejestru CEIDG.', '<b>Status:</b> Brak aktywnych wpisów w CEIDG')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 7V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v2" stroke="#b0895a" stroke-width="2"/>
+              <rect x="3" y="7" width="18" height="13" rx="2.5" fill="#b0895a"/>
+              <path d="M3 12h18" stroke="#181a1f" stroke-width="1.5"/>
+              <rect x="10.5" y="10.5" width="3" height="3" rx="0.6" fill="#e5cfa8"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Firma</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="openSheet('Punkty karne', 'Aktualne saldo punktów karnych z Centralnej Ewidencji Kierowców.', '<b>Aktywne punkty:</b> 0<br><b>Punkty tymczasowe:</b> 0')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="7" width="10" height="7" rx="2" fill="#3b82f6"/>
+              <path d="M6 14l-1 6h3l1-6" fill="#2563eb"/>
+              <path d="M16 8.5a4.5 4.5 0 0 1 0 5M18.5 6.5a7.5 7.5 0 0 1 0 9" stroke="#ef4444" stroke-width="1.9" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Punkty karne</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="openSheet('Mandaty', 'Rejestr mandatów karnych z e-Urzędu Skarbowego.', '<b>Nieopłacone mandaty:</b> 0')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M4 3h16v18l-2.5-2-2.5 2-3-2-3 2-2.5-2L4 21V3z" fill="#38bdf8"/>
+              <path d="M7.5 8h4.5M7.5 12h4.5M15.5 7.5v4.5M15.5 14.5h.01" stroke="#181a1f" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Mandaty</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
       </div>
 
-      <div class="sec-label">Najpopularniejsze</div>
-      <div class="list-card">
-        <div class="list-row srv-item" onclick="openSheet('Zastrzeż PESEL', 'Usługa pozwala w dowolnym momencie zastrzec lub cofnąć zastrzeżenie numeru PESEL.', '<b>PESEL:</b> ' + (data.pesel || '') + '<br><b>Aktualny status:</b> Niezastrzeżony')">
-          <div class="srv-ico ico-blue">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/>
-              <rect x="9.5" y="10.5" width="5" height="4" rx="1"/>
-              <path d="M10.5 10.5V9a1.5 1.5 0 0 1 3 0v1.5"/>
+      <!-- OCHRONA DANYCH -->
+      <div class="sec-head">Ochrona danych</div>
+      <div class="m-card">
+        <div class="m-row" onclick="openSheet('Sprawdź dowód', 'Sprawdź, czy dany dowód osobisty jest ważny lub unieważniony w Rejestrze Dowodów Osobistych.', '<b>Rejestr RDO:</b> Dostępny')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="2.5" y="5" width="16" height="12" rx="2" fill="#a855f7"/>
+              <circle cx="7" cy="10" r="1.8" fill="#181a1f"/>
+              <path d="M4.5 14.5c.6-1.5 4.4-1.5 5 0M11.5 9.5h4.5M11.5 12.5h3" stroke="#181a1f" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="18" cy="16.5" r="4" fill="#c084fc"/>
+              <path d="M16.3 16.5l1.2 1.2 2.2-2.2" stroke="#181a1f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-          <div class="row-text"><div class="row-title">Zastrzeż PESEL</div><div class="row-sub">Chroń swój numer przed wyłudzeniami</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+          <div class="m-row-label">Sprawdź dowód</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="list-row srv-item" onclick="openSheet('Recepty', 'Twoje e-Recepty z Internetowego Konta Pacjenta. Od wersji 4.93 dostępne również offline w formacie PDF.', '<b>Aktywne recepty:</b> 0<br><b>Synchronizacja IKP:</b> Aktualna')">
-          <div class="srv-ico ico-green">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10.5 20.5L3.5 13.5a4.95 4.95 0 1 1 7-7l7 7a4.95 4.95 0 1 1-7 7z"/><path d="M8.5 8.5l7 7"/>
+        <div class="m-row" onclick="openSheet('Sprawdź PESEL', 'Zweryfikuj status zastrzeżenia numeru PESEL w rejestrze państwowym.', '<b>Twój status:</b> Niezastrzeżony')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2.5l7.5 3v6c0 4.8-3.2 8.8-7.5 10.5C7.7 20.3 4.5 16.3 4.5 11.5v-6L12 2.5z" fill="#a855f7"/>
+              <circle cx="11.2" cy="11.2" r="3" stroke="#181a1f" stroke-width="1.9"/>
+              <path d="M13.5 13.5l2.5 2.5" stroke="#181a1f" stroke-width="1.9" stroke-linecap="round"/>
             </svg>
           </div>
-          <div class="row-text"><div class="row-title">Recepty</div><div class="row-sub">e-Recepty i pobieranie PDF offline</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
-        </div>
-
-        <div class="list-row srv-item" onclick="openSheet('Mandaty', 'Rejestr mandatów karnych z e-Urzędu Skarbowego.', '<b>Nieopłacone mandaty:</b> 0<br><b>Saldo zobowiązań:</b> 0,00 zł')">
-          <div class="srv-ico ico-red">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <path d="M14 2v6h6M9 13h6M9 17h4"/>
-            </svg>
-          </div>
-          <div class="row-text"><div class="row-title">Mandaty</div><div class="row-sub">Sprawdź i opłać mandaty karne</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
-        </div>
-
-        <div class="list-row srv-item" onclick="openSheet('Punkty karne', 'Informacja o punktach karnych z Centralnej Ewidencji Kierowców (CEPiK).', '<b>Aktywne punkty:</b> 0<br><b>Punkty tymczasowe:</b> 0')">
-          <div class="srv-ico ico-amber">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2.5"/>
-            </svg>
-          </div>
-          <div class="row-text"><div class="row-title">Punkty karne</div><div class="row-sub">Sprawdź swoje punkty w CEPiK</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+          <div class="m-row-label">Sprawdź PESEL</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
       </div>
 
-      <div class="sec-label">Pozostałe usługi</div>
-      <div class="list-card">
-        <div class="list-row srv-item" onclick="openSheet('Odyseusz', 'Zgłoszenie podróży zagranicznej w systemie MSZ. Dostępne potwierdzenie PDF offline.', '<b>Aktywne podróże:</b> Brak<br><b>Kontakt MSZ:</b> Aktywny')">
-          <div class="srv-ico ico-blue">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>
+      <!-- ZDROWIE -->
+      <div class="sec-head">Zdrowie</div>
+      <div class="m-card">
+        <div class="m-row" onclick="openSheet('Recepty', 'Twoje e-Recepty z Internetowego Konta Pacjenta.', '<b>Aktywne recepty:</b> 0')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 20.5l-1.3-1.2C5.4 14.5 2.5 11.8 2.5 8.5 2.5 5.8 4.6 3.8 7.3 3.8c1.6 0 3.1.8 4.1 2l.6.7.6-.7c1-1.2 2.5-2 4.1-2 2.7 0 4.8 2 4.8 4.7 0 3.3-2.9 6-8.2 10.8L12 20.5z" fill="#ef4444"/>
+              <circle cx="8" cy="9" r="1.4" fill="#fca5a5"/>
             </svg>
           </div>
-          <div class="row-text"><div class="row-title">Odyseusz</div><div class="row-sub">Zgłoś podróż zagraniczną w MSZ</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+          <div class="m-row-label">Recepty</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="list-row srv-item" onclick="openSheet('KSeF', 'Logowanie i autoryzacja w Krajowym Systemie e-Faktur za pomocą aplikacji mObywatel.', '<b>Status integracji:</b> Aktywna (2026)<br><b>Uprawnienia:</b> Brak przypisanych podmiotów')">
-          <div class="srv-ico ico-purple">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/>
+        <div class="m-row" onclick="openSheet('mojeIKP', 'Dostęp do Internetowego Konta Pacjenta, skierowań i historii leczenia.', '<b>Połączenie z IKP:</b> Aktywne')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 20.5l-1.3-1.2C5.4 14.5 2.5 11.8 2.5 8.5 2.5 5.8 4.6 3.8 7.3 3.8c1.6 0 3.1.8 4.1 2l.6.7.6-.7c1-1.2 2.5-2 4.1-2 2.7 0 4.8 2 4.8 4.7 0 3.3-2.9 6-8.2 10.8L12 20.5z" fill="#3b82f6"/>
+              <path d="M12 6.5V20.5" stroke="#1d4ed8" stroke-width="1.2"/>
             </svg>
           </div>
-          <div class="row-text"><div class="row-title">Logowanie do KSeF</div><div class="row-sub">Krajowy System e-Faktur</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+          <div class="m-row-label">mojeIKP</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+      </div>
+
+      <!-- SPRAWY URZĘDOWE -->
+      <div class="sec-head">Sprawy urzędowe</div>
+      <div class="m-card">
+        <div class="m-row" onclick="openSheet('Załatw sprawę', 'Składaj wnioski urzędowe online bez wizyty w urzędzie.', '<b>Usługa:</b> ePUAP / e-Doręczenia')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M5 3h9l5 5v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="#b8c4d4"/>
+              <path d="M8 12h8M8 16h5" stroke="#181a1f" stroke-width="1.9" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Załatw sprawę</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="list-row srv-item" onclick="openSheet('Historia pojazdu', 'Sprawdź historię pojazdu zarejestrowanego w Polsce na podstawie numeru rejestracyjnego, VIN i daty pierwszej rejestracji.', '<b>Rejestr:</b> CEPiK 2.0 Online')">
-          <div class="srv-ico ico-cyan">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 17h14M6 12l2-5h8l2 5M5 12h14v5H5z"/><circle cx="7.5" cy="14.5" r="1"/><circle cx="16.5" cy="14.5" r="1"/>
+        <div class="m-row" onclick="openSheet('Twoje sprawy', 'Lista złożonych wniosków i spraw w toku.', '<b>Sprawy w toku:</b> 0')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" fill="#b8c4d4"/>
             </svg>
           </div>
-          <div class="row-text"><div class="row-title">Historia pojazdu</div><div class="row-sub">Sprawdź dane auta przed zakupem</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+          <div class="m-row-label">Twoje sprawy</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="list-row srv-item" onclick="openSheet('Bezpieczny autobus', 'Zweryfikuj ważne badania techniczne oraz polisę OC autokaru przed wyjazdem.', '<b>Baza danych:</b> Centralna Ewidencja Pojazdów')">
-          <div class="srv-ico ico-blue">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="4" y="4" width="16" height="14" rx="2.5"/><path d="M4 11h16M7 18v2M17 18v2"/>
-              <circle cx="8" cy="14.5" r="1"/><circle cx="16" cy="14.5" r="1"/>
+        <div class="m-row" onclick="openSheet('Odbiór dowodu', 'Sprawdź, czy Twój nowy dowód osobisty jest gotowy do odbioru w urzędzie.', '<b>Status wniosku:</b> Brak aktywnego wniosku')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="2.5" y="5" width="16" height="12" rx="2" fill="#b8c4d4"/>
+              <circle cx="7" cy="10" r="1.8" fill="#181a1f"/>
+              <path d="M4.5 14.5c.6-1.5 4.4-1.5 5 0M11.5 9.5h4.5" stroke="#181a1f" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="18" cy="16.5" r="4" fill="#d4dde8"/>
+              <path d="M18 14.5v4M16.5 17l1.5 1.5 1.5-1.5" stroke="#181a1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-          <div class="row-text"><div class="row-title">Bezpieczny autobus</div><div class="row-sub">Sprawdź badania techniczne i OC</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+          <div class="m-row-label">Odbiór dowodu</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="list-row srv-item" onclick="openSheet('Jakość powietrza', 'Dane z najbliższej stacji pomiarowej GIOŚ.', '<b>Indeks jakości:</b> Bardzo dobry<br><b>PM2.5:</b> 8 µg/m³ &nbsp;|&nbsp; <b>PM10:</b> 14 µg/m³')">
-          <div class="srv-ico ico-green">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17.7 7.7A2.5 2.5 0 1 1 19 12H3"/><path d="M9.6 4.6A2 2 0 1 1 11 8H3"/><path d="M12.6 19.4A2 2 0 1 0 14 16H3"/>
+        <div class="m-row" onclick="openSheet('E-wizyta w ZUS', 'Umów wideorozmowę z ekspertem Zakładu Ubezpieczeń Społecznych.', '<b>Zaplanowane wizyty:</b> Brak')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="4" width="15" height="11" rx="2" fill="#b8c4d4"/>
+              <path d="M8 19h5M10.5 15v4" stroke="#b8c4d4" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="18" cy="7.5" r="3" fill="#d4dde8"/>
             </svg>
           </div>
-          <div class="row-text"><div class="row-title">Jakość powietrza</div><div class="row-sub">Aktualny poziom PM2.5 i PM10</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+          <div class="m-row-label">E-wizyta w ZUS</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="list-row srv-item" onclick="openSheet('ePłatności', 'Płatności urzędowe BLIK oraz kartą bez prowizji.', '<b>Do zapłaty:</b> 0,00 zł<br><b>Ostatnia transakcja:</b> Brak')">
-          <div class="srv-ico ico-purple">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20M6 15h4"/>
+        <div class="m-row" onclick="openSheet('Wybory', 'Sprawdź swój obwód głosowania w Centralnym Rejestrze Wyborców.', '<b>Status:</b> Dane zgodne z adresem zameldowania')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M4 10l8-5 8 5v7l-8 4-8-4v-7z" fill="#b8c4d4"/>
+              <path d="M9 9.5l6 0" stroke="#181a1f" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
           </div>
-          <div class="row-text"><div class="row-title">ePłatności</div><div class="row-sub">Opłaty urzędowe i podatki</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+          <div class="m-row-label">Wybory</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+      </div>
+
+      <!-- KIEROWCA I POJAZDY -->
+      <div class="sec-head">Kierowca i pojazdy</div>
+      <div class="m-card">
+        <div class="m-row" onclick="openSheet('Uprawnienia kierowcy', 'Sprawdź status swoich uprawnień do kierowania pojazdami w CEPiK.', '<b>Rejestr CEK:</b> Połączono')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="11.5" cy="11.5" r="8" stroke="#3b82f6" stroke-width="2.2"/>
+              <circle cx="11.5" cy="11.5" r="2.2" fill="#3b82f6"/>
+              <path d="M4 11.5h5.5M13.5 11.5H19M11.5 13.7V19" stroke="#3b82f6" stroke-width="2"/>
+              <circle cx="17.5" cy="17.5" r="3.8" fill="#60a5fa"/>
+              <path d="M16 17.5l1 1 2-2" stroke="#181a1f" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Uprawnienia kierowcy</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="list-row srv-item" onclick="openSheet('Wybory', 'Twoje dane z Centralnego Rejestru Wyborców.', '<b>Status:</b> Dane aktualne<br><b>Obwód:</b> Zgodny z adresem zameldowania')">
-          <div class="srv-ico ico-red">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 11l3 3 7-7"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+        <div class="m-row" onclick="openSheet('Historia pojazdu', 'Zweryfikuj przebieg, badania techniczne i OC pojazdu przed zakupem.', '<b>Baza CEPiK 2.0:</b> Dostępna')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M4 13l2-6h12l2 6v6a1 1 0 0 1-1 1h-1.5a1 1 0 0 1-1-1v-1h-9v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6z" fill="#3b82f6"/>
+              <path d="M7 9h10l1 3H6l1-3z" fill="#181a1f"/>
+              <circle cx="7.5" cy="15" r="1.2" fill="#181a1f"/><circle cx="16.5" cy="15" r="1.2" fill="#181a1f"/>
             </svg>
           </div>
-          <div class="row-text"><div class="row-title">Wybory</div><div class="row-sub">Sprawdź obwód głosowania w CRW</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+          <div class="m-row-label">Historia pojazdu</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+      </div>
+
+      <!-- OPŁATY I PODATKI -->
+      <div class="sec-head">Opłaty i podatki</div>
+      <div class="m-card">
+        <div class="m-row" onclick="openSheet('ePłatności', 'Opłacaj podatki lokalne i opłaty urzędowe bez prowizji.', '<b>Do zapłaty:</b> 0,00 zł')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="5" width="18" height="14" rx="3" fill="#38bdf8"/>
+              <rect x="14" y="10" width="7" height="4" rx="1.5" fill="#0284c7"/>
+              <circle cx="16.5" cy="12" r="1" fill="#e0f2fe"/>
+            </svg>
+          </div>
+          <div class="m-row-label">ePłatności</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+      </div>
+
+      <!-- ŚRODOWISKO -->
+      <div class="sec-head">Środowisko</div>
+      <div class="m-card">
+        <div class="m-row" onclick="openSheet('Naruszenie środowiskowe', 'Zgłoś nielegalne wysypisko śmieci lub zanieczyszczenie do GIOŚ.', '<b>Twoje zgłoszenia:</b> 0')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M4 10c0 6 4 10 8 10s8-4 8-10c0-3-1-5-1-5s-3.5 1-7 1-7-1-7-1-1 2-1 5z" fill="#22c55e"/>
+              <path d="M12 8v5M12 15.5h.01" stroke="#181a1f" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Naruszenie środowiskowe</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="openSheet('Jakość powietrza', 'Aktualne pomiary stacji jakości powietrza GIOŚ.', '<b>Jakość:</b> Bardzo dobra (PM2.5: 7 µg/m³)')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M4 9h11a2.5 2.5 0 1 0-2.5-2.5M4 13h14a2.5 2.5 0 1 1-2.5 2.5M4 17h7a2 2 0 1 1-2 2" stroke="#22c55e" stroke-width="2.1" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Jakość powietrza</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+      </div>
+
+      <!-- PODRÓŻ -->
+      <div class="sec-head">Podróż</div>
+      <div class="m-card">
+        <div class="m-row" onclick="openSheet('Bezpieczny autobus', 'Sprawdź badania techniczne i OC autobusu przed wyjazdem.', '<b>Baza CEP:</b> Aktywna')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="4" y="4" width="16" height="14" rx="2.5" fill="#eab308"/>
+              <rect x="6.5" y="6.5" width="11" height="5.5" rx="1" fill="#181a1f"/>
+              <circle cx="8" cy="15" r="1.2" fill="#181a1f"/><circle cx="16" cy="15" r="1.2" fill="#181a1f"/>
+              <path d="M7 18v2M17 18v2" stroke="#eab308" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Bezpieczny autobus</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="openSheet('Bilkom', 'Twoje bilety kolejowe zakupione w serwisie Bilkom.', '<b>Aktywne bilety:</b> 0')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="5" y="3.5" width="14" height="14" rx="3" fill="#eab308"/>
+              <rect x="7.5" y="6" width="9" height="5.5" rx="1" fill="#181a1f"/>
+              <circle cx="8.5" cy="14.5" r="1.1" fill="#181a1f"/><circle cx="15.5" cy="14.5" r="1.1" fill="#181a1f"/>
+              <path d="M7 20l2-2.5M17 20l-2-2.5" stroke="#eab308" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Bilkom</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="openSheet('Karta MKA', 'Małopolska Karta Aglomeracyjna w telefonie.', '<b>Status:</b> Nieaktywna')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2.5C8.1 2.5 5 5.6 5 9.5c0 5.2 7 12 7 12s7-6.8 7-12c0-3.9-3.1-7-7-7z" fill="#eab308"/>
+              <circle cx="12" cy="9.5" r="2.6" fill="#181a1f"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Karta MKA</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="openSheet('Polak za granicą', 'Informacje MSZ dla podróżujących i numery alarmowe ambasad.', '<b>Poradnik MSZ:</b> Zaktualizowany')">
+          <div class="m-row-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="4" y="4" width="16" height="16" rx="3" fill="#eab308"/>
+              <path d="M12 7v10M7.5 11.5L12 10l4.5 1.5M9.5 16l2.5-1 2.5 1" stroke="#181a1f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Polak za granicą</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SCREEN 5: KOD QR (Przerwa techniczna RDO-PKI) -->
+  <!-- SCREEN 5: KOD QR (1:1 ze zrzutu z dwoma opcjami) -->
   <div class="screen" id="screen-qr">
-    <div class="topbar">
-      <div class="back-btn" onclick="goToScreen('docs')">
-        <span class="back-chevron">&#8249;</span>
-        <span>Dokumenty</span>
+    <div class="main-topbar">
+      <img class="logo-sq" src="./logo.png" alt="Logo">
+      <div></div>
+    </div>
+
+    <div class="scroll-body">
+      <div class="page-h1">Kod QR</div>
+      <div class="qr-intro">
+        Dzięki tej funkcji zalogujesz się do usług w internecie i potwierdzisz cyfrowe dokumenty - zarówno swoje, jak i drugiej osoby.
       </div>
-      <div class="topbar-title">Kod QR</div>
+
+      <div class="m-card">
+        <div class="qr-menu-row" onclick="goToScreen('qr-error')">
+          <div class="m-row-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#e5e7eb" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M20 8V5.5A1.5 1.5 0 0 0 18.5 4H16M4 16v2.5A1.5 1.5 0 0 0 5.5 20H8M20 16v2.5A1.5 1.5 0 0 1 18.5 20H16"/>
+              <path d="M9 12.2l2 2 4-4.2"/>
+            </svg>
+          </div>
+          <div style="flex:1;">
+            <div class="qr-menu-title">Zeskanuj kod QR</div>
+            <div class="qr-menu-sub">Zaloguj się do strony internetowej lub potwierdź swój cyfrowy dokument.</div>
+          </div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="qr-menu-row" onclick="goToScreen('qr-error')">
+          <div class="m-row-icon">
+            <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#e5e7eb" stroke-width="1.6" stroke-linejoin="round">
+              <rect x="4" y="4" width="6.5" height="6.5" rx="1"/><rect x="6.2" y="6.2" width="2" height="2" fill="#e5e7eb"/>
+              <rect x="13.5" y="4" width="6.5" height="6.5" rx="1"/><rect x="15.7" y="6.2" width="2" height="2" fill="#e5e7eb"/>
+              <rect x="4" y="13.5" width="6.5" height="6.5" rx="1"/><rect x="6.2" y="15.7" width="2" height="2" fill="#e5e7eb"/>
+              <rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1"/><rect x="15.7" y="15.7" width="2" height="2" fill="#e5e7eb"/>
+            </svg>
+          </div>
+          <div style="flex:1;">
+            <div class="qr-menu-title">Pokaż kod QR</div>
+            <div class="qr-menu-sub">Sprawdź cyfrowy dokument drugiej osoby.</div>
+          </div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 5B: KOD QR ERROR (po kliknięciu Zeskanuj / Pokaż kod QR) -->
+  <div class="screen" id="screen-qr-error">
+    <div class="topbar">
+      <div class="back-btn" onclick="goToScreen('qr')">
+        <span class="back-chevron">&#8249;</span>
+        <span>Kod QR</span>
+      </div>
+      <div class="topbar-title">Weryfikacja</div>
       <div></div>
     </div>
 
@@ -1417,137 +1401,189 @@
     </div>
   </div>
 
-  <!-- SCREEN 6: WIĘCEJ -->
+  <!-- SCREEN 6: WIĘCEJ (1:1 ze zrzutów użytkownika) -->
   <div class="screen" id="screen-more">
     <div class="main-topbar">
       <img class="logo-sq" src="./logo.png" alt="Logo">
-      <button class="bell-btn" onclick="showToast('Brak nowych powiadomień')">
-        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
-          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-        </svg>
-      </button>
+      <button class="top-link-blue" onclick="goToScreen('login')">Wyloguj się</button>
     </div>
 
     <div class="scroll-body">
       <div class="page-h1">Więcej</div>
 
-      <div class="sec-label">Twoje dane</div>
-      <div class="list-card">
-        <div class="list-row" onclick="goToScreen('mdowod')">
-          <div class="srv-ico ico-blue">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
-              <circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 14.5-4 16 0"/>
+      <!-- TWOJE DANE -->
+      <div class="sec-head">Twoje dane</div>
+      <div class="m-card">
+        <div class="m-row" onclick="openSheet('Dane zameldowania', 'Aktualny adres zameldowania pobrany z rejestru PESEL.', '<b>Adres:</b> ' + (data.adres || '') + '<br><b>Data zameldowania:</b> ' + (data.dataZam || ''))">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 10.5L12 3l9 7.5M5 9.5V20h14V9.5"/>
+              <circle cx="12" cy="13.5" r="2"/>
             </svg>
           </div>
-          <div class="row-text"><div class="row-title" id="moreUserName">JAN KOWALSKI</div><div class="row-sub">Dane profilu zaufanego i mDowodu</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+          <div class="m-row-label">Dane zameldowania</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="list-row" onclick="openSheet('Wydane certyfikaty', 'Certyfikat kryptograficzny potwierdzający autentyczność Twojej aplikacji.', '<b>Wystawca:</b> Ministerstwo Cyfryzacji (COI)<br><b>Status:</b> Aktywny (odnowiony 16.11.2026)<br><b>Ważny do:</b> 16.11.2027')">
-          <div class="srv-ico ico-green">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2l3 3h4v4l3 3-3 3v4h-4l-3 3-3-3H5v-4l-3-3 3-3V5h4l3-3z"/><path d="M9 12l2 2 4-4"/>
+        <div class="m-row" onclick="openSheet('Dane paszportu', 'Informacje z Rejestru Dokumentów Paszportowych.', '<b>Status:</b> Brak aktywnego paszportu biometrycznego')">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7.5"/>
+              <path d="M3.8 11h14.4M11 3.5a11 11 0 0 1 0 15M11 3.5a11 11 0 0 0 0 15"/>
+              <rect x="14.5" y="13.5" width="6" height="7" rx="1" fill="#181a1f" stroke="#d4d7de"/>
             </svg>
           </div>
-          <div class="row-text"><div class="row-title">Wydane certyfikaty</div><div class="row-sub">Aktywny certyfikat urządzenia</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+          <div class="m-row-label">Dane paszportu</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+      </div>
+
+      <!-- USTAWIENIA -->
+      <div class="sec-head">Ustawienia</div>
+      <div class="m-card">
+        <div class="m-row" onclick="showToast('Hasło do aplikacji jest aktualne')">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="15" cy="9" r="4"/><path d="M12.2 11.8L4 20M7 17l2 2"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Zmień hasło</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="list-row" onclick="openSheet('Historia aktywności', 'Ostatnie zdarzenia zarejestrowane w aplikacji mObywatel.', '<b>Dzisiaj:</b> Zalogowano przy użyciu biometrii (Face ID)<br><b>16.11.2026:</b> Automatyczna aktualizacja certyfikatu domenowego (4.93.1)')">
-          <div class="srv-ico ico-gray">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <div class="m-row" onclick="openSheet('Logowanie biometryczne', 'Logowanie za pomocą Face ID / Touch ID jest aktywne na tym urządzeniu.', '<b>Status:</b> Włączone (WebAuthn)')">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 3H5a2 2 0 0 0-2 2v2M17 3h2a2 2 0 0 1 2 2v2M7 21H5a2 2 0 0 1-2-2v-2M17 21h2a2 2 0 0 0 2-2v-2"/>
+              <path d="M9 10v1.5M15 10v1.5M12 10v3h-1M9 15.5c1.5 1.3 4.5 1.3 6 0"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Logowanie biometryczne</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="showToast('Powiadomienia push są włączone')">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Powiadomienia</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="showToast('Wygląd: Ciemny')">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3a9 9 0 1 0 0 18 2.2 2.2 0 0 0 2.2-2.2c0-.6-.2-1.1-.6-1.5-.4-.4-.6-.9-.6-1.5A2.2 2.2 0 0 1 15.2 13.6H17a4 4 0 0 0 4-4A6.6 6.6 0 0 0 12 3z"/>
+              <circle cx="8" cy="10" r="1" fill="#d4d7de"/><circle cx="11.5" cy="7.5" r="1" fill="#d4d7de"/><circle cx="15.5" cy="9" r="1" fill="#d4d7de"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Wygląd</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="showToast('Język aplikacji: Polski')">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Język aplikacji</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="openSheet('Wydane certyfikaty', 'Certyfikat kryptograficzny potwierdzający autentyczność aplikacji.', '<b>Wystawca:</b> Ministerstwo Cyfryzacji (COI)<br><b>Status:</b> Ważny (odnowiony 16.11.2026)')">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3h8l4 4v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/>
+              <circle cx="14.5" cy="16.5" r="2.5"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Wydane certyfikaty</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+      </div>
+
+      <!-- POZOSTAŁE -->
+      <div class="sec-head">Pozostałe</div>
+      <div class="m-card">
+        <div class="m-row" onclick="openSheet('Historia aktywności', 'Ostatnie zdarzenia zarejestrowane w aplikacji.', '<b>Dzisiaj:</b> Zalogowano biometrią (Face ID)<br><b>16.11.2026:</b> Aktualizacja do wersji 4.93.1')">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
             </svg>
           </div>
-          <div class="row-text"><div class="row-title">Historia aktywności</div><div class="row-sub">Logowania i potwierdzenia tożsamości</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
-        </div>
-      </div>
-
-      <div class="sec-label">Ustawienia aplikacji</div>
-      <div class="list-card">
-        <div class="list-row" onclick="toggleBioSwitch()">
-          <div class="srv-ico ico-blue">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M7 3H5a2 2 0 0 0-2 2v2M17 3h2a2 2 0 0 1 2 2v2M7 21H5a2 2 0 0 1-2-2v-2M17 21h2a2 2 0 0 0 2-2v-2"/>
-              <path d="M9 10v1M15 10v1M9 15c1.5 1.5 4.5 1.5 6 0"/>
-            </svg>
-          </div>
-          <div class="row-text"><div class="row-title">Logowanie biometryczne</div><div class="row-sub">Face ID / Touch ID</div></div>
-          <div class="toggle-switch" id="bioToggle"><div class="toggle-knob"></div></div>
+          <div class="m-row-label">Historia aktywności</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="list-row" onclick="showToast('Powiadomienia push są włączone')">
-          <div class="srv-ico ico-amber">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-            </svg>
-          </div>
-          <div class="row-text"><div class="row-title">Powiadomienia</div><div class="row-sub">Włączone</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
-        </div>
-
-        <div class="list-row" onclick="showToast('Motyw: Ciemny (systemowy)')">
-          <div class="srv-ico ico-purple">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-          </div>
-          <div class="row-text"><div class="row-title">Wygląd aplikacji</div><div class="row-sub">Ciemny</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
-        </div>
-
-        <div class="list-row" onclick="showToast('Język aplikacji: Polski')">
-          <div class="srv-ico ico-cyan">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8"/>
-            </svg>
-          </div>
-          <div class="row-text"><div class="row-title">Język aplikacji</div><div class="row-sub">Polski</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
-        </div>
-      </div>
-
-      <div class="sec-label">Pomoc i informacje</div>
-      <div class="list-card">
-        <div class="list-row" onclick="openSheet('Pomoc techniczna', 'Masz problem z aplikacją lub dokumentami? Skontaktuj się z infolinią Centralnego Ośrodka Informatyki.', '<b>Infolinia COI:</b> +48 42 253 54 74<br><b>E-mail:</b> mobywatel-pomoc@coi.gov.pl<br><b>Godziny pracy:</b> pn.–pt. 7:00–18:00')">
-          <div class="srv-ico ico-gray">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-            </svg>
-          </div>
-          <div class="row-text"><div class="row-title">Pomoc techniczna</div><div class="row-sub">Zgłoś problem lub sprawdź FAQ</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
-        </div>
-
-        <div class="list-row" onclick="openSheet('O aplikacji', 'Twoja aplikacja mObywatel jest aktualna i posiada ważny certyfikat bezpieczeństwa.', '<b>Wersja aplikacji:</b> 4.93.1 (6712)<br><b>Wydawca:</b> Ministerstwo Cyfryzacji<br><b>Wykonawca:</b> Centralny Ośrodek Informatyki<br><b>Status aktualizacji:</b> Najnowsza wersja')">
-          <div class="srv-ico ico-gray">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <div class="m-row" onclick="openSheet('O aplikacji', 'Twoja aplikacja mObywatel jest aktualna.', '<b>Wersja:</b> 4.93.1 (6712)<br><b>Wydawca:</b> Ministerstwo Cyfryzacji<br><b>Wykonawca:</b> Centralny Ośrodek Informatyki')">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="9"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
             </svg>
           </div>
-          <div class="row-text"><div class="row-title">O aplikacji</div><div class="row-sub">Wersja 4.93.1 (6712)</div></div>
-          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+          <div class="m-row-label">O aplikacji</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="openSheet('Pomoc techniczna', 'Skontaktuj się z infolinią Centralnego Ośrodka Informatyki.', '<b>Infolinia COI:</b> +48 42 253 54 74<br><b>E-mail:</b> mobywatel-pomoc@coi.gov.pl')">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Pomoc techniczna</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="showToast('Dziękujemy za ocenę aplikacji')">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 3 14.9 8.8 21.3 9.7 16.6 14.2 17.8 20.6 12 17.5 6.2 20.6 7.4 14.2 2.7 9.7 9.1 8.8 12 3"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Oceń aplikację</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="showToast('Zgłoszenie pomysłu — przekierowanie')">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Zagłosuj na pomysł</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="m-row" onclick="openSheet('Dezaktywuj aplikację', 'Dezaktywacja usunie wszystkie certyfikaty i dokumenty z tego urządzenia.', '<b>Uwaga:</b> Ponowna aktywacja wymaga profilu zaufanego lub bankowości elektronicznej.')">
+          <div class="m-row-icon">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#d4d7de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="7" y="3" width="10" height="18" rx="2"/>
+              <line x1="3" y1="20" x2="21" y2="4"/>
+            </svg>
+          </div>
+          <div class="m-row-label">Dezaktywuj aplikację</div>
+          <svg class="m-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
       </div>
-
-      <button class="btn-logout" onclick="goToScreen('login')">Wyloguj się</button>
-      <div class="more-version">mObywatel wersja 4.93.1 (6712)</div>
     </div>
   </div>
 
   <!-- SHARED 4-TAB BOTTOM BAR -->
   <div class="bottom-nav-4" id="globalNav">
     <div class="nav4-btn active" id="nav-docs" onclick="goToScreen('docs')">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" id="ico-nav-docs">
         <rect x="4" y="8" width="16" height="12" rx="2.5"/>
-        <path d="M6.5 5.5h11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M6.5 5.5h11" stroke-linecap="round"/>
       </svg>
       <span>Dokumenty</span>
     </div>
     <div class="nav4-btn" id="nav-services" onclick="goToScreen('services')">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" id="ico-nav-services">
         <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
       </svg>
       <span>Usługi</span>
@@ -1560,7 +1596,7 @@
       <span>Kod QR</span>
     </div>
     <div class="nav4-btn" id="nav-more" onclick="goToScreen('more')">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="ico-nav-more">
         <path d="M7.5 10.5C5.2 8.9 4 7.7 4 6.2A2 2 0 0 1 7.5 5 2 2 0 0 1 11 6.2c0 1.5-1.2 2.7-3.5 4.3z"/>
         <circle cx="17" cy="7.5" r="3"/>
         <circle cx="7.5" cy="17" r="3"/>
@@ -1653,7 +1689,6 @@
       if (el && data[k] !== undefined) el.textContent = data[k];
     }
     document.getElementById("d-update").textContent = data.lastUpdate || formatDateToday();
-    document.getElementById("moreUserName").textContent = `${data.imie || ""} ${data.nazwisko || ""}`.trim() || "JAN KOWALSKI";
 
     const img = document.getElementById("userPhoto");
     const ph = document.getElementById("photoPlaceholder");
@@ -1693,18 +1728,26 @@
     const nav = document.getElementById("globalNav");
     nav.classList.toggle("visible", name !== "login");
 
-    const activeNav = (name === "mdowod" || name === "docs") ? "docs" : name;
+    const activeNav = (name === "mdowod" || name === "docs") ? "docs" : (name === "qr-error" ? "qr" : name);
     ["docs", "services", "qr", "more"].forEach(k => {
       const btn = document.getElementById(`nav-${k}`);
       if (btn) btn.classList.toggle("active", k === activeNav);
     });
+
+    // Filled blue active icon on docs/services/more matching screenshots
+    const icoDocs = document.getElementById("ico-nav-docs");
+    const icoSrv = document.getElementById("ico-nav-services");
+    const icoMore = document.getElementById("ico-nav-more");
+    if (icoDocs) icoDocs.setAttribute("fill", activeNav === "docs" ? "currentColor" : "none");
+    if (icoSrv) icoSrv.setAttribute("fill", activeNav === "services" ? "currentColor" : "none");
+    if (icoMore) icoMore.setAttribute("fill", activeNav === "more" ? "currentColor" : "none");
 
     if (name === "docs") {
       const tile = document.getElementById("mdowodTile");
       tile.classList.remove("fly-in");
       void tile.offsetWidth;
       tile.classList.add("fly-in");
-    } else if (name === "qr") {
+    } else if (name === "qr-error") {
       updateQrAttemptTime();
     }
   }
@@ -1716,22 +1759,7 @@
     document.getElementById("infoSheet").classList.add("open");
   }
 
-  function closeSheet() {
-    document.getElementById("infoSheet").classList.remove("open");
-  }
-
-  function filterServices(q) {
-    q = (q || "").toLowerCase().trim();
-    document.querySelectorAll(".srv-item").forEach(row => {
-      row.style.display = row.textContent.toLowerCase().includes(q) ? "flex" : "none";
-    });
-  }
-
-  function toggleBioSwitch() {
-    const sw = document.getElementById("bioToggle");
-    const isOff = sw.classList.toggle("off");
-    showToast(isOff ? "Wyłączono biometrię" : "Włączono Face ID / Touch ID");
-  }
+  function closeSheet() { document.getElementById("infoSheet").classList.remove("open"); }
 
   let bioBusy = false;
   function bufToB64(buf) { return btoa(String.fromCharCode(...new Uint8Array(buf))); }
