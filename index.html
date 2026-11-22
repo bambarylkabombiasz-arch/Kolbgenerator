@@ -3,67 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="mObywatel">
-<meta name="theme-color" content="#0a0b0e">
-<link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="./icon.svg">
-<title>mObywatel</title>
+<meta name="theme-color" content="#0d0e11">
+<title>Generator mObywatel</title>
 <style>
   :root {
-    --bg: #0f1012;
-    --bg-app: #111214;
-    --surface: #1b1d20;
+    --bg: #0d0e11;
+    --surface: #16191f;
     --text: #f3f4f6;
     --muted: #9ca3af;
-    --blue: #5ea0ff;
-    --green: #4ade80;
-    --border: rgba(255, 255, 255, 0.08);
+    --blue: #3b82f6;
+    --border: rgba(255, 255, 255, 0.1);
   }
 
   * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
   }
 
-  html, body {
-    background: #0a0b0e;
+  body {
+    background: radial-gradient(circle at 20% 0%, #161e2e 0%, #0d0e11 55%);
     color: var(--text);
-    height: 100%;
-    overflow: hidden;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
   }
 
-  .app-shell {
-    position: relative;
+  .wrap {
     width: 100%;
-    max-width: 440px;
-    height: 100dvh;
-    margin: 0 auto;
-    overflow: hidden;
-    background: var(--bg-app);
-  }
-
-  .screen {
-    position: absolute;
-    inset: 0;
-    display: none;
+    max-width: 460px;
+    min-height: 100dvh;
+    display: flex;
     flex-direction: column;
-    background: var(--bg-app);
-    overflow: hidden;
   }
 
-  .screen.active { display: flex; }
+  .gen-header {
+    padding: calc(env(safe-area-inset-top, 14px) + 14px) 20px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 
   .app-icon-red {
-    width: 36px;
-    height: 36px;
-    border-radius: 9px;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
     background: linear-gradient(155deg, #d81e3a 0%, #a51128 100%);
     display: flex;
     align-items: center;
@@ -73,698 +60,135 @@
     flex-shrink: 0;
   }
 
-  .app-icon-red img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
+  .app-icon-red img { width: 100%; height: 100%; object-fit: contain; }
 
-  /* =========================================================
-     SCREEN 1: FACE ID LOGIN
-     ========================================================= */
-  #screen-login {
-    background:
-      radial-gradient(ellipse at 50% 65%, rgba(28, 44, 78, 0.25) 0%, transparent 65%),
-      #0a0b0e;
-    padding: calc(env(safe-area-inset-top, 16px) + 18px) 22px calc(env(safe-area-inset-bottom, 16px) + 18px);
-    justify-content: space-between;
-  }
-
-  .login-top {
+  .gen-body {
+    flex: 1;
+    padding: 16px 20px 28px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 13px;
   }
 
-  .login-brand {
+  .sec-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #60a5fa;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-top: 6px;
+  }
+
+  .gen-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .field-group label {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    margin-bottom: 5px;
+  }
+
+  .field-group input,
+  .field-group select {
+    width: 100%;
+    padding: 11px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    background: var(--surface);
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .field-group input:focus,
+  .field-group select:focus { border-color: var(--blue); }
+
+  .pesel-row { display: flex; gap: 8px; }
+
+  .pesel-row input {
+    font-family: ui-monospace, "Consolas", monospace;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #60a5fa;
+  }
+
+  .btn-small {
+    background: #232833;
+    color: #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0 14px;
+    border-radius: 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .photo-upload-bar {
     display: flex;
     align-items: center;
     gap: 12px;
-  }
-
-  .login-brand-name {
-    font-size: 22px;
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: -0.2px;
-  }
-
-  .login-greeting {
-    font-size: 31px;
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: -0.4px;
-    margin-bottom: 6px;
-  }
-
-  .login-sub {
-    font-size: 16px;
-    color: #9ca3af;
-  }
-
-  .faceid-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    cursor: pointer;
-    margin: auto 0;
-  }
-
-  .faceid-box {
-    width: 84px;
-    height: 84px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease;
-  }
-
-  .faceid-box.scanning svg {
-    animation: facePulse 0.65s ease-in-out infinite;
-  }
-
-  @keyframes facePulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.1); opacity: 0.72; }
-  }
-
-  .faceid-label {
-    font-size: 14.5px;
-    color: #c7ccd6;
-  }
-
-  .login-bottom {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  .btn-outline-pass {
-    width: 100%;
-    padding: 15px;
+    background: var(--surface);
+    border: 1px dashed rgba(255, 255, 255, 0.24);
     border-radius: 14px;
-    background: transparent;
-    border: 1.8px solid #3567d6;
-    color: #4f86f7;
-    font-size: 15.5px;
-    font-weight: 600;
+    padding: 10px 12px;
     cursor: pointer;
   }
 
-  .gov-banner {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 9px 11px;
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr 1.2fr 0.9fr;
-    align-items: center;
-    gap: 6px;
-    color: #111827;
-  }
-
-  .gov-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 7px;
-    line-height: 1.15;
-    font-weight: 700;
-    color: #1f2937;
-  }
-
-  .mini-pl-flag {
-    width: 24px;
-    height: 15px;
-    border: 0.5px solid #d1d5db;
-    background: linear-gradient(to bottom, #ffffff 50%, #dc143c 50%);
-    flex-shrink: 0;
-  }
-
-  .mini-eu-flag {
-    width: 24px;
-    height: 16px;
-    background: #003399;
+  .photo-thumb {
+    width: 48px;
+    height: 60px;
+    border-radius: 9px;
+    background: #0c0e12;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffcc00;
-    font-size: 8px;
+    font-size: 20px;
     flex-shrink: 0;
   }
 
-  .login-version {
-    text-align: center;
-    font-size: 12px;
-    color: #8b919d;
-    margin-top: -6px;
-  }
-
-  /* =========================================================
-     SCREEN 2: DOKUMENTY (Tylko mDowód + przelot od dołu do góry)
-     ========================================================= */
-  #screen-docs {
-    background: #0f1012;
-  }
-
-  .docs-topbar {
-    padding: calc(env(safe-area-inset-top, 14px) + 12px) 20px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .docs-top-icons {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    color: #e5e7eb;
-  }
-
-  .docs-body {
-    flex: 1;
-    padding: 12px 20px 96px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-
-  .docs-h1 {
-    font-size: 31px;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 22px;
-    letter-spacing: -0.4px;
-  }
-
-  .mdowod-tile {
-    position: relative;
-    width: 100%;
-    height: 220px;
-    border-radius: 20px;
-    padding: 20px;
-    background:
-      radial-gradient(circle at 75% 15%, #519cf7 0%, transparent 55%),
-      linear-gradient(135deg, #1d63c6 0%, #2773d8 48%, #154ca1 100%);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-    cursor: pointer;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .mdowod-tile.fly-in {
-    animation: tileFlyUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  @keyframes tileFlyUp {
-    0% {
-      opacity: 0;
-      transform: translateY(280px) scale(0.93);
-    }
-    72% {
-      opacity: 1;
-      transform: translateY(-6px) scale(1.01);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  .mdowod-tile::before {
-    content: "";
-    position: absolute;
-    inset: -30%;
-    background: repeating-radial-gradient(circle at 20% 80%, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 10px);
-    pointer-events: none;
-  }
-
-  .tile-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    position: relative;
-    z-index: 2;
-  }
-
-  .tile-title {
-    font-size: 21px;
-    font-weight: 700;
-    color: #ffffff;
-  }
-
-  .tile-emblem-badge {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.22);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-  }
-
-  .tile-emblem-badge img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-  }
-
-  .tile-bottom {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    color: rgba(255, 255, 255, 0.88);
-    font-size: 13px;
-    font-weight: 500;
-  }
-
-  .docs-link {
-    margin-top: 20px;
-    color: #5ea0ff;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-block;
-  }
-
-  .fab-add {
-    position: absolute;
-    right: 20px;
-    bottom: calc(env(safe-area-inset-bottom, 10px) + 78px);
-    background: #6da4fa;
-    color: #0b1220;
-    border: none;
-    border-radius: 16px;
-    padding: 13px 18px;
-    font-size: 14.5px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
-  }
-
-  /* =========================================================
-     SCREEN 3: mDOWÓD DETAIL
-     ========================================================= */
-  .topbar {
-    background: var(--bg-app);
-    padding: calc(env(safe-area-inset-top, 12px) + 10px) 16px 8px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
-  }
-
-  .back-btn {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #5ea0ff;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-
-  .back-chevron { font-size: 25px; line-height: 1; margin-top: -2px; }
-
-  .topbar-title { font-size: 17px; font-weight: 700; color: #f9fafb; }
-
-  .help-btn {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    border: 1.7px solid #e5e7eb;
-    background: transparent;
-    color: #f9fafb;
-    font-size: 14px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  .content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 4px 18px 92px;
-  }
-
-  .content::-webkit-scrollbar { width: 0; }
-
-  .time-strip {
-    text-align: center;
-    font-size: 13px;
-    color: #9ca3af;
-    margin: 4px 0 14px;
-  }
-
-  .doc-wrapper {
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
-    margin-bottom: 22px;
-    background: #141618;
-  }
-
-  .id-card {
-    position: relative;
-    padding: 18px 16px 20px;
-    background-color: #e6f2fc;
-    background-image: url("./niebiesko-1.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-    min-height: 394px;
-  }
-
-  .holo-sweep {
-    position: absolute;
-    inset: -50%;
-    background: linear-gradient(
-      118deg,
-      transparent 40%,
-      rgba(255, 255, 255, 0.26) 48%,
-      rgba(165, 216, 255, 0.14) 52%,
-      rgba(244, 162, 220, 0.08) 56%,
-      transparent 63%
-    );
-    animation: holoMove 7s ease-in-out infinite;
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  @keyframes holoMove {
-    0% { transform: translateX(-58%) rotate(10deg); }
-    50% { transform: translateX(58%) rotate(10deg); }
-    100% { transform: translateX(-58%) rotate(10deg); }
-  }
-
-  .card-grid {
-    position: relative;
-    z-index: 3;
-    display: grid;
-    grid-template-columns: 132px 1fr;
-    gap: 16px;
-  }
-
-  .left-col {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-  }
-
-  .photo-frame {
-    width: 126px;
-    height: 162px;
-    border-radius: 16px;
-    background: #08090b;
-    padding: 3px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-  }
-
-  .photo-inner {
-    width: 100%;
-    height: 100%;
-    border-radius: 13px;
-    overflow: hidden;
-    background: #1a1d22;
-  }
-
-  .photo-inner img {
+  .photo-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) contrast(1.06);
+    filter: grayscale(100%);
   }
 
-  .photo-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #9ca3af;
-    font-size: 24px;
-  }
-
-  .flag-container {
-    width: 78px;
-    height: 50px;
-    margin-left: 2px;
-    filter: drop-shadow(0 2px 5px rgba(0, 35, 80, 0.14));
-  }
-
-  #flagCanvas { width: 78px; height: 50px; display: block; }
-
-  .rp-row {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    margin-left: 3px;
-  }
-
-  .emblem-hd {
-    width: 34px;
-    height: 40px;
-    object-fit: contain;
-    flex-shrink: 0;
-    filter: grayscale(100%) brightness(1.38) contrast(0.76) drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.12));
-    opacity: 0.9;
-  }
-
-  .rp-text {
-    font-size: 11.5px;
-    line-height: 1.24;
-    color: #989ca2;
-    font-weight: 500;
-  }
-
-  .right-col {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding-top: 4px;
-  }
-
-  .field-val {
-    font-size: 17px;
-    font-weight: 700;
-    color: #111827;
-    letter-spacing: 0.3px;
-    line-height: 1.15;
-    word-break: break-word;
-  }
-
-  .field-lbl {
-    font-size: 12.5px;
-    color: #4b5563;
-    margin-top: 2px;
-  }
-
-  .id-card.white-text .field-val {
-    color: #ffffff;
-    text-shadow: 0 1px 3px rgba(0, 50, 105, 0.28);
-  }
-  .id-card.white-text .field-lbl {
-    color: rgba(255, 255, 255, 0.92);
-    text-shadow: 0 1px 2px rgba(0, 50, 105, 0.22);
-  }
-
-  .card-valid-bar {
-    background: #141517;
-    padding: 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .valid-circle {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: 2px solid var(--green);
-    color: var(--green);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 800;
-  }
-
-  .valid-text { color: var(--green); font-size: 15.5px; font-weight: 500; }
-
-  .circle-actions {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 6px;
-    margin-bottom: 18px;
-  }
-
-  .circle-btn {
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    background: #181a1d;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  .dark-card {
-    background: var(--surface);
-    border-radius: 16px;
-    padding: 16px;
-    margin-bottom: 12px;
-    border: 1px solid var(--border);
-  }
-
-  .dark-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  .dark-row:first-child { padding-top: 0; }
-  .dark-row:last-child { border-bottom: none; padding-bottom: 0; }
-
-  .d-lbl { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
-  .d-val { font-size: 15px; font-weight: 600; color: #f3f4f6; }
-
-  .copy-pill {
-    background: rgba(59, 130, 246, 0.15);
-    color: #60a5fa;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 10px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .accordion-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 15px;
-  }
-
-  .accordion-body {
-    display: none;
-    margin-top: 12px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
-  }
-
-  .accordion-body.open { display: block; }
-
-  .bottom-nav {
-    position: absolute;
+  .gen-footer {
+    padding: 14px 20px calc(env(safe-area-inset-bottom, 16px) + 16px);
+    border-top: 1px solid var(--border);
+    background: rgba(13, 14, 17, 0.96);
+    backdrop-filter: blur(10px);
+    position: sticky;
     bottom: 0;
-    left: 0;
-    right: 0;
-    background: #141517;
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    padding: 8px 4px calc(env(safe-area-inset-bottom, 8px) + 8px);
-    z-index: 40;
   }
 
-  .nav-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    color: #d1d5db;
-    font-size: 10.5px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-
-  .nav-btn.active { color: #5ea0ff; }
-
-  .modal-bg {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.72);
-    backdrop-filter: blur(5px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 150;
-  }
-
-  .modal-bg.open { display: flex; }
-
-  .pass-modal {
-    background: #181a1f;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 20px;
-    padding: 20px;
+  .btn-launch {
     width: 100%;
-    max-width: 360px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .pass-modal input {
-    width: 100%;
-    padding: 12px 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: #0f1014;
-    color: #fff;
-    font-size: 16px;
-    outline: none;
-    user-select: text;
-  }
-
-  .btn-primary {
-    background: #2563eb;
-    color: #fff;
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    color: #ffffff;
     border: none;
-    padding: 12px;
-    border-radius: 12px;
+    padding: 15px;
+    border-radius: 14px;
+    font-size: 15.5px;
     font-weight: 700;
     cursor: pointer;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
   }
 
-  .btn-sec {
-    background: #282c34;
-    color: #e5e7eb;
-    border: none;
-    padding: 12px;
-    border-radius: 12px;
-    font-weight: 600;
-    cursor: pointer;
-  }
+  .btn-launch:active { transform: scale(0.98); }
 
   .toast {
     position: fixed;
-    bottom: 84px;
+    bottom: 86px;
     left: 50%;
     transform: translateX(-50%) translateY(16px);
     background: #2563eb;
@@ -776,535 +200,217 @@
     opacity: 0;
     pointer-events: none;
     transition: all 0.2s ease;
-    z-index: 300;
   }
 
-  .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
-<div class="app-shell">
+<div class="wrap">
+  <div class="gen-header">
+    <div class="app-icon-red">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg" alt="RP">
+    </div>
+    <div>
+      <div style="font-size:17px;font-weight:700;">Generator mObywatel</div>
+      <div style="font-size:12px;color:#9ca3af;">Wypełnij dane i utwórz gotową apkę na telefon</div>
+    </div>
+  </div>
 
-  <!-- SCREEN 1: FACE ID LOGIN -->
-  <div class="screen active" id="screen-login">
-    <div class="login-top">
-      <div class="login-brand">
-        <div class="app-icon-red">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg" alt="RP">
-        </div>
-        <div class="login-brand-name">mObywatel</div>
-      </div>
+  <div class="gen-body">
+    <div class="photo-upload-bar" onclick="document.getElementById('photoInput').click()">
+      <div class="photo-thumb" id="genPhotoThumb">&#128247;</div>
       <div>
-        <div class="login-greeting" id="loginGreeting">Dobry wieczór!</div>
-        <div class="login-sub">Zaloguj się do aplikacji.</div>
+        <div style="font-size:14px;font-weight:600;">Zdjęcie do mDowodu</div>
+        <div style="font-size:12px;color:#9ca3af;">Kliknij, aby wybrać z galerii telefonu</div>
+      </div>
+    </div>
+    <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="handlePhoto(event)">
+
+    <div class="sec-title">Dane podstawowe</div>
+    <div class="gen-grid-2">
+      <div class="field-group"><label>Imię (imiona)</label><input id="g-imie" type="text" placeholder="JAN"></div>
+      <div class="field-group"><label>Nazwisko</label><input id="g-nazwisko" type="text" placeholder="KOWALSKI"></div>
+    </div>
+
+    <div class="gen-grid-2">
+      <div class="field-group"><label>Data urodzenia</label><input id="g-urodzenie" type="text" placeholder="12.05.2006" oninput="autoGeneratePesel()"></div>
+      <div class="field-group">
+        <label>Płeć</label>
+        <select id="g-plec" onchange="autoGeneratePesel()">
+          <option value="Mężczyzna">Mężczyzna</option>
+          <option value="Kobieta">Kobieta</option>
+        </select>
       </div>
     </div>
 
-    <div class="faceid-center" onclick="triggerFaceId()">
-      <div class="faceid-box" id="faceIdBox">
-        <svg id="faceIdSvg" width="76" height="76" viewBox="0 0 64 64" fill="none" stroke="#4f86f7" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 8H12C9.8 8 8 9.8 8 12V18"/>
-          <path d="M46 8H52C54.2 8 56 9.8 56 12V18"/>
-          <path d="M18 56H12C9.8 56 8 54.2 8 52V46"/>
-          <path d="M46 56H52C54.2 56 56 54.2 56 52V46"/>
-          <path d="M23 23V28"/>
-          <path d="M41 23V28"/>
-          <path d="M32 23V35H29"/>
-          <path d="M23 41C25.5 44 28.5 45.5 32 45.5C35.5 45.5 38.5 44 41 41"/>
-        </svg>
+    <div class="field-group">
+      <label>Numer PESEL (auto)</label>
+      <div class="pesel-row">
+        <input id="g-pesel" type="text" readonly>
+        <button type="button" class="btn-small" onclick="autoGeneratePesel(true)">Losuj</button>
       </div>
-      <div class="faceid-label" id="faceIdLabel">Dotknij, aby zalogować się Face ID</div>
     </div>
 
-    <div class="login-bottom">
-      <button class="btn-outline-pass" onclick="openPassModal()">Wpisz hasło</button>
-
-      <div class="gov-banner">
-        <div class="gov-item">
-          <svg width="20" height="16" viewBox="0 0 24 20" fill="#a51128">
-            <rect x="0" y="2" width="14" height="3"/><rect x="0" y="7" width="18" height="3"/><rect x="0" y="12" width="12" height="3"/>
-          </svg>
-          <span>KRAJOWY<br>PLAN<br>ODBUDOWY</span>
-        </div>
-        <div class="gov-item">
-          <div class="mini-pl-flag"></div>
-          <span>Rzeczpospolita<br>Polska</span>
-        </div>
-        <div class="gov-item">
-          <div class="mini-eu-flag">&#9733;</div>
-          <span>Sfinansowane przez<br>Unię Europejską<br>NextGenerationEU</span>
-        </div>
-        <div class="gov-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
-          <span>Ministerstwo<br>Cyfryzacji</span>
-          <div style="width:100%;height:2px;background:#dc143c;"></div>
-        </div>
-      </div>
-
-      <div class="login-version">wersja 4.89.1 (6426)</div>
+    <div class="gen-grid-2">
+      <div class="field-group"><label>Obywatelstwo</label><input id="g-obywatelstwo" type="text" placeholder="POLSKIE"></div>
+      <div class="field-group"><label>Seria i numer</label><input id="g-seria" type="text" placeholder="ZZC 108291"></div>
     </div>
+
+    <div class="gen-grid-2">
+      <div class="field-group"><label>Data wydania</label><input id="g-wydanie" type="text" placeholder="14.08.2024"></div>
+      <div class="field-group"><label>Termin ważności</label><input id="g-waznosc" type="text" placeholder="14.08.2034"></div>
+    </div>
+
+    <div class="sec-title">Rodzice i dane dodatkowe</div>
+    <div class="gen-grid-2">
+      <div class="field-group"><label>Imię ojca</label><input id="g-ojciec" type="text" placeholder="MAREK"></div>
+      <div class="field-group"><label>Imię matki</label><input id="g-matka" type="text" placeholder="ANNA"></div>
+    </div>
+
+    <div class="gen-grid-2">
+      <div class="field-group"><label>Nazwisko rodowe</label><input id="g-rodowe" type="text" placeholder="KOWALSKI"></div>
+      <div class="field-group"><label>Miejsce urodzenia</label><input id="g-miejsce" type="text" placeholder="BIAŁYSTOK"></div>
+    </div>
+
+    <div class="gen-grid-2">
+      <div class="field-group"><label>Nazwisko rodowe ojca</label><input id="g-rodoweOjca" type="text" placeholder="KOWALSKI"></div>
+      <div class="field-group"><label>Nazwisko rodowe matki</label><input id="g-rodoweMatki" type="text" placeholder="NOWAK"></div>
+    </div>
+
+    <div class="gen-grid-2">
+      <div class="field-group"><label>Kraj urodzenia</label><input id="g-kraj" type="text" placeholder="POLSKA"></div>
+      <div class="field-group"><label>Data zameldowania</label><input id="g-dataZam" type="text" placeholder="02.09.2012"></div>
+    </div>
+
+    <div class="field-group"><label>Adres zameldowania na pobyt stały</label><input id="g-adres" type="text" placeholder="UL. LIPOWA 14/2, 15-427 BIAŁYSTOK"></div>
+    <div class="field-group"><label>Organ wydający</label><input id="g-organ" type="text" placeholder="PREZYDENT MIASTA BIAŁEGOSTOKU"></div>
   </div>
 
-  <!-- SCREEN 2: DOKUMENTY -->
-  <div class="screen" id="screen-docs">
-    <div class="docs-topbar">
-      <div class="app-icon-red">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg" alt="RP">
-      </div>
-      <div class="docs-top-icons">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="4" y="7" width="16" height="11" rx="3"/>
-          <path d="M12 7V4M9 12h.01M15 12h.01M9 15h6"/>
-        </svg>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <rect x="3" y="5" width="18" height="14" rx="2"/>
-          <path d="M3 7l9 6 9-6"/>
-        </svg>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
-          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-        </svg>
-      </div>
-    </div>
-
-    <div class="docs-body">
-      <div class="docs-h1">Dokumenty</div>
-
-      <div class="mdowod-tile" id="mdowodTile" onclick="goToScreen('mdowod')">
-        <div class="tile-top">
-          <div class="tile-title">mDowód</div>
-          <div class="tile-emblem-badge">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg" alt="RP">
-          </div>
-        </div>
-        <div class="tile-bottom">
-          <span id="tileNamePreview">JAN KOWALSKI</span>
-          <span style="opacity:0.75;font-size:12px;">Ważny</span>
-        </div>
-      </div>
-
-      <div class="docs-link" onclick="window.location.href='./generator.html'">Dostosuj widok</div>
-
-      <button class="fab-add" onclick="window.location.href='./generator.html'">
-        <span style="font-size:18px;line-height:1;">+</span>
-        <span>Dodaj dokument</span>
-      </button>
-    </div>
-
-    <div class="bottom-nav">
-      <div class="nav-btn active">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-          <rect x="4" y="6" width="16" height="14" rx="3"/>
-          <path d="M7 4h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <span>Dokumenty</span>
-      </div>
-      <div class="nav-btn">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
-        </svg>
-        <span>Usługi</span>
-      </div>
-      <div class="nav-btn" onclick="goToScreen('mdowod'); switchDocTab('qr')">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M4 8V5h3M20 8V5h-3M4 16v3h3M20 16v3h-3M9 9h2v2H9zM13 9h2v2h-2zM9 13h2v2H9zM13 13h2v2h-2z"/>
-        </svg>
-        <span>Kod QR</span>
-      </div>
-      <div class="nav-btn">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <circle cx="11" cy="11" r="7"/>
-          <path d="M20 20l-3.5-3.5"/>
-        </svg>
-        <span>Szukaj</span>
-      </div>
-      <div class="nav-btn" onclick="window.location.href='./generator.html'">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <rect x="4" y="4" width="6" height="6" rx="1.5"/>
-          <rect x="14" y="4" width="6" height="6" rx="1.5"/>
-          <rect x="4" y="14" width="6" height="6" rx="1.5"/>
-          <rect x="14" y="14" width="6" height="6" rx="1.5"/>
-        </svg>
-        <span>Więcej</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- SCREEN 3: mDOWÓD DETAIL -->
-  <div class="screen" id="screen-mdowod">
-    <div class="topbar">
-      <div class="back-btn" onclick="goToScreen('docs')">
-        <span class="back-chevron">&#8249;</span>
-        <span>Wróć</span>
-      </div>
-      <div class="topbar-title" id="topTitle">mDowód</div>
-      <button class="help-btn" onclick="window.location.href='./generator.html'">?</button>
-    </div>
-
-    <div class="content" id="view-doc">
-      <div class="time-strip" id="liveClock">Czas: --:--:-- --.--.----</div>
-
-      <div class="doc-wrapper">
-        <div class="id-card white-text" id="idCardBox">
-          <div class="holo-sweep"></div>
-
-          <div class="card-grid">
-            <div class="left-col">
-              <div class="photo-frame">
-                <div class="photo-inner">
-                  <img id="userPhoto" style="display:none;" alt="Zdjęcie">
-                  <div class="photo-placeholder" id="photoPlaceholder">&#128247;</div>
-                </div>
-              </div>
-
-              <div class="flag-container">
-                <canvas id="flagCanvas" width="156" height="100"></canvas>
-              </div>
-
-              <div class="rp-row">
-                <img class="emblem-hd" src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg" alt="Godło RP">
-                <div class="rp-text">Rzeczpospolita<br>Polska</div>
-              </div>
-            </div>
-
-            <div class="right-col">
-              <div><div class="field-val" id="d-imie">JAN</div><div class="field-lbl">Imię (imiona)</div></div>
-              <div><div class="field-val" id="d-nazwisko">KOWALSKI</div><div class="field-lbl">Nazwisko</div></div>
-              <div><div class="field-val" id="d-obywatelstwo">POLSKIE</div><div class="field-lbl">Obywatelstwo</div></div>
-              <div><div class="field-val" id="d-urodzenie">12.05.2006</div><div class="field-lbl">Data urodzenia</div></div>
-              <div><div class="field-val" id="d-pesel">06251204819</div><div class="field-lbl">Numer PESEL</div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-valid-bar">
-          <div class="valid-circle">&#10003;</div>
-          <div class="valid-text">Dokument ważny</div>
-        </div>
-      </div>
-
-      <div class="circle-actions">
-        <button class="circle-btn" onclick="switchDocTab('qr')">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round">
-            <path d="M4 8V5a1 1 0 0 1 1-1h3M20 8V5a1 1 0 0 0-1-1h-3M4 16v3a1 1 0 0 0 1 1h3M20 16v3a1 1 0 0 1-1 1h-3"/>
-            <path d="M9 12h6M12 9v6"/>
-          </svg>
-        </button>
-        <button class="circle-btn" onclick="toggleAccordion('acc-extra')">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e5e7eb" stroke-width="1.8">
-            <rect x="3" y="5" width="18" height="14" rx="2.5" fill="#e5e7eb" fill-opacity="0.12"/>
-            <circle cx="8.5" cy="11" r="2"/>
-            <path d="M13 10h5M13 14h4"/>
-          </svg>
-        </button>
-        <button class="circle-btn" onclick="copyText(data.pesel, 'Skopiowano PESEL')">
-          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8">
-            <path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/>
-            <rect x="9.5" y="10.5" width="5" height="4" rx="1"/>
-            <path d="M10.5 10.5V9a1.5 1.5 0 0 1 3 0v1.5"/>
-          </svg>
-        </button>
-        <button class="circle-btn" onclick="window.location.href='./generator.html'">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="#3b82f6">
-            <circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/>
-          </svg>
-        </button>
-      </div>
-
-      <div class="dark-card">
-        <div class="dark-row">
-          <div><div class="d-lbl">Seria i numer</div><div class="d-val" id="d-seria">ZZC 108291</div></div>
-          <button class="copy-pill" onclick="copyText(data.seria, 'Skopiowano serię')">Kopiuj</button>
-        </div>
-        <div class="dark-row"><div><div class="d-lbl">Termin ważności</div><div class="d-val" id="d-waznosc">14.08.2034</div></div></div>
-        <div class="dark-row"><div><div class="d-lbl">Data wydania</div><div class="d-val" id="d-wydanie">14.08.2024</div></div></div>
-        <div class="dark-row"><div><div class="d-lbl">Imię ojca</div><div class="d-val" id="d-ojciec">MAREK</div></div></div>
-        <div class="dark-row"><div><div class="d-lbl">Imię matki</div><div class="d-val" id="d-matka">ANNA</div></div></div>
-      </div>
-
-      <div class="dark-card">
-        <div class="accordion-head" onclick="toggleAccordion('acc-extra')">
-          <span>Twoje dodatkowe dane</span>
-          <span id="acc-arrow">&#9662;</span>
-        </div>
-        <div class="accordion-body" id="acc-extra">
-          <div class="dark-row"><div><div class="d-lbl">Nazwisko rodowe</div><div class="d-val" id="d-rodowe">KOWALSKI</div></div></div>
-          <div class="dark-row"><div><div class="d-lbl">Płeć</div><div class="d-val" id="d-plec">Mężczyzna</div></div></div>
-          <div class="dark-row"><div><div class="d-lbl">Miejsce urodzenia</div><div class="d-val" id="d-miejsce">BIAŁYSTOK</div></div></div>
-          <div class="dark-row"><div><div class="d-lbl">Adres zameldowania</div><div class="d-val" id="d-adres">UL. LIPOWA 14/2, 15-427 BIAŁYSTOK</div></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- QR sub-view -->
-    <div class="content" id="view-qr" style="display:none;flex-direction:column;align-items:center;text-align:center;padding-top:20px;">
-      <h3 style="font-size:19px;margin-bottom:6px;">Kod QR</h3>
-      <p style="font-size:13px;color:var(--muted);max-width:280px;">Pokaż ten kod osobie sprawdzającej dokument.</p>
-      <div style="background:#fff;padding:18px;border-radius:20px;margin:18px 0;">
-        <canvas id="qrCanvas" width="200" height="200"></canvas>
-        <div style="color:#111;font-size:24px;font-weight:800;letter-spacing:4px;margin-top:10px;" id="qrNum">519 204</div>
-      </div>
-      <button class="btn-primary" style="width:210px;" onclick="generateQR()">Odśwież kod</button>
-    </div>
-
-    <div class="bottom-nav">
-      <div class="nav-btn active" onclick="goToScreen('docs')">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3l9-8z"/></svg>
-        <span>Pulpit</span>
-      </div>
-      <div class="nav-btn" onclick="switchDocTab('doc')">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="10" r="2.5"/><path d="M8 17c1-2 7-2 8 0"/></svg>
-        <span>Dokumenty</span>
-      </div>
-      <div class="nav-btn" onclick="toggleAccordion('acc-extra')">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
-        <span>Usługi</span>
-      </div>
-      <div class="nav-btn" onclick="switchDocTab('qr')">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8V5h3M20 8V5h-3M4 16v3h3M20 16v3h-3M9 9h2v2H9zM13 9h2v2h-2zM9 13h2v2H9zM13 13h2v2h-2z"/></svg>
-        <span>Kod QR</span>
-      </div>
-      <div class="nav-btn" onclick="window.location.href='./generator.html'">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="8.5" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="15.5" cy="12" r="1" fill="currentColor"/></svg>
-        <span>Więcej</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Password Modal -->
-<div class="modal-bg" id="passModal">
-  <div class="pass-modal">
-    <div style="font-size:16px;font-weight:700;">Wpisz hasło</div>
-    <input type="password" id="passInput" placeholder="Hasło do aplikacji" onkeydown="if(event.key==='Enter') submitPass()">
-    <div style="display:flex;gap:10px;">
-      <button class="btn-sec" style="flex:1;" onclick="closePassModal()">Anuluj</button>
-      <button class="btn-primary" style="flex:1;" onclick="submitPass()">Zaloguj</button>
-    </div>
+  <div class="gen-footer">
+    <button type="button" class="btn-launch" onclick="generateAndOpenApp()">Wygeneruj aplikację na telefon</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-  const STORAGE_KEY = "mobywatel_pwa_data_v1";
+  const DEFAULTS = {
+    imie: "JAN",
+    nazwisko: "KOWALSKI",
+    obywatelstwo: "POLSKIE",
+    urodzenie: "12.05.2006",
+    pesel: "",
+    seria: "ZZC 108291",
+    waznosc: "14.08.2034",
+    wydanie: "14.08.2024",
+    ojciec: "MAREK",
+    matka: "ANNA",
+    rodowe: "KOWALSKI",
+    rodoweOjca: "KOWALSKI",
+    rodoweMatki: "NOWAK",
+    plec: "Mężczyzna",
+    miejsce: "BIAŁYSTOK",
+    kraj: "POLSKA",
+    dataZam: "02.09.2012",
+    adres: "UL. LIPOWA 14/2, 15-427 BIAŁYSTOK",
+    organ: "PREZYDENT MIASTA BIAŁEGOSTOKU",
+    photo: ""
+  };
 
-  // If never configured yet, redirect to separate generator.html once
-  let data = null;
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) data = JSON.parse(raw);
-  } catch {}
+  const FIELDS = Object.keys(DEFAULTS).filter(k => k !== "photo");
+  let photoDataUrl = "";
 
-  if (!data || !data.configured) {
-    window.location.replace("./generator.html");
-  }
-
-  // Register PWA Service Worker
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("./sw.js").catch(() => {});
-  }
-
-  const FIELDS = [
-    "imie", "nazwisko", "obywatelstwo", "urodzenie", "pesel",
-    "seria", "waznosc", "wydanie", "ojciec", "matka",
-    "rodowe", "plec", "miejsce", "adres"
-  ];
-
-  function renderDoc() {
-    if (!data) return;
-    for (const k of FIELDS) {
-      const el = document.getElementById(`d-${k}`);
-      if (el && data[k] !== undefined) el.textContent = data[k];
+  function computePesel(dateStr, plec) {
+    const m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec((dateStr || "").trim());
+    let day = 12, month = 5, year = 2006;
+    if (m) {
+      day = Math.max(1, Math.min(31, parseInt(m[1], 10)));
+      month = Math.max(1, Math.min(12, parseInt(m[2], 10)));
+      year = parseInt(m[3], 10);
     }
-    document.getElementById("tileNamePreview").textContent = `${data.imie || ""} ${data.nazwisko || ""}`.trim();
+    const yy = String(year % 100).padStart(2, "0");
+    let mmNum = month;
+    if (year >= 2000 && year <= 2099) mmNum += 20;
+    else if (year >= 2100 && year <= 2199) mmNum += 40;
+    else if (year >= 1800 && year <= 1899) mmNum += 80;
+    const mm = String(mmNum).padStart(2, "0");
+    const dd = String(day).padStart(2, "0");
 
-    const img = document.getElementById("userPhoto");
-    const ph = document.getElementById("photoPlaceholder");
-    if (data.photo) {
-      img.src = data.photo;
-      img.style.display = "block";
-      ph.style.display = "none";
-    } else {
-      img.style.display = "none";
-      ph.style.display = "flex";
-    }
-    document.getElementById("idCardBox").classList.toggle("white-text", data.whiteText !== false);
+    const rand3 = String(Math.floor(Math.random() * 1000)).padStart(3, "0");
+    const gDigits = plec === "Kobieta" ? [0, 2, 4, 6, 8] : [1, 3, 5, 7, 9];
+    const gDigit = gDigits[Math.floor(Math.random() * gDigits.length)];
+
+    const base10 = `${yy}${mm}${dd}${rand3}${gDigit}`;
+    const w = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
+    let sum = 0;
+    for (let i = 0; i < 10; i++) sum += parseInt(base10[i], 10) * w[i];
+    const ctrl = (10 - (sum % 10)) % 10;
+    return base10 + String(ctrl);
   }
 
-  function updateGreeting() {
-    const h = new Date().getHours();
-    document.getElementById("loginGreeting").textContent =
-      (h >= 18 || h < 5) ? "Dobry wieczór!" : "Dzień dobry!";
+  function autoGeneratePesel(notify = false) {
+    const dob = document.getElementById("g-urodzenie").value;
+    const plec = document.getElementById("g-plec").value;
+    document.getElementById("g-pesel").value = computePesel(dob, plec);
+    if (notify) showToast("Wylosowano nowy PESEL");
   }
 
-  function goToScreen(name) {
-    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-    const target = document.getElementById(`screen-${name}`);
-    if (target) target.classList.add("active");
+  // Compact grayscale photo so it survives inside the URL hash cleanly for iOS/Android PWA install
+  function handlePhoto(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = new Image();
+      img.onload = () => {
+        const targetW = 190;
+        const targetH = 244;
+        const canvas = document.createElement("canvas");
+        canvas.width = targetW;
+        canvas.height = targetH;
+        const ctx = canvas.getContext("2d");
 
-    if (name === "docs") {
-      const tile = document.getElementById("mdowodTile");
-      tile.classList.remove("fly-in");
-      void tile.offsetWidth;
-      tile.classList.add("fly-in");
-    } else if (name === "mdowod") {
-      switchDocTab("doc");
-    }
-  }
+        // Center-crop cover
+        const scale = Math.max(targetW / img.width, targetH / img.height);
+        const sw = targetW / scale;
+        const sh = targetH / scale;
+        const sx = (img.width - sw) / 2;
+        const sy = (img.height - sh) / 2;
 
-  let faceBusy = false;
-  function triggerFaceId() {
-    if (faceBusy) return;
-    faceBusy = true;
-    const box = document.getElementById("faceIdBox");
-    const lbl = document.getElementById("faceIdLabel");
-    const svg = document.getElementById("faceIdSvg");
-    box.classList.add("scanning");
-    lbl.textContent = "Weryfikacja Face ID...";
-
-    setTimeout(() => {
-      box.classList.remove("scanning");
-      svg.setAttribute("stroke", "#4ade80");
-      lbl.textContent = "Zalogowano";
-      lbl.style.color = "#4ade80";
-      setTimeout(() => {
-        svg.setAttribute("stroke", "#4f86f7");
-        lbl.textContent = "Dotknij, aby zalogować się Face ID";
-        lbl.style.color = "#c7ccd6";
-        faceBusy = false;
-        goToScreen("docs");
-      }, 420);
-    }, 650);
-  }
-
-  function openPassModal() {
-    document.getElementById("passInput").value = "";
-    document.getElementById("passModal").classList.add("open");
-    setTimeout(() => document.getElementById("passInput").focus(), 60);
-  }
-
-  function closePassModal() {
-    document.getElementById("passModal").classList.remove("open");
-  }
-
-  function submitPass() {
-    closePassModal();
-    goToScreen("docs");
-  }
-
-  function switchDocTab(tab) {
-    document.getElementById("view-doc").style.display = tab === "doc" ? "block" : "none";
-    document.getElementById("view-qr").style.display = tab === "qr" ? "flex" : "none";
-    document.getElementById("topTitle").textContent = tab === "doc" ? "mDowód" : "Kod QR";
-    if (tab === "qr") generateQR();
-  }
-
-  function toggleAccordion(id) {
-    const el = document.getElementById(id);
-    const open = el.classList.toggle("open");
-    document.getElementById("acc-arrow").innerHTML = open ? "&#9652;" : "&#9662;";
-  }
-
-  function generateQR() {
-    const c = document.getElementById("qrCanvas");
-    const ctx = c.getContext("2d");
-    const n = 21;
-    const cell = c.width / n;
-    ctx.fillStyle = "#fff";
-    ctx.fillRect(0, 0, c.width, c.height);
-    ctx.fillStyle = "#111";
-    const finder = (ox, oy) => {
-      for (let y = 0; y < 7; y++)
-        for (let x = 0; x < 7; x++)
-          if (x===0||x===6||y===0||y===6||(x>=2&&x<=4&&y>=2&&y<=4))
-            ctx.fillRect((ox+x)*cell, (oy+y)*cell, cell, cell);
+        ctx.filter = "grayscale(100%) contrast(106%)";
+        ctx.drawImage(img, sx, sy, sw, sh, 0, 0, targetW, targetH);
+        photoDataUrl = canvas.toDataURL("image/jpeg", 0.68);
+        document.getElementById("genPhotoThumb").innerHTML = `<img src="${photoDataUrl}">`;
+        showToast("Zdjęcie dodane");
+      };
+      img.src = ev.target.result;
     };
-    finder(0,0); finder(n-7,0); finder(0,n-7);
-    for (let y = 0; y < n; y++)
-      for (let x = 0; x < n; x++) {
-        const f = (x<8&&y<8)||(x>=n-8&&y<8)||(x<8&&y>=n-8);
-        if (!f && Math.random() > 0.5) ctx.fillRect(x*cell, y*cell, cell, cell);
-      }
-    document.getElementById("qrNum").textContent =
-      `${Math.floor(100+Math.random()*900)} ${Math.floor(100+Math.random()*900)}`;
+    reader.readAsDataURL(file);
   }
 
-  function updateClock() {
-    const now = new Date();
-    const p = n => String(n).padStart(2, "0");
-    document.getElementById("liveClock").textContent =
-      `Czas: ${p(now.getHours())}:${p(now.getMinutes())}:${p(now.getSeconds())} ${p(now.getDate())}.${p(now.getMonth()+1)}.${now.getFullYear()}`;
+  function encodePayload(obj) {
+    const json = JSON.stringify(obj);
+    const bytes = new TextEncoder().encode(json);
+    let bin = "";
+    for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
   }
 
-  // Rounded Waving Polish Flag
-  (function initRoundedWavingFlag() {
-    const canvas = document.getElementById("flagCanvas");
-    const ctx = canvas.getContext("2d");
-    const W = canvas.width;
-    const H = canvas.height;
-    const flagW = 136;
-    const flagH = 82;
-    const offsetX = 10;
-    const offsetY = 9;
-    const cornerR = 13;
-    let t = 0;
-
-    function getCornerInset(x) {
-      if (x < cornerR) {
-        const dx = cornerR - x;
-        return cornerR - Math.sqrt(Math.max(0, cornerR * cornerR - dx * dx));
-      }
-      if (x > flagW - cornerR) {
-        const dx = x - (flagW - cornerR);
-        return cornerR - Math.sqrt(Math.max(0, cornerR * cornerR - dx * dx));
-      }
-      return 0;
+  function generateAndOpenApp() {
+    const payload = { photo: photoDataUrl };
+    for (const k of FIELDS) {
+      const el = document.getElementById(`g-${k}`);
+      if (el) payload[k] = el.value.trim();
     }
+    if (!payload.pesel) payload.pesel = computePesel(payload.urodzenie, payload.plec);
 
-    function drawFlag() {
-      ctx.clearRect(0, 0, W, H);
-      for (let x = 0; x < flagW; x++) {
-        const u = x / flagW;
-        const wave = Math.sin(u * 4.4 - t) * (2.5 + u * 1.9);
-        const shade = Math.cos(u * 4.4 - t) * 19;
+    try {
+      localStorage.setItem("mobywatel_app_data", JSON.stringify(payload));
+    } catch {}
 
-        const inset = getCornerInset(x);
-        const topY = offsetY + wave + inset;
-        const midY = offsetY + wave + flagH / 2;
-        const botY = offsetY + wave + flagH - inset;
-
-        if (botY <= topY) continue;
-
-        const whiteTop = topY;
-        const whiteBot = Math.min(midY, botY);
-        if (whiteBot > whiteTop) {
-          const wv = Math.max(224, Math.min(255, Math.round(248 + shade * 0.5)));
-          ctx.fillStyle = `rgb(${wv}, ${wv}, ${wv})`;
-          ctx.fillRect(offsetX + x, whiteTop, 1.5, whiteBot - whiteTop + 0.5);
-        }
-
-        const redTop = Math.max(midY, topY);
-        const redBot = botY;
-        if (redBot > redTop) {
-          const r = Math.max(178, Math.min(242, Math.round(220 + shade * 0.85)));
-          const g = Math.max(12, Math.min(44, Math.round(20 + shade * 0.4)));
-          const b = Math.max(32, Math.min(72, Math.round(48 + shade * 0.45)));
-          ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
-          ctx.fillRect(offsetX + x, redTop, 1.5, redBot - redTop);
-        }
-      }
-      t += 0.065;
-      requestAnimationFrame(drawFlag);
-    }
-    drawFlag();
-  })();
-
-  function copyText(txt, msg) {
-    navigator.clipboard?.writeText(txt);
-    showToast(msg || "Skopiowano");
+    const hash = encodePayload(payload);
+    window.location.href = `./app.html#d=${hash}`;
   }
 
   function showToast(msg) {
@@ -1312,13 +418,14 @@
     t.textContent = msg;
     t.classList.add("show");
     clearTimeout(window._t);
-    window._t = setTimeout(() => t.classList.remove("show"), 1600);
+    window._t = setTimeout(() => t.classList.remove("show"), 1500);
   }
 
-  updateGreeting();
-  renderDoc();
-  updateClock();
-  setInterval(updateClock, 1000);
+  for (const k of FIELDS) {
+    const el = document.getElementById(`g-${k}`);
+    if (el) el.value = DEFAULTS[k];
+  }
+  autoGeneratePesel();
 </script>
 </body>
 </html>
