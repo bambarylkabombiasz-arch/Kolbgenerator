@@ -15,12 +15,12 @@
 <style>
   :root {
     --bg: #0e0f11;
-    --surface: #181a1e;
+    --surface: #18191b;
     --text: #f5f6f8;
-    --muted: #98a0ad;
+    --muted: #a1a6b0;
     --blue: #5899fb;
     --green: #46c862;
-    --border: rgba(255, 255, 255, 0.075);
+    --border: rgba(255, 255, 255, 0.08);
   }
 
   * {
@@ -75,7 +75,7 @@
   }
 
   /* =========================================================
-     SCREEN 1: FACE ID LOGIN (1:1)
+     SCREEN 1: FACE ID LOGIN
      ========================================================= */
   #screen-login {
     background:
@@ -175,7 +175,7 @@
   .login-version { text-align: center; font-size: 11.5px; color: #8c929e; margin-top: -4px; }
 
   /* =========================================================
-     SCREEN 2: DOKUMENTY (1:1 ze zrzutu)
+     SCREEN 2: DOKUMENTY
      ========================================================= */
   #screen-docs { background: #101113; }
 
@@ -229,23 +229,21 @@
     cursor: pointer;
   }
 
-  /* 1:1 Blue mDowód Card matching attached screenshot */
+  /* Blue mDowód Card: Dark blue bottom-left -> Brighter blue top-right (45deg) */
   .mdowod-tile {
     position: relative;
     width: 100%;
     height: 215px;
     border-radius: 18px;
-    padding: 20px 20px;
+    padding: 20px;
     background:
-      radial-gradient(ellipse at 52% 22%, #1886f2 0%, rgba(16, 114, 224, 0) 62%),
-      radial-gradient(ellipse at 92% 92%, #0045a5 0%, rgba(0, 69, 165, 0) 60%),
-      linear-gradient(138deg, #004eb3 0%, #0976e2 48%, #0048a8 100%);
+      radial-gradient(ellipse at 88% 12%, rgba(92, 184, 255, 0.55) 0%, rgba(28, 134, 245, 0) 58%),
+      linear-gradient(45deg, #002b73 0%, #0046a8 36%, #0c74de 72%, #2b9cff 100%);
     box-shadow: 0 14px 34px rgba(0, 0, 0, 0.48);
     cursor: pointer;
     overflow: hidden;
   }
 
-  /* Same Eagle from niebiesko-1.jpg blended seamlessly on the right side 1:1 */
   .mdowod-tile::before {
     content: "";
     position: absolute;
@@ -255,19 +253,17 @@
     background-position: right 48%;
     background-repeat: no-repeat;
     mix-blend-mode: soft-light;
-    opacity: 0.58;
+    opacity: 0.55;
     filter: contrast(1.45) brightness(1.05);
     pointer-events: none;
   }
 
-  /* Soft glossy blue highlight on top-center like screenshot */
   .mdowod-tile::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 45%, rgba(0, 20, 65, 0.14) 100%);
     border-radius: 18px;
-    border: 1px solid rgba(145, 205, 255, 0.22);
+    border: 1px solid rgba(145, 205, 255, 0.24);
     pointer-events: none;
   }
 
@@ -300,7 +296,7 @@
     width: 38px;
     height: 38px;
     border-radius: 10px;
-    background: rgba(155, 210, 255, 0.36);
+    background: rgba(170, 220, 255, 0.36);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -315,41 +311,47 @@
     filter: brightness(0) invert(1);
   }
 
-  /* 4-icon Bottom Bar on Dokumenty screen (1:1 matching screenshot) */
-  .docs-bottom-nav {
+  /* =========================================================
+     SHARED 4-TAB BOTTOM NAVIGATION (Dokumenty, Usługi, Kod QR, Więcej)
+     ========================================================= */
+  .bottom-nav-4 {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     background: #141517;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    padding: 12px 10px calc(env(safe-area-inset-bottom, 10px) + 12px);
+    padding: 8px 6px calc(env(safe-area-inset-bottom, 8px) + 8px);
     z-index: 40;
   }
 
-  .docs-nav-icon {
+  .nav4-btn {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 4px;
     color: #d4d7de;
+    font-size: 11px;
+    font-weight: 500;
     cursor: pointer;
   }
 
-  .docs-nav-icon.active {
+  .nav4-btn.active {
     color: #5ea0ff;
   }
 
   /* =========================================================
-     SCREEN 3: mDOWÓD DETAIL (CZARNE NAPISY + HOLOGRAM GODŁA)
+     SCREEN 3: mDOWÓD DETAIL (1:1 z image_9ba502.jpg)
      ========================================================= */
   .topbar {
     background: var(--bg);
     padding: calc(env(safe-area-inset-top, 12px) + 10px) 16px 8px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
     flex-shrink: 0;
   }
 
@@ -358,22 +360,24 @@
     align-items: center;
     gap: 4px;
     color: #5ea0ff;
-    font-size: 16px;
+    font-size: 16.5px;
     font-weight: 500;
     cursor: pointer;
+    justify-self: start;
   }
 
   .back-chevron { font-size: 26px; line-height: 1; margin-top: -2px; }
-  .topbar-title { font-size: 17px; font-weight: 700; color: #f9fafb; }
+  .topbar-title { font-size: 17px; font-weight: 700; color: #f9fafb; text-align: center; }
 
   .help-btn {
-    width: 26px;
-    height: 26px;
+    justify-self: end;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    border: 1.6px solid #e5e7eb;
+    border: 1.5px solid #d1d5db;
     background: transparent;
     color: #f9fafb;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -647,37 +651,70 @@
     cursor: pointer;
   }
 
+  /* 1:1 DARK DETAIL CARDS (matching image_9ba502.jpg) */
   .dark-card {
-    background: var(--surface);
+    background: #191a1c;
     border-radius: 16px;
-    padding: 16px;
-    margin-bottom: 12px;
-    border: 1px solid var(--border);
+    padding: 18px 18px;
+    margin-bottom: 14px;
   }
 
   .dark-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    gap: 12px;
   }
 
   .dark-row:first-child { padding-top: 0; }
   .dark-row:last-child { border-bottom: none; padding-bottom: 0; }
 
-  .d-lbl { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
-  .d-val { font-size: 15px; font-weight: 600; color: #f3f4f6; }
+  .d-lbl {
+    font-size: 13px;
+    color: #b0b5be;
+    margin-bottom: 5px;
+    font-weight: 400;
+  }
 
-  .copy-pill {
-    background: rgba(59, 130, 246, 0.15);
-    color: #60a5fa;
+  .d-val-lg {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.4px;
+    line-height: 1.2;
+  }
+
+  .d-val {
+    font-size: 17.5px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.25;
+  }
+
+  .d-note {
+    margin-top: 8px;
+    font-size: 13.5px;
+    line-height: 1.38;
+    color: #c5cad3;
+    max-width: 240px;
+  }
+
+  .action-pill {
+    background: #122742;
+    color: #5ca2ff;
     border: none;
-    padding: 6px 12px;
-    border-radius: 10px;
-    font-size: 12px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .action-pill:active {
+    background: #19355a;
   }
 
   .accordion-head {
@@ -685,45 +722,109 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 15px;
+    font-weight: 500;
+    font-size: 17px;
+    color: #f3f4f6;
+    padding: 4px 0;
   }
 
   .accordion-body {
     display: none;
-    margin-top: 12px;
-    padding-top: 10px;
+    margin-top: 14px;
+    padding-top: 12px;
     border-top: 1px solid rgba(255, 255, 255, 0.07);
   }
 
   .accordion-body.open { display: block; }
 
-  .bottom-nav {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #141517;
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    padding: 8px 4px calc(env(safe-area-inset-bottom, 8px) + 8px);
-    z-index: 40;
-  }
-
-  .nav-btn {
-    display: flex;
+  /* =========================================================
+     REALISTIC QR UNAVAILABLE VIEW
+     ========================================================= */
+  .qr-error-wrap {
+    display: none;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
-    color: #d1d5db;
-    font-size: 10.5px;
-    font-weight: 500;
-    cursor: pointer;
+    justify-content: center;
+    text-align: center;
+    padding: 28px 22px 110px;
+    flex: 1;
   }
 
-  .nav-btn.active { color: #5ea0ff; }
+  .qr-error-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: rgba(245, 158, 11, 0.14);
+    border: 1.5px solid rgba(245, 158, 11, 0.4);
+    color: #fbbf24;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
 
+  .qr-error-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .qr-error-desc {
+    font-size: 14px;
+    color: #a1a7b3;
+    line-height: 1.52;
+    max-width: 320px;
+    margin-bottom: 18px;
+  }
+
+  .qr-error-meta {
+    background: #181a1e;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+    padding: 12px 16px;
+    width: 100%;
+    max-width: 330px;
+    text-align: left;
+    font-size: 12px;
+    color: #9ca3af;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+
+  .qr-error-meta b { color: #e5e7eb; font-weight: 600; }
+
+  .btn-retry {
+    width: 100%;
+    max-width: 330px;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Password Modal */
   .modal-bg {
     position: fixed;
     inset: 0;
@@ -862,7 +963,7 @@
     </div>
   </div>
 
-  <!-- SCREEN 2: DOKUMENTY (1:1 ze zrzutu) -->
+  <!-- SCREEN 2: DOKUMENTY -->
   <div class="screen" id="screen-docs">
     <div class="docs-topbar">
       <img class="logo-sq" src="./logo.png" alt="Logo">
@@ -882,7 +983,7 @@
         <span class="docs-top-link" onclick="showToast('Wszystkie dokumenty dodane')">Dodaj</span>
       </div>
 
-      <!-- 1:1 Blue mDowód Tile -->
+      <!-- 1:1 Blue mDowód Tile (dark bottom-left -> bright top-right) -->
       <div class="mdowod-tile" id="mdowodTile" onclick="goToScreen('mdowod')">
         <div class="tile-top">
           <div class="tile-title">mDowód</div>
@@ -893,47 +994,52 @@
       </div>
     </div>
 
-    <!-- 4-icon Bottom Bar matching screenshot 1:1 -->
-    <div class="docs-bottom-nav">
-      <div class="docs-nav-icon active">
-        <svg width="25" height="25" viewBox="0 0 24 24" fill="currentColor">
+    <!-- 4-tab Bottom Bar with Labels -->
+    <div class="bottom-nav-4">
+      <div class="nav4-btn active" onclick="goToScreen('docs')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
           <rect x="4" y="8" width="16" height="12" rx="2.5"/>
           <path d="M6.5 5.5h11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
+        <span>Dokumenty</span>
       </div>
-      <div class="docs-nav-icon">
-        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+      <div class="nav4-btn" onclick="showToast('Usługi są aktualne')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
           <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
         </svg>
+        <span>Usługi</span>
       </div>
-      <div class="docs-nav-icon" onclick="goToScreen('mdowod'); switchDocTab('qr')">
-        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+      <div class="nav4-btn" onclick="goToScreen('mdowod'); switchDocTab('qr')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
           <path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M20 8V5.5A1.5 1.5 0 0 0 18.5 4H16M4 16v2.5A1.5 1.5 0 0 0 5.5 20H8M20 16v2.5A1.5 1.5 0 0 1 18.5 20H16"/>
           <path d="M9 10v4M12 8.5v7M15 10.5v3"/>
         </svg>
+        <span>Kod QR</span>
       </div>
-      <div class="docs-nav-icon">
-        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <div class="nav4-btn" onclick="showToast('Wersja 4.89.1')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
           <path d="M7.5 10.5C5.2 8.9 4 7.7 4 6.2A2 2 0 0 1 7.5 5 2 2 0 0 1 11 6.2c0 1.5-1.2 2.7-3.5 4.3z"/>
           <circle cx="17" cy="7.5" r="3"/>
           <circle cx="7.5" cy="17" r="3"/>
           <circle cx="17" cy="17" r="3"/>
         </svg>
+        <span>Więcej</span>
       </div>
     </div>
   </div>
 
-  <!-- SCREEN 3: mDOWÓD DETAIL (CZARNE NAPISY + HOLOGRAM GODŁA) -->
+  <!-- SCREEN 3: mDOWÓD DETAIL -->
   <div class="screen" id="screen-mdowod">
     <div class="topbar">
       <div class="back-btn" onclick="goToScreen('docs')">
         <span class="back-chevron">&#8249;</span>
-        <span>Wróć</span>
+        <span>Dokumenty</span>
       </div>
       <div class="topbar-title" id="topTitle">mDowód</div>
       <button class="help-btn" onclick="showToast('Dokument zweryfikowany')">?</button>
     </div>
 
+    <!-- Main mDowód View -->
     <div class="content" id="view-doc">
       <div class="time-strip" id="liveClock">Czas: --:--:-- --.--.----</div>
 
@@ -1009,21 +1115,53 @@
         </button>
       </div>
 
+      <!-- 1:1 DATA CARD matching image_9ba502.jpg -->
       <div class="dark-card">
-        <div class="dark-row">
-          <div><div class="d-lbl">Seria i numer</div><div class="d-val" id="d-seria">ZZC 108291</div></div>
-          <button class="copy-pill" onclick="copyText(data.seria, 'Skopiowano serię')">Kopiuj</button>
+        <div class="dark-row" style="align-items:center;">
+          <div>
+            <div class="d-lbl">Seria i numer mDowodu</div>
+            <div class="d-val-lg" id="d-seria">VGB810570</div>
+            <div class="d-note">Dane mDowodu i dowodu osobistego są inne - to dwa różne dokumenty.</div>
+          </div>
+          <button class="action-pill" onclick="copyText(data.seria, 'Skopiowano serię i numer')">Kopiuj</button>
         </div>
-        <div class="dark-row"><div><div class="d-lbl">Termin ważności</div><div class="d-val" id="d-waznosc">14.08.2034</div></div></div>
-        <div class="dark-row"><div><div class="d-lbl">Data wydania</div><div class="d-val" id="d-wydanie">14.08.2024</div></div></div>
-        <div class="dark-row"><div><div class="d-lbl">Imię ojca</div><div class="d-val" id="d-ojciec">MAREK</div></div></div>
-        <div class="dark-row"><div><div class="d-lbl">Imię matki</div><div class="d-val" id="d-matka">ANNA</div></div></div>
+
+        <div class="dark-row">
+          <div>
+            <div class="d-lbl">Termin ważności mDowodu</div>
+            <div class="d-val" id="d-waznosc">14.08.2034</div>
+          </div>
+        </div>
+
+        <div class="dark-row">
+          <div>
+            <div class="d-lbl">Data wydania mDowodu</div>
+            <div class="d-val" id="d-wydanie">14.08.2024</div>
+          </div>
+        </div>
+
+        <div class="dark-row">
+          <div>
+            <div class="d-lbl">Imię ojca</div>
+            <div class="d-val" id="d-ojciec">MAREK</div>
+          </div>
+        </div>
+
+        <div class="dark-row">
+          <div>
+            <div class="d-lbl">Imię matki</div>
+            <div class="d-val" id="d-matka">ANNA</div>
+          </div>
+        </div>
       </div>
 
+      <!-- 1:1 ACCORDION CARD -->
       <div class="dark-card">
         <div class="accordion-head" onclick="toggleAccordion('acc-extra')">
           <span>Twoje dodatkowe dane</span>
-          <span id="acc-arrow">&#9662;</span>
+          <svg id="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s ease;">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
         </div>
         <div class="accordion-body" id="acc-extra">
           <div class="dark-row"><div><div class="d-lbl">Nazwisko rodowe</div><div class="d-val" id="d-rodowe">KOWALSKI</div></div></div>
@@ -1037,38 +1175,70 @@
           <div class="dark-row"><div><div class="d-lbl">Organ wydający</div><div class="d-val" id="d-organ">PREZYDENT MIASTA BIAŁEGOSTOKU</div></div></div>
         </div>
       </div>
+
+      <!-- 1:1 LAST UPDATE CARD matching image_9ba502.jpg -->
+      <div class="dark-card" style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div class="d-lbl">Ostatnia aktualizacja</div>
+          <div class="d-val" id="d-update">22.11.2026</div>
+        </div>
+        <button class="action-pill" onclick="refreshUpdateDate()">Aktualizuj</button>
+      </div>
     </div>
 
-    <!-- QR sub-view -->
-    <div class="content" id="view-qr" style="display:none;flex-direction:column;align-items:center;text-align:center;padding-top:20px;">
-      <h3 style="font-size:19px;margin-bottom:6px;">Kod QR</h3>
-      <p style="font-size:13px;color:var(--muted);max-width:280px;">Pokaż ten kod osobie sprawdzającej dokument.</p>
-      <div style="background:#fff;padding:18px;border-radius:20px;margin:18px 0;">
-        <canvas id="qrCanvas" width="200" height="200"></canvas>
-        <div style="color:#111;font-size:24px;font-weight:800;letter-spacing:4px;margin-top:10px;" id="qrNum">519 204</div>
+    <!-- REALISTIC QR UNAVAILABLE SUB-VIEW -->
+    <div class="qr-error-wrap" id="view-qr">
+      <div class="qr-error-icon">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
       </div>
-      <button class="btn-primary" style="width:210px;" onclick="generateQR()">Odśwież kod</button>
+      <div class="qr-error-title">Usługa weryfikacji QR chwilowo niedostępna</div>
+      <div class="qr-error-desc">
+        Trwają planowane prace serwisowe po stronie Centralnego Ośrodka Informatyki (synchronizacja certyfikatów RDO). Generowanie i skanowanie kodów QR zostało czasowo wstrzymane. Twój mDowód pozostaje ważny w trybie wizualnym.
+      </div>
+      <div class="qr-error-meta">
+        <div><b>Status usługi:</b> Przerwa techniczna (RDO-PKI)</div>
+        <div><b>Kod zdarzenia:</b> ERR_COI_QR_503</div>
+        <div><b>Ostatnia próba:</b> <span id="qrAttemptTime">--:--:--</span></div>
+      </div>
+      <button class="btn-retry" id="btnRetryQr" onclick="retryQrService()">
+        <span class="spinner" id="qrSpinner"></span>
+        <span id="qrBtnText">Spróbuj ponownie</span>
+      </button>
     </div>
 
-    <div class="bottom-nav">
-      <div class="nav-btn active" onclick="goToScreen('docs')">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3l9-8z"/></svg>
-        <span>Pulpit</span>
-      </div>
-      <div class="nav-btn" onclick="switchDocTab('doc')">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="10" r="2.5"/><path d="M8 17c1-2 7-2 8 0"/></svg>
+    <!-- 4-tab Bottom Bar matching image_9ba502.jpg 1:1 -->
+    <div class="bottom-nav-4">
+      <div class="nav4-btn active" id="md-nav-doc" onclick="switchDocTab('doc')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="4" y="8" width="16" height="12" rx="2.5"/>
+          <path d="M6.5 5.5h11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
         <span>Dokumenty</span>
       </div>
-      <div class="nav-btn" onclick="toggleAccordion('acc-extra')">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+      <div class="nav4-btn" onclick="toggleAccordion('acc-extra')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+          <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
+        </svg>
         <span>Usługi</span>
       </div>
-      <div class="nav-btn" onclick="switchDocTab('qr')">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8V5h3M20 8V5h-3M4 16v3h3M20 16v3h-3M9 9h2v2H9zM13 9h2v2h-2zM9 13h2v2H9zM13 13h2v2h-2z"/></svg>
+      <div class="nav4-btn" id="md-nav-qr" onclick="switchDocTab('qr')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+          <path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M20 8V5.5A1.5 1.5 0 0 0 18.5 4H16M4 16v2.5A1.5 1.5 0 0 0 5.5 20H8M20 16v2.5A1.5 1.5 0 0 1 18.5 20H16"/>
+          <path d="M9 10v4M12 8.5v7M15 10.5v3"/>
+        </svg>
         <span>Kod QR</span>
       </div>
-      <div class="nav-btn">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="8.5" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="15.5" cy="12" r="1" fill="currentColor"/></svg>
+      <div class="nav4-btn" onclick="showToast('Wersja 4.89.1')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7.5 10.5C5.2 8.9 4 7.7 4 6.2A2 2 0 0 1 7.5 5 2 2 0 0 1 11 6.2c0 1.5-1.2 2.7-3.5 4.3z"/>
+          <circle cx="17" cy="7.5" r="3"/>
+          <circle cx="7.5" cy="17" r="3"/>
+          <circle cx="17" cy="17" r="3"/>
+        </svg>
         <span>Więcej</span>
       </div>
     </div>
@@ -1133,12 +1303,20 @@
     "miejsce", "kraj", "dataZam", "adres", "organ"
   ];
 
+  function formatDateToday() {
+    const now = new Date();
+    const p = n => String(n).padStart(2, "0");
+    return `${p(now.getDate())}.${p(now.getMonth() + 1)}.${now.getFullYear()}`;
+  }
+
   function renderDoc() {
     if (!data) return;
     for (const k of FIELDS) {
       const el = document.getElementById(`d-${k}`);
       if (el && data[k] !== undefined) el.textContent = data[k];
     }
+    document.getElementById("d-update").textContent = data.lastUpdate || formatDateToday();
+
     const img = document.getElementById("userPhoto");
     const ph = document.getElementById("photoPlaceholder");
     if (data.photo) {
@@ -1149,6 +1327,13 @@
       img.style.display = "none";
       ph.style.display = "flex";
     }
+  }
+
+  function refreshUpdateDate() {
+    data.lastUpdate = formatDateToday();
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
+    document.getElementById("d-update").textContent = data.lastUpdate;
+    showToast("Zaktualizowano dane dokumentu");
   }
 
   function updateGreeting() {
@@ -1275,39 +1460,45 @@
   function closePassModal() { document.getElementById("passModal").classList.remove("open"); }
   function submitPass() { closePassModal(); goToScreen("docs"); }
 
+  function updateQrAttemptTime() {
+    const now = new Date();
+    const p = n => String(n).padStart(2, "0");
+    document.getElementById("qrAttemptTime").textContent =
+      `${p(now.getHours())}:${p(now.getMinutes())}:${p(now.getSeconds())}`;
+  }
+
   function switchDocTab(tab) {
-    document.getElementById("view-doc").style.display = tab === "doc" ? "block" : "none";
-    document.getElementById("view-qr").style.display = tab === "qr" ? "flex" : "none";
-    document.getElementById("topTitle").textContent = tab === "doc" ? "mDowód" : "Kod QR";
-    if (tab === "qr") generateQR();
+    const isDoc = tab === "doc";
+    document.getElementById("view-doc").style.display = isDoc ? "block" : "none";
+    document.getElementById("view-qr").style.display = isDoc ? "none" : "flex";
+    document.getElementById("topTitle").textContent = isDoc ? "mDowód" : "Kod QR";
+    document.getElementById("md-nav-doc").classList.toggle("active", isDoc);
+    document.getElementById("md-nav-qr").classList.toggle("active", !isDoc);
+    if (!isDoc) updateQrAttemptTime();
+  }
+
+  let qrRetrying = false;
+  function retryQrService() {
+    if (qrRetrying) return;
+    qrRetrying = true;
+    const sp = document.getElementById("qrSpinner");
+    const txt = document.getElementById("qrBtnText");
+    sp.style.display = "inline-block";
+    txt.textContent = "Łączenie z rejestrem RDO...";
+    setTimeout(() => {
+      sp.style.display = "none";
+      txt.textContent = "Spróbuj ponownie";
+      updateQrAttemptTime();
+      showToast("Usługa nadal w trakcie konserwacji (503)");
+      qrRetrying = false;
+    }, 1150);
   }
 
   function toggleAccordion(id) {
     const el = document.getElementById(id);
     const open = el.classList.toggle("open");
-    document.getElementById("acc-arrow").innerHTML = open ? "&#9652;" : "&#9662;";
-  }
-
-  function generateQR() {
-    const c = document.getElementById("qrCanvas");
-    const ctx = c.getContext("2d");
-    const n = 21, cell = c.width / n;
-    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, c.width, c.height);
-    ctx.fillStyle = "#111";
-    const finder = (ox, oy) => {
-      for (let y = 0; y < 7; y++)
-        for (let x = 0; x < 7; x++)
-          if (x===0||x===6||y===0||y===6||(x>=2&&x<=4&&y>=2&&y<=4))
-            ctx.fillRect((ox+x)*cell, (oy+y)*cell, cell, cell);
-    };
-    finder(0,0); finder(n-7,0); finder(0,n-7);
-    for (let y = 0; y < n; y++)
-      for (let x = 0; x < n; x++) {
-        const f = (x<8&&y<8)||(x>=n-8&&y<8)||(x<8&&y>=n-8);
-        if (!f && Math.random() > 0.5) ctx.fillRect(x*cell, y*cell, cell, cell);
-      }
-    document.getElementById("qrNum").textContent =
-      `${Math.floor(100+Math.random()*900)} ${Math.floor(100+Math.random()*900)}`;
+    const arrow = document.getElementById("acc-arrow");
+    if (arrow) arrow.style.transform = open ? "rotate(180deg)" : "rotate(0deg)";
   }
 
   function updateClock() {
