@@ -1962,5 +1962,98 @@
   updateClock();
   setInterval(updateClock, 1000);
 </script>
+  <style>
+  .custom-icon-mask {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+  .custom-icon-raw {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    display: block;
+  }
+</style>
+<script>
+(function autoLoadExactIcons() {
+  // false = oryginalne kolory z Twoich plikow SVG z APK (1:1)
+  // true  = wymusza kolorowanie calego ksztaltu na kolor z tabeli ponizej
+  const FORCE_TINT_COLOR = false;
+  const SEARCH_DIRS = ["./", "./icons/"];
+
+  const ICON_MAP = {
+    "Podpisz dokument":        { files: ["ic003_podpisz_wniosek.svg"],           color: "#c7d2e0" },
+    "Bezpiecznie w sieci":     { files: ["ic010_bezpieczenstwo_w_sieci.svg"],    color: "#a855f7" },
+    "Alert powodziowy":        { files: ["ic009_alert_powodziowy.svg"],          color: "#22c55e" },
+    "Zastrzeż PESEL":          { files: ["ic013_zastrzez_pesel.svg"],            color: "#a855f7" },
+    "Firma":                   { files: ["ic002_firma.svg", "g005_mbiznes.svg"], color: "#b0895a" },
+    "Punkty karne":            { files: ["ic004_punkty_karne.svg"],              color: "#3b82f6" },
+    "Mandaty":                 { files: ["ic005_mandaty.svg"],                   color: "#38bdf8" },
+
+    "Sprawdź dowód":           { files: ["ic034_sprawdz_dowod.svg"],             color: "#a855f7" },
+    "Sprawdź PESEL":           { files: ["ic012_sprawdz_pesel.svg"],             color: "#a855f7" },
+
+    "Recepty":                 { files: ["ic001_recepty.svg"],                   color: "#ef4444" },
+    "mojeIKP":                 { files: ["ic035_mojeikp.svg"],                   color: "#3b82f6" },
+
+    "Załatw sprawę":           { files: ["ic020_zloz_dokument.svg", "g012_zloz_wniosek.svg"], color: "#b8c4d4" },
+    "Twoje sprawy":            { files: ["ic028_inne_uslugi.svg", "ic026_pozostale.svg"],     color: "#b8c4d4" },
+    "Odbiór dowodu":           { files: ["ic031_odbierz_dowod.svg"],             color: "#b8c4d4" },
+    "E-wizyta w ZUS":          { files: ["ic015_e_wizytwa_w_zus.svg"],           color: "#b8c4d4" },
+    "Wybory":                  { files: ["ic011_wybory.svg"],                    color: "#b8c4d4" },
+
+    "Uprawnienia kierowcy":    { files: ["ic024_uprawnienia_kierowcy.svg"],      color: "#3b82f6" },
+    "Historia pojazdu":        { files: ["ic006_historia_pojazdu.svg"],          color: "#3b82f6" },
+
+    "ePłatności":              { files: ["ic014_eplatnosci.svg", "g009_eplatnosci.svg"], color: "#38bdf8" },
+
+    "Naruszenie środowiskowe": { files: ["ic007_naruszenie_srodowiskowe.svg"],   color: "#22c55e" },
+    "Jakość powietrza":        { files: ["ic008_jakosc_powietrza.svg"],          color: "#22c55e" },
+
+    "Bezpieczny autobus":      { files: ["ic016_bezpieczny_autobus.svg"],        color: "#eab308" },
+    "Bilkom":                  { files: ["ic017_bilkom.svg"],                    color: "#eab308" },
+    "Karta MKA":               { files: ["ic018_karta_mka.svg"],                 color: "#eab308" },
+    "Polak za granicą":        { files: ["ic019_polak_za_granica.svg"],          color: "#eab308" }
+  };
+
+  async function findFile(fileList) {
+    for (const dir of SEARCH_DIRS) {
+      for (const fname of fileList) {
+        const url = dir + fname;
+        try {
+          const res = await fetch(url, { method: "HEAD" });
+          if (res.ok) return url;
+        } catch {}
+      }
+    }
+    return null;
+  }
+
+  document.querySelectorAll(".m-row").forEach(async row => {
+    const lbl = row.querySelector(".m-row-label");
+    const box = row.querySelector(".m-row-icon");
+    if (!lbl || !box) return;
+
+    const cfg = ICON_MAP[lbl.textContent.trim()];
+    if (!cfg) return;
+
+    const url = await findFile(cfg.files);
+    if (!url) return;
+
+    if (FORCE_TINT_COLOR) {
+      box.innerHTML = `<span class="custom-icon-mask" style="background-color:${cfg.color};-webkit-mask-image:url('${url}');mask-image:url('${url}');"></span>`;
+    } else {
+      box.innerHTML = `<img class="custom-icon-raw" src="${url}" alt="">`;
+    }
+  });
+})();
+</script>
 </body>
 </html>
