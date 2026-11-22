@@ -1,4 +1,4 @@
-const CACHE_NAME = "ui-pwa-v9";
+const CACHE_NAME = "ui-pwa-v11";
 const ASSETS = [
   "./",
   "./index.html",
@@ -6,6 +6,7 @@ const ASSETS = [
   "./manifest.json",
   "./logo.png",
   "./niebiesko-1.jpg"
+  "./mdowod_bg_big.webp"
 ];
 
 self.addEventListener("install", e => {
