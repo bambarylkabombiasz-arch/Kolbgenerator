@@ -214,55 +214,68 @@
 
   .docs-top-link { color: #5b9bff; font-size: 16px; font-weight: 500; cursor: pointer; }
 
-  .mdowod-tile {
+.mdowod-tile {
     position: relative;
     width: 100%;
     height: 215px;
     border-radius: 18px;
     padding: 20px;
-    background-color: #0052b8;
-    background-image: url("./mdowod_bg_big.webp"), url("./mdowod_bg_big.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: linear-gradient(45deg, #00358a 0%, #0564d4 55%, #1d8cf8 100%);
     box-shadow: 0 14px 34px rgba(0, 0, 0, 0.48);
     cursor: pointer;
     overflow: hidden;
   }
 
-  .mdowod-tile::before {
+  .mdowod-tile-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    pointer-events: none;
     display: none;
   }
+
+  .mdowod-tile::before { display: none; }
 
   .mdowod-tile::after {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: 18px;
-    border: 1px solid rgba(145, 205, 255, 0.22);
+    border: 1px solid rgba(145, 205, 255, 0.24);
+    z-index: 3;
     pointer-events: none;
   }
 
-  .mdowod-tile.fly-in { animation: tileFlyUp 0.62s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  @keyframes tileFlyUp {
-    0% { opacity: 0; transform: translateY(310px) scale(0.93); }
-    72% { opacity: 1; transform: translateY(-6px) scale(1.01); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
+  .tile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    z-index: 4;
   }
-
-  .tile-top { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 2; }
-  .tile-title { font-size: 21px; font-weight: 500; color: #ffffff; letter-spacing: -0.2px; }
 
   .tile-emblem-badge {
     width: 38px;
     height: 38px;
     border-radius: 10px;
-    background: rgba(170, 220, 255, 0.36);
+    background: rgba(155, 210, 255, 0.34);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 5px;
     box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  }
+
+  .tile-emblem-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* bez brightness(0) invert(1) zeby nie robilo bialej plamy z tarczy */
+    filter: none;
   }
 
   .tile-emblem-badge img { width: 100%; height: 100%; object-fit: contain; filter: brightness(0) invert(1); }
@@ -820,16 +833,15 @@
         <span class="docs-top-link" onclick="showToast('Wszystkie dostępne dokumenty są dodane')">Dodaj</span>
       </div>
 
-      <div class="mdowod-tile" id="mdowodTile" onclick="goToScreen('mdowod')">
+<div class="mdowod-tile" id="mdowodTile" onclick="goToScreen('mdowod')">
+        <img class="mdowod-tile-bg" id="mdowodTileBg" alt="">
         <div class="tile-top">
           <div class="tile-title">mDowód</div>
           <div class="tile-emblem-badge">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg" alt="RP">
+            <img id="tileEagleImg" src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg" alt="RP">
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
   <!-- SCREEN 3: mDOWÓD DETAIL -->
   <div class="screen" id="screen-mdowod">
@@ -1980,14 +1992,59 @@
     object-fit: contain;
     display: block;
   }
+<style>
+  .custom-icon-mask {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
 </style>
 <script>
-(function autoLoadExactIcons() {
-  // false = oryginalne kolory z Twoich plikow SVG z APK (1:1)
-  // true  = wymusza kolorowanie calego ksztaltu na kolor z tabeli ponizej
-  const FORCE_TINT_COLOR = false;
+(function autoLoadExactAssets() {
   const SEARCH_DIRS = ["./", "./icons/"];
 
+  async function findFile(fileList) {
+    for (const dir of SEARCH_DIRS) {
+      for (const fname of fileList) {
+        const url = dir + fname;
+        try {
+          const res = await fetch(url, { method: "HEAD" });
+          if (res.ok) return url;
+        } catch {}
+      }
+    }
+    return null;
+  }
+
+  // 1. Automatyczne wykrycie tla karty mDowód (webp / jpg / png)
+  (async () => {
+    const bgUrl = await findFile([
+      "mdowod_bg_big.webp",
+      "mdowod_bg_big.jpg",
+      "mdowod_bg_big.jpeg",
+      "mdowod_bg_big.png"
+    ]);
+    const bgImg = document.getElementById("mdowodTileBg");
+    if (bgUrl && bgImg) {
+      bgImg.src = bgUrl;
+      bgImg.style.display = "block";
+    }
+
+    // Jesli wrzuciles godlo.svg do repo, uzyj go jako bialego orla w prawym gornym rogu karty
+    const godloUrl = await findFile(["godlo.svg", "godlo.png"]);
+    const eagleImg = document.getElementById("tileEagleImg");
+    if (godloUrl && eagleImg) {
+      eagleImg.src = godloUrl;
+    }
+  })();
+
+  // 2. Kolorowanie wszystkich Twoich oryginalnych ikon ic001..ic035 dokladnie pod kolory z mObywatela
   const ICON_MAP = {
     "Podpisz dokument":        { files: ["ic003_podpisz_wniosek.svg"],           color: "#c7d2e0" },
     "Bezpiecznie w sieci":     { files: ["ic010_bezpieczenstwo_w_sieci.svg"],    color: "#a855f7" },
@@ -2023,19 +2080,6 @@
     "Polak za granicą":        { files: ["ic019_polak_za_granica.svg"],          color: "#eab308" }
   };
 
-  async function findFile(fileList) {
-    for (const dir of SEARCH_DIRS) {
-      for (const fname of fileList) {
-        const url = dir + fname;
-        try {
-          const res = await fetch(url, { method: "HEAD" });
-          if (res.ok) return url;
-        } catch {}
-      }
-    }
-    return null;
-  }
-
   document.querySelectorAll(".m-row").forEach(async row => {
     const lbl = row.querySelector(".m-row-label");
     const box = row.querySelector(".m-row-icon");
@@ -2047,11 +2091,7 @@
     const url = await findFile(cfg.files);
     if (!url) return;
 
-    if (FORCE_TINT_COLOR) {
-      box.innerHTML = `<span class="custom-icon-mask" style="background-color:${cfg.color};-webkit-mask-image:url('${url}');mask-image:url('${url}');"></span>`;
-    } else {
-      box.innerHTML = `<img class="custom-icon-raw" src="${url}" alt="">`;
-    }
+    box.innerHTML = `<span class="custom-icon-mask" style="background-color:${cfg.color};-webkit-mask-image:url('${url}');mask-image:url('${url}');"></span>`;
   });
 })();
 </script>
