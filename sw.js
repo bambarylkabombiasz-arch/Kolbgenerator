@@ -1,10 +1,10 @@
-const CACHE_NAME = "mobywatel-pwa-v3";
+const CACHE_NAME = "ui-pwa-v4";
 const ASSETS = [
   "./",
   "./index.html",
   "./app.html",
   "./manifest.json",
-  "./icon.svg",
+  "./logo.png",
   "./niebiesko-1.jpg"
 ];
 
