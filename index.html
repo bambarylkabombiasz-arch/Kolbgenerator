@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0d0e11">
-<title>Generator mObywatel</title>
+<title>Konfigurator Karty</title>
 <style>
   :root {
     --bg: #0d0e11;
@@ -14,15 +14,13 @@
     --blue: #3b82f6;
     --border: rgba(255, 255, 255, 0.1);
   }
-
   * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
   }
-
   body {
     background: radial-gradient(circle at 20% 0%, #161e2e 0%, #0d0e11 55%);
     color: var(--text);
@@ -30,7 +28,6 @@
     display: flex;
     justify-content: center;
   }
-
   .wrap {
     width: 100%;
     max-width: 460px;
@@ -38,7 +35,6 @@
     display: flex;
     flex-direction: column;
   }
-
   .gen-header {
     padding: calc(env(safe-area-inset-top, 14px) + 14px) 20px 14px;
     border-bottom: 1px solid var(--border);
@@ -46,45 +42,30 @@
     align-items: center;
     gap: 12px;
   }
-
-  .app-icon-red {
-    width: 38px;
-    height: 38px;
+  .app-icon-img {
+    width: 40px;
+    height: 40px;
     border-radius: 10px;
-    background: linear-gradient(155deg, #d81e3a 0%, #a51128 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px;
-    box-shadow: 0 3px 10px rgba(216, 30, 58, 0.35);
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(216, 30, 58, 0.35);
     flex-shrink: 0;
   }
-
-  .app-icon-red img { width: 100%; height: 100%; object-fit: contain; }
-
   .gen-body {
     flex: 1;
     padding: 16px 20px 28px;
     display: flex;
     flex-direction: column;
-    gap: 13px;
+    gap: 12px;
   }
-
   .sec-title {
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 700;
     color: #60a5fa;
     text-transform: uppercase;
     letter-spacing: 0.6px;
     margin-top: 6px;
   }
-
-  .gen-grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
+  .gen-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .field-group label {
     display: block;
     font-size: 10.5px;
@@ -94,7 +75,6 @@
     letter-spacing: 0.35px;
     margin-bottom: 5px;
   }
-
   .field-group input,
   .field-group select {
     width: 100%;
@@ -106,19 +86,15 @@
     font-size: 14px;
     outline: none;
   }
-
   .field-group input:focus,
   .field-group select:focus { border-color: var(--blue); }
-
   .pesel-row { display: flex; gap: 8px; }
-
   .pesel-row input {
     font-family: ui-monospace, "Consolas", monospace;
     font-weight: 700;
     letter-spacing: 1px;
     color: #60a5fa;
   }
-
   .btn-small {
     background: #232833;
     color: #e5e7eb;
@@ -130,7 +106,6 @@
     cursor: pointer;
     white-space: nowrap;
   }
-
   .photo-upload-bar {
     display: flex;
     align-items: center;
@@ -141,7 +116,6 @@
     padding: 10px 12px;
     cursor: pointer;
   }
-
   .photo-thumb {
     width: 48px;
     height: 60px;
@@ -154,14 +128,7 @@
     font-size: 20px;
     flex-shrink: 0;
   }
-
-  .photo-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%);
-  }
-
+  .photo-thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
   .gen-footer {
     padding: 14px 20px calc(env(safe-area-inset-bottom, 16px) + 16px);
     border-top: 1px solid var(--border);
@@ -170,7 +137,6 @@
     position: sticky;
     bottom: 0;
   }
-
   .btn-launch {
     width: 100%;
     background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
@@ -183,9 +149,7 @@
     cursor: pointer;
     box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
   }
-
   .btn-launch:active { transform: scale(0.98); }
-
   .toast {
     position: fixed;
     bottom: 86px;
@@ -201,19 +165,16 @@
     pointer-events: none;
     transition: all 0.2s ease;
   }
-
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="gen-header">
-    <div class="app-icon-red">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg" alt="RP">
-    </div>
+    <img class="app-icon-img" src="./logo.png" alt="Logo">
     <div>
-      <div style="font-size:17px;font-weight:700;">Generator mObywatel</div>
-      <div style="font-size:12px;color:#9ca3af;">Wypełnij dane i utwórz gotową apkę na telefon</div>
+      <div style="font-size:17px;font-weight:700;">Generator Karty</div>
+      <div style="font-size:12px;color:#9ca3af;">Wypełnij raz i dodaj aplikację na ekran główny</div>
     </div>
   </div>
 
@@ -221,20 +182,20 @@
     <div class="photo-upload-bar" onclick="document.getElementById('photoInput').click()">
       <div class="photo-thumb" id="genPhotoThumb">&#128247;</div>
       <div>
-        <div style="font-size:14px;font-weight:600;">Zdjęcie do mDowodu</div>
-        <div style="font-size:12px;color:#9ca3af;">Kliknij, aby wybrać z galerii telefonu</div>
+        <div style="font-size:14px;font-weight:600;">Zdjęcie profilowe</div>
+        <div style="font-size:12px;color:#9ca3af;">Kliknij, aby wybrać z galerii</div>
       </div>
     </div>
     <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="handlePhoto(event)">
 
     <div class="sec-title">Dane podstawowe</div>
     <div class="gen-grid-2">
-      <div class="field-group"><label>Imię (imiona)</label><input id="g-imie" type="text" placeholder="JAN"></div>
-      <div class="field-group"><label>Nazwisko</label><input id="g-nazwisko" type="text" placeholder="KOWALSKI"></div>
+      <div class="field-group"><label>Imię (imiona)</label><input id="g-imie" type="text"></div>
+      <div class="field-group"><label>Nazwisko</label><input id="g-nazwisko" type="text"></div>
     </div>
 
     <div class="gen-grid-2">
-      <div class="field-group"><label>Data urodzenia</label><input id="g-urodzenie" type="text" placeholder="12.05.2006" oninput="autoGeneratePesel()"></div>
+      <div class="field-group"><label>Data urodzenia</label><input id="g-urodzenie" type="text" oninput="autoGeneratePesel()"></div>
       <div class="field-group">
         <label>Płeć</label>
         <select id="g-plec" onchange="autoGeneratePesel()">
@@ -245,7 +206,7 @@
     </div>
 
     <div class="field-group">
-      <label>Numer PESEL (auto)</label>
+      <label>Numer identyfikacyjny (auto)</label>
       <div class="pesel-row">
         <input id="g-pesel" type="text" readonly>
         <button type="button" class="btn-small" onclick="autoGeneratePesel(true)">Losuj</button>
@@ -253,42 +214,42 @@
     </div>
 
     <div class="gen-grid-2">
-      <div class="field-group"><label>Obywatelstwo</label><input id="g-obywatelstwo" type="text" placeholder="POLSKIE"></div>
-      <div class="field-group"><label>Seria i numer</label><input id="g-seria" type="text" placeholder="ZZC 108291"></div>
+      <div class="field-group"><label>Obywatelstwo</label><input id="g-obywatelstwo" type="text"></div>
+      <div class="field-group"><label>Seria i numer</label><input id="g-seria" type="text"></div>
     </div>
 
     <div class="gen-grid-2">
-      <div class="field-group"><label>Data wydania</label><input id="g-wydanie" type="text" placeholder="14.08.2024"></div>
-      <div class="field-group"><label>Termin ważności</label><input id="g-waznosc" type="text" placeholder="14.08.2034"></div>
+      <div class="field-group"><label>Data wydania</label><input id="g-wydanie" type="text"></div>
+      <div class="field-group"><label>Termin ważności</label><input id="g-waznosc" type="text"></div>
     </div>
 
-    <div class="sec-title">Rodzice i dane dodatkowe</div>
+    <div class="sec-title">Dane dodatkowe</div>
     <div class="gen-grid-2">
-      <div class="field-group"><label>Imię ojca</label><input id="g-ojciec" type="text" placeholder="MAREK"></div>
-      <div class="field-group"><label>Imię matki</label><input id="g-matka" type="text" placeholder="ANNA"></div>
-    </div>
-
-    <div class="gen-grid-2">
-      <div class="field-group"><label>Nazwisko rodowe</label><input id="g-rodowe" type="text" placeholder="KOWALSKI"></div>
-      <div class="field-group"><label>Miejsce urodzenia</label><input id="g-miejsce" type="text" placeholder="BIAŁYSTOK"></div>
+      <div class="field-group"><label>Imię ojca</label><input id="g-ojciec" type="text"></div>
+      <div class="field-group"><label>Imię matki</label><input id="g-matka" type="text"></div>
     </div>
 
     <div class="gen-grid-2">
-      <div class="field-group"><label>Nazwisko rodowe ojca</label><input id="g-rodoweOjca" type="text" placeholder="KOWALSKI"></div>
-      <div class="field-group"><label>Nazwisko rodowe matki</label><input id="g-rodoweMatki" type="text" placeholder="NOWAK"></div>
+      <div class="field-group"><label>Nazwisko rodowe</label><input id="g-rodowe" type="text"></div>
+      <div class="field-group"><label>Miejsce urodzenia</label><input id="g-miejsce" type="text"></div>
     </div>
 
     <div class="gen-grid-2">
-      <div class="field-group"><label>Kraj urodzenia</label><input id="g-kraj" type="text" placeholder="POLSKA"></div>
-      <div class="field-group"><label>Data zameldowania</label><input id="g-dataZam" type="text" placeholder="02.09.2012"></div>
+      <div class="field-group"><label>Nazwisko rodowe ojca</label><input id="g-rodoweOjca" type="text"></div>
+      <div class="field-group"><label>Nazwisko rodowe matki</label><input id="g-rodoweMatki" type="text"></div>
     </div>
 
-    <div class="field-group"><label>Adres zameldowania na pobyt stały</label><input id="g-adres" type="text" placeholder="UL. LIPOWA 14/2, 15-427 BIAŁYSTOK"></div>
-    <div class="field-group"><label>Organ wydający</label><input id="g-organ" type="text" placeholder="PREZYDENT MIASTA BIAŁEGOSTOKU"></div>
+    <div class="gen-grid-2">
+      <div class="field-group"><label>Kraj urodzenia</label><input id="g-kraj" type="text"></div>
+      <div class="field-group"><label>Data zameldowania</label><input id="g-dataZam" type="text"></div>
+    </div>
+
+    <div class="field-group"><label>Adres zameldowania</label><input id="g-adres" type="text"></div>
+    <div class="field-group"><label>Organ wydający</label><input id="g-organ" type="text"></div>
   </div>
 
   <div class="gen-footer">
-    <button type="button" class="btn-launch" onclick="generateAndOpenApp()">Wygeneruj aplikację na telefon</button>
+    <button type="button" class="btn-launch" onclick="generateAndOpenApp()">Wygeneruj i przejdź do aplikacji</button>
   </div>
 </div>
 
@@ -353,10 +314,9 @@
     const dob = document.getElementById("g-urodzenie").value;
     const plec = document.getElementById("g-plec").value;
     document.getElementById("g-pesel").value = computePesel(dob, plec);
-    if (notify) showToast("Wylosowano nowy PESEL");
+    if (notify) showToast("Wylosowano nowy numer");
   }
 
-  // Compact grayscale photo so it survives inside the URL hash cleanly for iOS/Android PWA install
   function handlePhoto(e) {
     const file = e.target.files[0];
     if (!file) return;
@@ -364,25 +324,19 @@
     reader.onload = ev => {
       const img = new Image();
       img.onload = () => {
-        const targetW = 190;
-        const targetH = 244;
+        const targetW = 190, targetH = 244;
         const canvas = document.createElement("canvas");
         canvas.width = targetW;
         canvas.height = targetH;
         const ctx = canvas.getContext("2d");
-
-        // Center-crop cover
         const scale = Math.max(targetW / img.width, targetH / img.height);
-        const sw = targetW / scale;
-        const sh = targetH / scale;
-        const sx = (img.width - sw) / 2;
-        const sy = (img.height - sh) / 2;
-
+        const sw = targetW / scale, sh = targetH / scale;
+        const sx = (img.width - sw) / 2, sy = (img.height - sh) / 2;
         ctx.filter = "grayscale(100%) contrast(106%)";
         ctx.drawImage(img, sx, sy, sw, sh, 0, 0, targetW, targetH);
         photoDataUrl = canvas.toDataURL("image/jpeg", 0.68);
         document.getElementById("genPhotoThumb").innerHTML = `<img src="${photoDataUrl}">`;
-        showToast("Zdjęcie dodane");
+        showToast("Zdjęcie gotowe");
       };
       img.src = ev.target.result;
     };
@@ -390,8 +344,7 @@
   }
 
   function encodePayload(obj) {
-    const json = JSON.stringify(obj);
-    const bytes = new TextEncoder().encode(json);
+    const bytes = new TextEncoder().encode(JSON.stringify(obj));
     let bin = "";
     for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
     return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
@@ -404,13 +357,8 @@
       if (el) payload[k] = el.value.trim();
     }
     if (!payload.pesel) payload.pesel = computePesel(payload.urodzenie, payload.plec);
-
-    try {
-      localStorage.setItem("mobywatel_app_data", JSON.stringify(payload));
-    } catch {}
-
-    const hash = encodePayload(payload);
-    window.location.href = `./app.html#d=${hash}`;
+    try { localStorage.setItem("card_app_v4", JSON.stringify(payload)); } catch {}
+    window.location.href = `./app.html#d=${encodePayload(payload)}`;
   }
 
   function showToast(msg) {
