@@ -14,9 +14,9 @@
 <title>mObywatel</title>
 <style>
   :root {
-    --bg: #0f1014;
+    --bg: #0c0e12;
     --bg-login: #0a0b0e;
-    --surface: #181a1f;
+    --surface: rgba(24, 26, 31, 0.9);
     --surface-active: #22252c;
     --text: #f3f4f6;
     --muted: #9ca3af;
@@ -54,7 +54,10 @@
     max-width: 460px;
     margin: 0 auto;
     overflow: hidden;
-    background: var(--bg);
+    background-color: var(--bg);
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
   }
 
   .screen {
@@ -62,7 +65,7 @@
     inset: 0;
     display: none;
     flex-direction: column;
-    background: var(--bg);
+    background: transparent;
     overflow: hidden;
   }
 
@@ -78,21 +81,42 @@
   }
 
   /* =========================================================
-     SCREEN 1: FACE ID LOGIN (4.93.1)
+     SCREEN 1: FACE ID LOGIN (login_default_background.webp)
      ========================================================= */
   #screen-login {
-    background:
-      radial-gradient(ellipse at 50% 60%, rgba(25, 42, 76, 0.24) 0%, transparent 62%),
-      #0a0b0e;
+    background-color: #0a0b0e;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
     padding: calc(env(safe-area-inset-top, 16px) + 18px) 22px calc(env(safe-area-inset-bottom, 16px) + 14px);
     justify-content: space-between;
   }
 
+  #screen-login::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(8, 12, 20, 0.42) 0%,
+      rgba(8, 12, 20, 0.28) 38%,
+      rgba(9, 12, 18, 0.72) 72%,
+      rgba(9, 11, 16, 0.94) 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #screen-login > * {
+    position: relative;
+    z-index: 1;
+  }
+
   .login-top { display: flex; flex-direction: column; gap: 26px; }
   .login-brand { display: flex; align-items: center; gap: 11px; }
-  .login-brand-name { font-size: 21px; font-weight: 700; color: #ffffff; letter-spacing: -0.3px; }
-  .login-greeting { font-size: 30px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px; margin-bottom: 6px; }
-  .login-sub { font-size: 16px; color: #a1a7b3; font-weight: 400; }
+  .login-brand-name { font-size: 21px; font-weight: 700; color: #ffffff; letter-spacing: -0.3px; text-shadow: 0 1px 6px rgba(0,0,0,0.35); }
+  .login-greeting { font-size: 30px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px; margin-bottom: 6px; text-shadow: 0 2px 10px rgba(0,0,0,0.45); }
+  .login-sub { font-size: 16px; color: #d5dae3; font-weight: 400; text-shadow: 0 1px 6px rgba(0,0,0,0.45); }
 
   .faceid-center {
     display: flex;
@@ -111,14 +135,16 @@
     50% { transform: scale(1.09); opacity: 0.7; }
   }
 
-  .faceid-label { font-size: 14.5px; color: #c7ccd6; text-align: center; }
+  .faceid-label { font-size: 14.5px; color: #e2e6ee; text-align: center; text-shadow: 0 1px 6px rgba(0,0,0,0.55); }
   .login-bottom { display: flex; flex-direction: column; gap: 14px; }
 
   .btn-outline-pass {
     width: 100%;
     padding: 15px;
     border-radius: 13px;
-    background: transparent;
+    background: rgba(12, 16, 24, 0.45);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border: 1.6px solid #3c73e6;
     color: #5a94ff;
     font-size: 15.5px;
@@ -149,7 +175,7 @@
 
   .mini-pl-flag { width: 22px; height: 14px; border: 0.5px solid #d1d5db; background: linear-gradient(to bottom, #ffffff 50%, #dc143c 50%); flex-shrink: 0; }
   .mini-eu-flag { width: 22px; height: 15px; background: #003399; display: flex; align-items: center; justify-content: center; color: #ffcc00; font-size: 8px; flex-shrink: 0; }
-  .login-version-row { display: flex; justify-content: flex-end; font-size: 11.5px; color: #8c929e; margin-top: -2px; }
+  .login-version-row { display: flex; justify-content: flex-end; font-size: 11.5px; color: #9ca3af; margin-top: -2px; }
 
   /* =========================================================
      SHARED HEADER & SCROLL
@@ -201,7 +227,7 @@
   }
 
   /* =========================================================
-     SCREEN 2: DOKUMENTY
+     SCREEN 2: DOKUMENTY (czysta karta mDowód bez godła)
      ========================================================= */
   .docs-actions-row {
     display: flex;
@@ -257,7 +283,7 @@
 
   .tile-top {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
     position: relative;
     z-index: 4;
@@ -265,29 +291,11 @@
 
   .tile-title { font-size: 21px; font-weight: 500; color: #ffffff; letter-spacing: -0.2px; }
 
-  .tile-emblem-badge {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: rgba(155, 210, 255, 0.34);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35);
-  }
-
-  .tile-emblem-badge img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
   /* =========================================================
-     SCREEN 3: mDOWÓD DETAIL
+     SCREEN 3: mDOWÓD DETAIL (zdjęcie bez czarnej ramki!)
      ========================================================= */
   .topbar {
-    background: var(--bg);
+    background: transparent;
     padding: calc(env(safe-area-inset-top, 12px) + 10px) 16px 8px;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -380,19 +388,43 @@
   .card-grid { position: relative; z-index: 3; display: grid; grid-template-columns: 126px 1fr; gap: 15px; }
   .left-col { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
 
+  /* Zero black frame around photo */
   .photo-frame {
     width: 122px;
     height: 156px;
-    border-radius: 15px;
-    background: #08090b;
-    padding: 3px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    border-radius: 14px;
+    background: transparent;
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
     overflow: hidden;
   }
 
-  .photo-inner { width: 100%; height: 100%; border-radius: 12px; overflow: hidden; background: #1a1d22; }
-  .photo-inner img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.06); }
-  .photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #9ca3af; font-size: 24px; }
+  .photo-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .photo-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%) contrast(1.06);
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.08);
+    color: #6b7280;
+    font-size: 24px;
+  }
 
   .flag-container { width: 78px; height: 50px; margin-left: 2px; filter: drop-shadow(0 2px 5px rgba(0, 35, 80, 0.14)); }
   #flagCanvas { width: 78px; height: 50px; display: block; }
@@ -501,10 +533,10 @@
 
   .circle-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 18px; }
   .circle-action-item { display: flex; flex-direction: column; align-items: center; gap: 7px; cursor: pointer; }
-  .circle-btn { width: 54px; height: 54px; border-radius: 50%; background: #181a1d; border: 1px solid rgba(255, 255, 255, 0.06); display: flex; align-items: center; justify-content: center; }
+  .circle-btn { width: 54px; height: 54px; border-radius: 50%; background: rgba(24, 26, 29, 0.92); border: 1px solid rgba(255, 255, 255, 0.06); display: flex; align-items: center; justify-content: center; }
   .circle-lbl { font-size: 11px; color: #c7ccd6; text-align: center; line-height: 1.2; }
 
-  .dark-card { background: #191a1c; border-radius: 16px; padding: 18px; margin-bottom: 14px; }
+  .dark-card { background: rgba(25, 26, 28, 0.92); border-radius: 16px; padding: 18px; margin-bottom: 14px; }
   .dark-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.07); gap: 12px; }
   .dark-row:first-child { padding-top: 0; }
   .dark-row:last-child { border-bottom: none; padding-bottom: 0; }
@@ -620,7 +652,9 @@
     right: 0;
     max-width: 460px;
     margin: 0 auto;
-    background: #141518;
+    background: rgba(20, 21, 24, 0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255, 255, 255, 0.07);
     display: none;
     grid-template-columns: repeat(4, 1fr);
@@ -707,7 +741,7 @@
 </style>
 </head>
 <body>
-<div class="app-shell">
+<div class="app-shell" id="appShell">
 
   <!-- SCREEN 1: FACE ID LOGIN -->
   <div class="screen active" id="screen-login">
@@ -776,13 +810,11 @@
         <span class="docs-top-link" onclick="showToast('Wszystkie dostępne dokumenty są dodane')">Dodaj</span>
       </div>
 
+      <!-- Czysta karta mDowód bez czerwonego godła -->
       <div class="mdowod-tile" id="mdowodTile" onclick="goToScreen('mdowod')">
         <img class="mdowod-tile-bg" id="mdowodTileBg" alt="">
         <div class="tile-top">
           <div class="tile-title">mDowód</div>
-          <div class="tile-emblem-badge">
-            <img id="tileEagleImg" src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Herb_Polski.svg" alt="RP">
-          </div>
         </div>
       </div>
     </div>
@@ -1780,7 +1812,7 @@
       setTimeout(() => {
         svg.setAttribute("stroke", "#4f86f7");
         lbl.textContent = "Dotknij, aby zalogować się Face ID";
-        lbl.style.color = "#c7ccd6";
+        lbl.style.color = "#e2e6ee";
         bioBusy = false;
         goToScreen("docs");
       }, 360);
@@ -1904,7 +1936,7 @@
     window._t = setTimeout(() => t.classList.remove("show"), 1600);
   }
 
-  // AUTO-LOADER: tlo karty mDowód + godło + pokolorowane ikony ic001..ic035
+  // AUTO-LOADER: tlo logowania + tlo po zalogowaniu + tlo karty mDowód + ikony ic001..ic035
   (function autoLoadExactAssets() {
     const SEARCH_DIRS = ["./", "./icons/"];
 
@@ -1922,22 +1954,41 @@
     }
 
     (async () => {
-      const bgUrl = await findFile([
+      // 1. Tło ekranu logowania (flaga)
+      const loginBgUrl = await findFile([
+        "login_default_background.webp",
+        "login_default_background.jpg",
+        "login_default_background.jpeg",
+        "login_default_background.png"
+      ]);
+      const loginScreen = document.getElementById("screen-login");
+      if (loginBgUrl && loginScreen) {
+        loginScreen.style.backgroundImage = `url('${loginBgUrl}')`;
+      }
+
+      // 2. Tło po zalogowaniu (ciemne fale COI)
+      const appBgUrl = await findFile([
+        "coi_common_ui_mobywatel_background.webp",
+        "coi_common_ui_mobywatel_background.jpg",
+        "coi_common_ui_mobywatel_background.jpeg",
+        "coi_common_ui_mobywatel_background.png"
+      ]);
+      const appShell = document.getElementById("appShell");
+      if (appBgUrl && appShell) {
+        appShell.style.backgroundImage = `url('${appBgUrl}')`;
+      }
+
+      // 3. Tło karty mDowód
+      const cardBgUrl = await findFile([
         "mdowod_bg_big.webp",
         "mdowod_bg_big.jpg",
         "mdowod_bg_big.jpeg",
         "mdowod_bg_big.png"
       ]);
       const bgImg = document.getElementById("mdowodTileBg");
-      if (bgUrl && bgImg) {
-        bgImg.src = bgUrl;
+      if (cardBgUrl && bgImg) {
+        bgImg.src = cardBgUrl;
         bgImg.style.display = "block";
-      }
-
-      const godloUrl = await findFile(["godlo.svg", "godlo.png"]);
-      const eagleImg = document.getElementById("tileEagleImg");
-      if (godloUrl && eagleImg) {
-        eagleImg.src = godloUrl;
       }
     })();
 
